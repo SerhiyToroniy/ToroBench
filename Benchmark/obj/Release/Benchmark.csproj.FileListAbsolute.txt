@@ -1,0 +1,14 @@
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\bin\Release\Benchmark.exe.config
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\bin\Release\Benchmark.exe
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\bin\Release\Benchmark.pdb
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.Properties.Resources.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.csproj.GenerateResource.cache
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.csproj.CoreCompileInputs.cache
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.exe
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.pdb
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.MainForm.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.ProgressForm.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.CPUSpeed.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.StressForm.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\bin\Release\OpenHardwareMonitorLib.dll
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Release\Benchmark.csproj.CopyComplete

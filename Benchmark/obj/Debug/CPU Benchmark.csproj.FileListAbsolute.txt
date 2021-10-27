@@ -1,0 +1,191 @@
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\bin\Debug\Benchmark.exe.config
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\bin\Debug\Benchmark.exe
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\bin\Debug\Benchmark.pdb
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\Benchmark.CPUSpeed.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\Benchmark.MainForm.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\Benchmark.ProgressForm.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\Benchmark.Properties.Resources.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\Benchmark.StressForm.resources
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.GenerateResource.cache
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CoreCompileInputs.cache
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CopyComplete
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\Benchmark.exe
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\Benchmark.pdb
+E:\Microsoft Visual Studio\2019\Repos\Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.AssemblyReference.cache
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.exe.config
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.exe
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.pdb
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.AssemblyReference.cache
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.CPUSpeed.resources
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.MainForm.resources
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.ProgressForm.resources
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.Properties.Resources.resources
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.StressForm.resources
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.GenerateResource.cache
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CoreCompileInputs.cache
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CopyComplete
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.exe
+E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.exe.config
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.exe
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Microsoft.Win32.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\netstandard.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.AppContext.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Collections.Concurrent.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Collections.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Collections.NonGeneric.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Collections.Specialized.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ComponentModel.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ComponentModel.EventBasedAsync.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ComponentModel.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ComponentModel.TypeConverter.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Console.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Data.Common.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.Contracts.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.Debug.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.FileVersionInfo.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.Process.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.StackTrace.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.Tools.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.TraceSource.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Diagnostics.Tracing.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Drawing.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Dynamic.Runtime.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Globalization.Calendars.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Globalization.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Globalization.Extensions.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.Compression.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.Compression.ZipFile.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.FileSystem.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.FileSystem.DriveInfo.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.FileSystem.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.FileSystem.Watcher.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.IsolatedStorage.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.MemoryMappedFiles.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.Pipes.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.IO.UnmanagedMemoryStream.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Linq.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Linq.Expressions.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Linq.Parallel.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Linq.Queryable.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.Http.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.NameResolution.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.NetworkInformation.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.Ping.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.Requests.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.Security.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.Sockets.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.WebHeaderCollection.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.WebSockets.Client.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Net.WebSockets.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ObjectModel.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Reflection.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Reflection.Extensions.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Reflection.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Resources.Reader.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Resources.ResourceManager.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Resources.Writer.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.CompilerServices.VisualC.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.Extensions.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.Handles.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.InteropServices.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.Numerics.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.Serialization.Formatters.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.Serialization.Json.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.Serialization.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.Serialization.Xml.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.Claims.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.Cryptography.Algorithms.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.Cryptography.Csp.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.Cryptography.Encoding.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.Cryptography.Primitives.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.Principal.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Security.SecureString.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Encoding.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Encoding.Extensions.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.RegularExpressions.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Overlapped.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Tasks.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Tasks.Parallel.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Thread.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.ThreadPool.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Timer.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.ReaderWriter.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XDocument.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XmlDocument.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XmlSerializer.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XPath.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XPath.XDocument.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Docking.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Navigator.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Workspace.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Dropbox.Api.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Auth.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Core.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v2.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v3.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.PlatformServices.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Newtonsoft.Json.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Npgsql.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Buffers.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Memory.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Numerics.Vectors.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Encodings.Web.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Json.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Channels.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ValueTuple.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Docking.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Navigator.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Ribbon.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Workspace.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Dropbox.Api.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Auth.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Auth.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Core.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Core.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v2.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v2.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v3.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v3.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Newtonsoft.Json.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Npgsql.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Buffers.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Memory.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Numerics.Vectors.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Encodings.Web.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Json.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Channels.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ValueTuple.xml
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.AssemblyReference.cache
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.exe.config
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.ErrorForm.resources
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.MainForm.resources
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.ProgressForm.resources
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.Properties.Resources.resources
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.RankForm.resources
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.StressForm.resources
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.GenerateResource.cache
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CoreCompileInputs.cache
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.exe
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.pdb
