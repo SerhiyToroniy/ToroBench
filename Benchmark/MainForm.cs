@@ -21,7 +21,7 @@ using ComponentFactory.Krypton.Toolkit;
 
 namespace Benchmark
 {
-    public partial class MainForm : KryptonForm
+    public partial class MainForm : Form
     {
         public static int Single = -1;
         public static int Multi = -1;
@@ -337,11 +337,11 @@ namespace Benchmark
             label7.BackColor = Color.DimGray;
             label5.BackColor = Color.Black;
             label6.BackColor = Color.Black;
-            StateCommon.Back.Color1 = Color.DimGray;
-            StateCommon.Back.Color2 = Color.DimGray;
-            StateCommon.Header.Back.Color1 = Color.DimGray;
-            StateCommon.Header.Back.Color2 = Color.DimGray;
-            StateCommon.Header.Content.ShortText.Color1 = Color.White;
+            //StateCommon.Back.Color1 = Color.DimGray;
+            //StateCommon.Back.Color2 = Color.DimGray;
+            //StateCommon.Header.Back.Color1 = Color.DimGray;
+            //StateCommon.Header.Back.Color2 = Color.DimGray;
+            //StateCommon.Header.Content.ShortText.Color1 = Color.White;
             //groupBox2.ForeColor = Color.White;
             //groupBox3.ForeColor = Color.White;
             menuStrip1.BackColor = Color.Black;
@@ -405,11 +405,11 @@ namespace Benchmark
             label7.BackColor = Color.WhiteSmoke;
             label5.BackColor = Color.WhiteSmoke;
             label6.BackColor = Color.WhiteSmoke;
-            StateCommon.Back.Color1 = Color.White;
-            StateCommon.Back.Color2 = Color.White;
-            StateCommon.Header.Back.Color1 = Color.White;
-            StateCommon.Header.Back.Color2 = Color.White;
-            StateCommon.Header.Content.ShortText.Color1 = Color.Black;
+            //StateCommon.Back.Color1 = Color.White;
+            //StateCommon.Back.Color2 = Color.White;
+            //StateCommon.Header.Back.Color1 = Color.White;
+            //StateCommon.Header.Back.Color2 = Color.White;
+            //StateCommon.Header.Content.ShortText.Color1 = Color.Black;
             //groupBox2.ForeColor = Color.Black;
             //groupBox3.ForeColor = Color.Black;
             menuStrip1.BackColor = Color.WhiteSmoke;
@@ -794,6 +794,11 @@ namespace Benchmark
             settingsToolStripMenuItem.Enabled = false;
             ProgressForm q = new ProgressForm(Multi, settingsToolStripMenuItem, fileToolStripMenuItem, "Multi-Core", label6, HardwareInfo.GetCPUCoresCount(), kryptonButton1, kryptonButton2, BackColor);
             q.Show();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 

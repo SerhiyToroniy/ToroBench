@@ -70,6 +70,9 @@
     <Reference Include="ComponentFactory.Krypton.Workspace">
       <HintPath>C:\Users\toron\Downloads\Krypton-master\Bin\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.v21.1, Version=21.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevExpress.Data.21.1.6\lib\net452\DevExpress.Data.v21.1.dll</HintPath>
+    </Reference>
     <Reference Include="Dropbox.Api, Version=6.11.0.0, Culture=neutral, PublicKeyToken=310f0e82fbb45d01, processorArchitecture=MSIL">
       <HintPath>..\packages\Dropbox.Api.6.11.0\lib\netstandard2.0\Dropbox.Api.dll</HintPath>
     </Reference>

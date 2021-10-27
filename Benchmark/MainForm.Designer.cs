@@ -53,11 +53,11 @@ namespace Benchmark
             this.label4 = new System.Windows.Forms.Label();
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.kryptonGroupBox6 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.label5 = new System.Windows.Forms.Label();
             this.kryptonGroupBox7 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
@@ -104,6 +104,7 @@ namespace Benchmark
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Tag = "";
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -143,6 +144,7 @@ namespace Benchmark
             // 
             // toolStripMenuItem3
             // 
+            this.toolStripMenuItem3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
@@ -191,7 +193,7 @@ namespace Benchmark
             // 
             // kryptonGroupBox1
             // 
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(0, 43);
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(12, 43);
             this.kryptonGroupBox1.Name = "kryptonGroupBox1";
             // 
             // kryptonGroupBox1.Panel
@@ -202,7 +204,7 @@ namespace Benchmark
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonGroupBox2);
             this.kryptonGroupBox1.Panel.Controls.Add(this.label4);
             this.kryptonGroupBox1.Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.kryptonGroupBox1_Panel_Paint);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(394, 156);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(372, 156);
             this.kryptonGroupBox1.StateCommon.Back.Color1 = System.Drawing.Color.WhiteSmoke;
             this.kryptonGroupBox1.StateCommon.Back.Color2 = System.Drawing.Color.White;
             this.kryptonGroupBox1.StateCommon.Border.Color1 = System.Drawing.Color.White;
@@ -408,14 +410,14 @@ namespace Benchmark
             // 
             // kryptonGroupBox6
             // 
-            this.kryptonGroupBox6.Location = new System.Drawing.Point(0, 214);
+            this.kryptonGroupBox6.Location = new System.Drawing.Point(12, 214);
             this.kryptonGroupBox6.Name = "kryptonGroupBox6";
             // 
             // kryptonGroupBox6.Panel
             // 
             this.kryptonGroupBox6.Panel.Controls.Add(this.kryptonButton1);
             this.kryptonGroupBox6.Panel.Controls.Add(this.label5);
-            this.kryptonGroupBox6.Size = new System.Drawing.Size(394, 93);
+            this.kryptonGroupBox6.Size = new System.Drawing.Size(372, 93);
             this.kryptonGroupBox6.StateCommon.Back.Color1 = System.Drawing.Color.WhiteSmoke;
             this.kryptonGroupBox6.StateCommon.Back.Color2 = System.Drawing.Color.WhiteSmoke;
             this.kryptonGroupBox6.StateCommon.Border.Color1 = System.Drawing.Color.White;
@@ -427,6 +429,25 @@ namespace Benchmark
             this.kryptonGroupBox6.StateCommon.Border.Width = 0;
             this.kryptonGroupBox6.TabIndex = 5;
             this.kryptonGroupBox6.Values.Heading = "";
+            // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.kryptonButton1.Location = new System.Drawing.Point(121, 37);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(143, 33);
+            this.kryptonButton1.StateCommon.Back.Color1 = System.Drawing.Color.LightGray;
+            this.kryptonButton1.StateCommon.Back.Color2 = System.Drawing.Color.LightGray;
+            this.kryptonButton1.StateCommon.Border.Color1 = System.Drawing.Color.WhiteSmoke;
+            this.kryptonButton1.StateCommon.Border.Color2 = System.Drawing.Color.White;
+            this.kryptonButton1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonButton1.StateCommon.Border.Rounding = 10;
+            this.kryptonButton1.TabIndex = 6;
+            this.kryptonButton1.TabStop = false;
+            this.kryptonButton1.Values.Text = "Run";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // label5
             // 
@@ -441,14 +462,14 @@ namespace Benchmark
             // 
             // kryptonGroupBox7
             // 
-            this.kryptonGroupBox7.Location = new System.Drawing.Point(0, 324);
+            this.kryptonGroupBox7.Location = new System.Drawing.Point(12, 324);
             this.kryptonGroupBox7.Name = "kryptonGroupBox7";
             // 
             // kryptonGroupBox7.Panel
             // 
             this.kryptonGroupBox7.Panel.Controls.Add(this.kryptonButton2);
             this.kryptonGroupBox7.Panel.Controls.Add(this.label6);
-            this.kryptonGroupBox7.Size = new System.Drawing.Size(394, 93);
+            this.kryptonGroupBox7.Size = new System.Drawing.Size(370, 93);
             this.kryptonGroupBox7.StateCommon.Back.Color1 = System.Drawing.Color.WhiteSmoke;
             this.kryptonGroupBox7.StateCommon.Back.Color2 = System.Drawing.Color.WhiteSmoke;
             this.kryptonGroupBox7.StateCommon.Border.Color1 = System.Drawing.Color.White;
@@ -491,25 +512,6 @@ namespace Benchmark
             this.label6.Text = "Your multi-core score will appear here!";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // kryptonButton1
-            // 
-            this.kryptonButton1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonButton1.Location = new System.Drawing.Point(121, 37);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(143, 33);
-            this.kryptonButton1.StateCommon.Back.Color1 = System.Drawing.Color.LightGray;
-            this.kryptonButton1.StateCommon.Back.Color2 = System.Drawing.Color.LightGray;
-            this.kryptonButton1.StateCommon.Border.Color1 = System.Drawing.Color.WhiteSmoke;
-            this.kryptonButton1.StateCommon.Border.Color2 = System.Drawing.Color.White;
-            this.kryptonButton1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton1.StateCommon.Border.Rounding = 10;
-            this.kryptonButton1.TabIndex = 6;
-            this.kryptonButton1.TabStop = false;
-            this.kryptonButton1.Values.Text = "Run";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -528,25 +530,6 @@ namespace Benchmark
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            this.StateCommon.Border.Color1 = System.Drawing.Color.WhiteSmoke;
-            this.StateCommon.Border.Color2 = System.Drawing.Color.WhiteSmoke;
-            this.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.StateCommon.Border.Rounding = 15;
-            this.StateCommon.Border.Width = 0;
-            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.White;
-            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.White;
-            this.StateCommon.Header.Border.Color1 = System.Drawing.Color.White;
-            this.StateCommon.Header.Border.Color2 = System.Drawing.Color.White;
-            this.StateCommon.Header.Border.DrawBorders = ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top;
-            this.StateCommon.Header.Border.Rounding = 0;
-            this.StateCommon.Header.Border.Width = 0;
-            this.StateCommon.Header.Content.Padding = new System.Windows.Forms.Padding(10, -1, -1, -1);
-            this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.StateCommon.Header.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Text = "ToroBench";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
