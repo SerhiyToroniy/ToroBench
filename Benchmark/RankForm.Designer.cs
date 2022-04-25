@@ -51,7 +51,7 @@ namespace Benchmark
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(526, 175);
+            this.dataGridView1.Size = new System.Drawing.Size(698, 283);
             this.dataGridView1.TabIndex = 0;
             // 
             // textBox1
@@ -62,7 +62,7 @@ namespace Benchmark
             this.textBox1.ForeColor = System.Drawing.Color.LightGray;
             this.textBox1.Location = new System.Drawing.Point(12, 17);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(526, 22);
+            this.textBox1.Size = new System.Drawing.Size(698, 22);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "CPU name, score or anything else\r\n..";
             this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
@@ -73,7 +73,7 @@ namespace Benchmark
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(9, 227);
+            this.label6.Location = new System.Drawing.Point(9, 335);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(404, 23);
             this.label6.TabIndex = 2;
@@ -84,7 +84,7 @@ namespace Benchmark
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 271);
+            this.ClientSize = new System.Drawing.Size(722, 367);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);

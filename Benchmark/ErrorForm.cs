@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Benchmark
 {
     public partial class ErrorForm : Form
     {
-        KryptonButton b1;
-        KryptonButton b2;
+        Guna.UI2.WinForms.Guna2Button b1;
+        Guna.UI2.WinForms.Guna2Button b2;
         ToolStripMenuItem t1;
         ToolStripMenuItem t2;
         Form m;
         string errortext;
 
-        public ErrorForm(Form main, KryptonButton button1, KryptonButton button2, ToolStripMenuItem tool1, ToolStripMenuItem tool2, Color b, string error_text, string title, string img)
+        public ErrorForm(Form main, Guna.UI2.WinForms.Guna2Button button1, Guna.UI2.WinForms.Guna2Button button2, ToolStripMenuItem tool1, ToolStripMenuItem tool2, Color b, string error_text, string title, string img)
         {
             InitializeComponent();
             b1 = button1;

@@ -8,13 +8,14 @@ using System.Windows.Forms;
 using System.Management;
 using System.Diagnostics;
 using OpenHardwareMonitor.Hardware;
-using ComponentFactory.Krypton.Toolkit;
-
+using OpenCL;
+using System.Threading;
 
 namespace Benchmark
 {
     public partial class StressForm : Form
     {
+
         public System.Windows.Forms.Timer _timer;
         public DateTime _startTime = DateTime.MinValue;
         public TimeSpan _currentElapsedTime = TimeSpan.Zero;
@@ -22,23 +23,37 @@ namespace Benchmark
         public bool _timerRunnig = false;
 
         BackgroundWorker worker;
-        public List<int> Scores { get; set; }
-        public List<int> Loads { get; set; }
         public List<float> floatList { get; set; }
-        public List<int> Temps { get; set; }
+
+        public List<int> LoadsGPU { get; set; }
+        public List<int> LoadsCPU { get; set; }
+        public List<int> TempsCPU { get; set; }
+        public List<int> TempsGPU { get; set; }
+        public List<int> ScoresCPU { get; set; }
+        public List<int> ScoresGPU { get; set; }
         public float testfloat { get; set; }
         bool stop = false;
-        int N = 10000000;
+        int size = 1000;
+        OpenCL.OpenCL cl;
         PerformanceCounter cpuCounter;
-        bool clear = false;
-        KryptonButton button1_;
-        KryptonButton button2_;
+        Guna.UI2.WinForms.Guna2Button button1_;
+        Guna.UI2.WinForms.Guna2Button button2_;
         ToolStripMenuItem tool = new ToolStripMenuItem();
         ToolStripMenuItem tool1 = new ToolStripMenuItem();
-
+        int loadCPU = -1;
+        int loadGPU = -1;
+        int tempCPU = -1;
+        int tempGPU = -1;
+        int scoreCPU = -1;
+        int scoreGPU = -1;
+        Thread thread1;
+        Thread thread2;
+        List<string> l1 = new List<string>();
+        char[] a;
+        char[] B;
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            clear = false;
+            //clear = false;
             stop = false;
             button1_.Enabled = true;
             button2_.Enabled = true;
@@ -57,97 +72,243 @@ namespace Benchmark
         {
             return Convert.ToInt32(cpuCounter.NextValue());
         }
-        void worker_DoWork(object sender, DoWorkEventArgs e)
+        public void WhileMonitor(List<List<string>> L)
         {
-            List<Stress> l = new List<Stress>();
-            var cpu_usage = new Stress("CPU usage", $"", $"", $"");
-            var realtime_score = new Stress("Real-time score", $"", $"", $"");
-            var temperature = new Stress("Temperature", $"", $"", $"");
-            int N = 10000000;
+            UpdateVisitor updateVisitor = new UpdateVisitor();
+            Computer computer = new Computer();
+            computer.Open();
+            computer.CPUEnabled = true;
+            computer.GPUEnabled = true;
+            computer.Accept(updateVisitor);
 
-            //int testint = 0;
-            //float testfloat = 0;
-            //var integerList = Enumerable.Range(1, N).ToList();
-            //integerList.Sort();
-            //integerList.Reverse();
-            l.Add(cpu_usage);
-            l.Add(realtime_score);
-            l.Add(temperature);
-            worker.ReportProgress(0, l);
-            List<string> l1 = new List<string>();
-            for (int i = 0; i < N; i++)
+            for (int i = 0; i < computer.Hardware.Length; i++)
+            {
+                if (computer.Hardware[i].HardwareType == HardwareType.CPU)
+                {
+                    for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                    {
+                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                        {
+                            tempCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                        }
+                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
+                        {
+                            loadCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                        }
+                    }
+                    break;
+                }
+            }
+            for (int i = 0; i < computer.Hardware.Length; i++)
+            {
+                if (computer.Hardware[i].HardwareType == HardwareType.GpuAti || computer.Hardware[i].HardwareType == HardwareType.GpuNvidia)
+                {
+                    for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                    {
+                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                        {
+                            tempGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                        }
+                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
+                        {
+                            loadGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                        }
+                    }
+                    break;
+                }
+            }
+            Stopwatch stopWatchCPU = new Stopwatch();
+            stopWatchCPU.Start();
+            Parallel.ForEach(L, i =>
+            {
+                Parallel.For(0, 10000, j =>
+                {
+                    if (stop)
+                    {
+                        return;
+                    }
+                });
+            });
+            stopWatchCPU.Stop();
+            scoreCPU = Convert.ToInt32(1000 / stopWatchCPU.ElapsedMilliseconds);
+            Stopwatch stopWatchGPU = new Stopwatch();
+            stopWatchGPU.Start();
+            if (stop)
+            {
+                return;
+            }
+            cl.Execute(size * size);
+            stopWatchGPU.Stop();
+            scoreGPU = Convert.ToInt32(100000 / stopWatchGPU.ElapsedMilliseconds);
+            computer.Close();
+        }
+        public void WhileCPU(List<List<string>> L)
+        {
+            while (true)
             {
                 if (stop)
+                {
                     return;
-                l1.Add(i.ToString());
+                }
+                Parallel.ForEach(L, i =>
+                {
+                    if (stop)
+                    {
+                        return;
+                    }
+                    Parallel.For(0, 1000000, j =>
+                    {
+                        if (stop)
+                        {
+                            return;
+                        }
+                    });
+                });
             }
+        }
+        public void WhileGPU()
+        {
+
+            while (true)
+            {
+                if (stop)
+                {
+                    return;
+                }
+                cl.Execute(size * size);
+                cl.Execute(size * size);
+                cl.Execute(size * size);
+            }
+        }
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
             List<List<string>> L = new List<List<string>>();
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < 128; i++)
             {
                 if (stop)
                     return;
                 L.Add(l1);
             }
-            var options = new ParallelOptions()
-            {
-                MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount(),
-            };
-            long elapsedMs = -1;
+            UpdateVisitor updateVisitor = new UpdateVisitor();
+            Computer computer = new Computer();
+            computer.Open();
+            computer.CPUEnabled = true;
+            computer.GPUEnabled = true;
+            computer.Accept(updateVisitor);
+            cl = new OpenCL.OpenCL();
+            cl.Accelerator = AcceleratorDevice.GPU;
+
+            //string kernel = File.ReadAllText(@"./kernel.cl");
+            string kernel = "kernel void MatrixMulti(global int * dimension, global char * a, global char * b, global char * c){int id = get_global_id(0);for (int i = 0; i < 500; i++){c[id] = a[id] + b[id];}}";
+
+            char[] c = new char[size * size];
+            int[] dimensions = new int[3] { size, size, size };
+            cl.SetKernel(kernel, "MatrixMulti");
+            cl.SetParameter(dimensions, a, B, c);
+
+            thread1 = new Thread(() => WhileGPU());
+            thread2 = new Thread(() => WhileCPU(L));
+            //var thread3 = new Thread(() => WhileMonitor());
+            thread1.Start();
+            thread2.Start();
+            //thread3.Start();
             while (!stop)
             {
-                var watch = new Stopwatch();
-                int load = getCurrentCpuUsage();
-                int temp = -1;
-                watch.Start();
-                Parallel.ForEach(L, options, i =>
-                {
-                    foreach (var item2 in i)
-                    {
-                        if (item2 == "-1")
-                            break;
-                        if (stop)
-                            return;
-                    }
-                });
-                watch.Stop();
-                temp = HardwareInfo.GetCurrentCPUTemperature();
-                load = getCurrentCpuUsage();
-                elapsedMs = watch.ElapsedMilliseconds;
-                int score = Convert.ToInt32((1000000 / elapsedMs));
-                Loads.Add(load);
-                Temps.Add(temp);
-                Scores.Add(score);
-                Loads.Distinct();
-                Temps.Distinct();
-                Scores.Distinct();
-                if (clear)
-                {
-                    Loads.Clear();
-                    Scores.Clear();
-                    Temps.Clear();
-                }
-                l.Clear();
-                cpu_usage = new Stress("CPU usage", $"{Loads.Min()}%", $"{Loads.Max()}%", $"{load}%");
-                realtime_score = new Stress("Real-time score", $"{Scores.Min()}", $"{Scores.Max()}", $"{score}");
-                temperature = new Stress("Temperature", $"{Temps.Min()}°С", $"{Temps.Max()}°С", $"{temp}°С");
-                l.Add(cpu_usage);
-                l.Add(realtime_score);
-                l.Add(temperature);
+                var thread3 = new Thread(() => WhileMonitor(L));
+                thread3.Start();
+                thread3.Join();
+                //Thread.Sleep(1000);
+                //for (int i = 0; i < computer.Hardware.Length; i++)
+                //{
+                //    if (computer.Hardware[i].HardwareType == HardwareType.CPU)
+                //    {
+                //        for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                //        {
+                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                //            {
+                //                tempCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                //            }
+                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
+                //            {
+                //                loadCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                //            }
+                //        }
+                //        break;
+                //    }
+                //}
+                //for (int i = 0; i < computer.Hardware.Length; i++)
+                //{
+                //    if (computer.Hardware[i].HardwareType == HardwareType.GpuAti || computer.Hardware[i].HardwareType == HardwareType.GpuNvidia)
+                //    {
+                //        for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                //        {
+                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                //            {
+                //                tempGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                //            }
+                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
+                //            {
+                //                loadGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                //            }
+                //        }
+                //        break;
+                //    }
+                //}
+                LoadsCPU.Add(loadCPU);
+                TempsCPU.Add(tempCPU);
+                LoadsGPU.Add(loadGPU);
+                TempsGPU.Add(tempGPU);
+                ScoresCPU.Add(scoreCPU);
+                ScoresGPU.Add(scoreGPU);
+                var lInt = new StressINT(loadCPU, LoadsCPU.Max(), tempCPU, TempsCPU.Max(), loadGPU, LoadsGPU.Max(), tempGPU, TempsGPU.Max(), scoreCPU, ScoresCPU.Max(), scoreGPU, ScoresGPU.Max());
+                var l = new Stress($"{loadCPU}%", $"Max: {LoadsCPU.Max()}%", $"{tempCPU}℃", $"Max: {TempsCPU.Max()}℃", $"{loadGPU}%", $"Max: {LoadsGPU.Max()}%", $"{tempGPU}℃", $"Max: {TempsGPU.Max()}℃", $"{scoreCPU}", $"Max: {ScoresCPU.Max()}", $"{scoreGPU}", $"Max: {ScoresGPU.Max()}", lInt);
                 worker.ReportProgress(1, l);
             }
+            computer.Close();
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            dataGridView1.Update();
-            dataGridView1.Refresh();
-            dataGridView1.DataSource = e.UserState;
-            if (e.ProgressPercentage == 0)
-            {
-                dataGridView1.Rows[0].HeaderCell.Value = "CPU usage";
-                dataGridView1.Rows[1].HeaderCell.Value = "Real-time score";
-                dataGridView1.Rows[2].HeaderCell.Value = "Temperature";
-            }
+            //guna2DataGridView1.Update();
+            //guna2DataGridView1.Refresh();
+            //guna2DataGridView1.DataSource = e.UserState;
+            //if (e.ProgressPercentage == 0)
+            //{
+            //    guna2DataGridView1.Rows[0].HeaderCell.Value = "CPU usage";
+            //    guna2DataGridView1.Rows[1].HeaderCell.Value = "Real-time score";
+            //    guna2DataGridView1.Rows[2].HeaderCell.Value = "Temperature";
+            //}
+            var l = e.UserState as Stress;
+            label12.Text = l.CPUload;
+            label5.Text = l.CPUloadMax;
+            label13.Text = l.CPUtemp;
+            label6.Text = l.CPUtempMax;
+            guna2CircleProgressBar5.Value = l.StressINT.CPUload;
+            if (l.StressINT.CPUtemp <= 100)
+                guna2CircleProgressBar3.Value = l.StressINT.CPUtemp;
+            guna2CircleProgressBar4.Value = 100;
+            if (l.StressINT.CPUScore <= 100)
+                guna2CircleProgressBar4.Value = l.StressINT.CPUScore;
+
+
+            label4.Text = l.GPUload;
+            label7.Text = l.GPUloadMax;
+            label9.Text = l.GPUtemp;
+            label8.Text = l.GPUtempMax;
+            guna2CircleProgressBar1.Value = l.StressINT.GPUload;
+            if (l.StressINT.GPUtemp <= 100)
+                guna2CircleProgressBar2.Value = l.StressINT.GPUtemp;
+            guna2CircleProgressBar6.Value = 100;
+            if (l.StressINT.GPUScore <= 100)
+                guna2CircleProgressBar6.Value = l.StressINT.GPUScore;
+
+            label10.Text = l.CPUScore;
+            label11.Text = l.CPUScoreMin;
+
+            label14.Text = l.GPUScore;
+            label15.Text = l.GPUScoreMin;
+
+            label1.Visible = true;
         }
         void _timer_Tick(object sender, EventArgs e)
         {
@@ -159,22 +320,31 @@ namespace Benchmark
                 label1.Text = label1.Text.Substring(0, 14) + $"{TimeSinceStartTime}";
             }
         }
-        public StressForm(Color b, KryptonButton b1, KryptonButton b2, ToolStripMenuItem t, ToolStripMenuItem t1)
+        public StressForm(Color b, Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, ToolStripMenuItem t, ToolStripMenuItem t1, string _CPUname, string _GPUname, List<string> _l1, char[] _a, char[] _B)
         {
             InitializeComponent();
-            floatList = new List<float>();
-            for (float i = 1; i <= N; i++)
-            {
-                floatList.Add(i);
-            }
-            Scores = new List<int>();
-            Loads = new List<int>();
-            Temps = new List<int>();
+            //floatList = new List<float>();
+            //for (float i = 1; i <= N; i++)
+            //{
+            //    floatList.Add(i);
+            //}
+            l1 = _l1;
+            a = _a;
+            B = _B;
+
+            LoadsCPU = new List<int>();
+            LoadsGPU = new List<int>();
+            TempsCPU = new List<int>();
+            TempsGPU = new List<int>();
+            ScoresCPU = new List<int>();
+            ScoresGPU = new List<int>();
             worker = new BackgroundWorker();
             tool = t;
             tool1 = t1;
+            label2.Text = _CPUname;
+            label3.Text = _GPUname;
             _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 10;
+            _timer.Interval = 1000;
             _timer.Tick += new EventHandler(_timer_Tick);
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += worker_ProgressChanged;
@@ -183,30 +353,96 @@ namespace Benchmark
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             button1_ = b1;
             button2_ = b2;
+
+
+            //var thread1 = new Thread(() => WhileGPU());
+            //var thread2 = new Thread(() => WhileCPU(L));
+            //var thread3 = new Thread(() => WhileMonitor());
+            //thread3.Priority = ThreadPriority.Highest;
             if (b == Color.DimGray)
             {
                 BackColor = Color.DimGray;
-                dataGridView1.DefaultCellStyle.BackColor = Color.Black;
-                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Black;
-                dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
-                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
-                dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
-                dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                dataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Black;
-                dataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.White;
                 ForeColor = Color.White;
-                button2.BackColor = Color.Black;
-                button2.ForeColor = Color.White;
+                guna2GroupBox1.BorderColor = Color.FromArgb(56, 56, 56);
+                guna2GroupBox1.CustomBorderColor = Color.FromArgb(56, 56, 56);
+                guna2GroupBox1.FillColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar5.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar3.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar1.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar2.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar4.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar6.InnerColor = Color.FromArgb(56, 56, 56);
+
+                label5.ForeColor = Color.White;
+                label1.ForeColor = Color.White;
+                label2.ForeColor = Color.White;
+                label3.ForeColor = Color.White;
+                label12.ForeColor = Color.White;
+                label13.ForeColor = Color.White;
+                label6.ForeColor = Color.White;
+                label4.ForeColor = Color.White;
+                label7.ForeColor = Color.White;
+                label9.ForeColor = Color.White;
+                label8.ForeColor = Color.White;
+                label10.ForeColor = Color.White;
+                label11.ForeColor = Color.White;
+                label14.ForeColor = Color.White;
+                label15.ForeColor = Color.White;
+                //guna2DataGridView1.DefaultCellStyle.BackColor = Color.Black;
+                //guna2DataGridView1.DefaultCellStyle.ForeColor = Color.White;
+                //guna2DataGridView1.DefaultCellStyle.SelectionBackColor = Color.Black;
+                //guna2DataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
+                //guna2DataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
+                //guna2DataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                //guna2DataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
+                //guna2DataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Black;
+                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+                //guna2GroupBox1.BorderColor = Color.Black;
+                //guna2GroupBox1.CustomBorderColor = Color.Black;
+                //guna2GroupBox1.FillColor = Color.Black;
+                //label1.ForeColor = Color.White;
+                //ForeColor = Color.White;
+                //button2.BackColor = Color.Black;
+                //button2.ForeColor = Color.White;
             }
             if (b == Color.White)
             {
                 BackColor = Color.White;
                 ForeColor = Color.Black;
-                button2.BackColor = Color.Gainsboro;
-                button2.ForeColor = Color.Black;
+                guna2GroupBox1.BorderColor = SystemColors.Control;
+                guna2GroupBox1.CustomBorderColor = SystemColors.Control;
+                guna2GroupBox1.FillColor = SystemColors.Control;
+                guna2CircleProgressBar5.InnerColor = SystemColors.Control;
+                guna2CircleProgressBar3.InnerColor = SystemColors.Control;
+                guna2CircleProgressBar1.InnerColor = SystemColors.Control;
+                guna2CircleProgressBar2.InnerColor = SystemColors.Control;
+                guna2CircleProgressBar4.InnerColor = SystemColors.Control;
+                guna2CircleProgressBar6.InnerColor = SystemColors.Control;
+
+                label5.ForeColor = Color.DimGray;
+                label1.ForeColor = Color.DimGray;
+                label2.ForeColor = Color.DimGray;
+                label3.ForeColor = Color.DimGray;
+                label12.ForeColor = Color.DimGray;
+                label13.ForeColor = Color.DimGray;
+                label6.ForeColor = Color.DimGray;
+                label4.ForeColor = Color.DimGray;
+                label7.ForeColor = Color.DimGray;
+                label9.ForeColor = Color.DimGray;
+                label8.ForeColor = Color.DimGray;
+                label10.ForeColor = Color.DimGray;
+                label11.ForeColor = Color.DimGray;
+                label14.ForeColor = Color.DimGray;
+                label15.ForeColor = Color.DimGray;
+
+                //button2.BackColor = Color.Gainsboro;
+                //button2.ForeColor = Color.Black;
             }
-            worker.RunWorkerAsync();
+            //thread1.Start();
+            //thread2.Start();
+            //thread3.Start();
+
             if (!_timerRunnig)
             {
                 _startTime = DateTime.Now;
@@ -219,6 +455,8 @@ namespace Benchmark
                 _timer.Stop();
                 _timerRunnig = false;
             }
+            worker.RunWorkerAsync();
+
         }
 
         private void StressForm_Load(object sender, EventArgs e)
@@ -244,7 +482,7 @@ namespace Benchmark
 
         private void button1_Click(object sender, EventArgs e)
         {
-            clear = true;
+            //clear = true;
         }
 
         private void StressForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -259,7 +497,41 @@ namespace Benchmark
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            dataGridView1.ClearSelection();
+            //guna2DataGridView1.ClearSelection();
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            stop = true;
+            thread1.Abort();
+            thread2.Abort();
+            //thread3.Abort();
+            Close();
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2GroupBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2GroupBox1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2GroupBox1_Click_2(object sender, EventArgs e)
+        {
+
         }
     }
 
@@ -301,17 +573,79 @@ namespace Benchmark
     [Serializable]
     public class Stress
     {
-        public string Sensor { get; set; }
-        public string Current { get; set; }
-        public string Min { get; set; }
-        public string Max { get; set; }
+        public string CPUload { get; set; }
+        public string CPUloadMax { get; set; }
+        public string CPUtemp { get; set; }
+        public string CPUtempMax { get; set; }
 
-        public Stress(string s, string mi, string ma, string c)
+        public string GPUload { get; set; }
+        public string GPUloadMax { get; set; }
+        public string GPUtemp { get; set; }
+        public string GPUtempMax { get; set; }
+
+
+        public string CPUScore { get; set; }
+        public string CPUScoreMin { get; set; }
+        public string GPUScore { get; set; }
+        public string GPUScoreMin { get; set; }
+
+        public StressINT StressINT { get; set; }
+
+        public Stress(string Cl, string ClM, string Ct, string CtM, string Gl, string GlM, string Gt, string GtM, string CS, string CSM, string GS, string GSM, StressINT SI)
         {
-            Sensor = s;
-            Min = mi;
-            Max = ma;
-            Current = c;
+            CPUload = Cl;
+            CPUloadMax = ClM;
+            CPUtemp = Ct;
+            CPUtempMax = CtM;
+
+            GPUload = Gl;
+            GPUloadMax = GlM;
+            GPUtemp = Gt;
+            GPUtempMax = GtM;
+
+            CPUScore = CS;
+            CPUScoreMin = CSM;
+            GPUScore = GS;
+            GPUScoreMin = GSM;
+
+            StressINT = SI;
+        }
+    }
+
+    [Serializable]
+    public class StressINT
+    {
+        public int CPUload { get; set; }
+        public int CPUloadMax { get; set; }
+        public int CPUtemp { get; set; }
+        public int CPUtempMax { get; set; }
+        public int GPUload { get; set; }
+        public int GPUloadMax { get; set; }
+        public int GPUtemp { get; set; }
+        public int GPUtempMax { get; set; }
+
+        public int CPUScore { get; set; }
+        public int CPUScoreMin { get; set; }
+        public int GPUScore { get; set; }
+        public int GPUScoreMin { get; set; }
+
+
+        public StressINT(int Cl, int ClM, int Ct, int CtM, int Gl, int GlM, int Gt, int GtM, int CS, int CSM, int GS, int GSM)
+        {
+            CPUload = Cl;
+            CPUloadMax = ClM;
+            CPUtemp = Ct;
+            CPUtempMax = CtM;
+
+            GPUload = Gl;
+            GPUloadMax = GlM;
+            GPUtemp = Gt;
+            GPUtempMax = GtM;
+
+            CPUScore = CS;
+            CPUScoreMin = CSM;
+            GPUScore = GS;
+            GPUScoreMin = GSM;
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
-using ComponentFactory.Krypton.Toolkit;
+using OpenCL;
 
 
 namespace Benchmark
@@ -19,14 +19,15 @@ namespace Benchmark
         long elapsedMs = -1;
         Label score = new Label();
         int cores = -1;
-        KryptonButton b1;
-        KryptonButton b2;
+        Guna.UI2.WinForms.Guna2Button b1;
+        Guna.UI2.WinForms.Guna2Button b2;
         bool stop = false;
         Color o = new Color();
         ToolStripMenuItem tool = new ToolStripMenuItem();
-        DateTime StartTime;
+        //DateTime StartTime;
         ToolStripMenuItem tool1 = new ToolStripMenuItem();
         Process Proc = Process.GetCurrentProcess();
+        int iterationGPU = 0;
         public int Score { get; set; }
 
         //bool benching;
@@ -75,18 +76,25 @@ namespace Benchmark
                 return false;
             }
         }
+        public static bool IsPrime(int number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
 
+            var boundary = (int)Math.Floor(Math.Sqrt(number));
+
+            for (int i = 3; i <= boundary; i += 2)
+                if (number % i == 0)
+                    return false;
+
+            return true;
+        }
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             if (stop)
                 return;
-            Benchmark b = new Benchmark(cores);
-            int N = 10000000;
-            //int testint = 0;
-            //float testfloat = 0;
-            var integerList = Enumerable.Range(1, N).ToList();
-            integerList.Sort();
-            integerList.Reverse();
+            int N = 5000;
             var floatList = new List<float>();
             for (float i = 1; i <= N; i++)
             {
@@ -94,23 +102,31 @@ namespace Benchmark
                     return;
                 floatList.Add(i);
             }
-            List<string> l1 = new List<string>();
+            var intList = new List<int>();
+            for (int i = 1; i <= N; i++)
+            {
+                if (stop)
+                    return;
+                intList.Add(i);
+            }
+            List<string> stringList = new List<string>();
             for (int i = 0; i < N; i++)
             {
                 if (stop)
                     return;
-                l1.Add(i.ToString());
+                stringList.Add(i.ToString());
             }
-            List<List<string>> L = new List<List<string>>();
-            for (int i = 0; i < 100; i++)
-            {
-                if (stop)
-                    return;
-                L.Add(l1);
-            }
+            //List<List<string>> L = new List<List<string>>();
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    if (stop)
+            //        return;
+            //    L.Add(l1);
+            //}
             var watch = new Stopwatch();
             int count = 0;
-            if (Text == "Single-Core")
+            int percent = 0;
+            if (Text == "CPU")
             {
                 var options = new ParallelOptions()
                 {
@@ -120,62 +136,131 @@ namespace Benchmark
                 AffinityMask &= 0x0001;
                 Proc.ProcessorAffinity = (IntPtr)AffinityMask;
                 watch.Start();
-                Parallel.ForEach(L, options, i =>
-                 {
-                     count += 1;
-                     foreach (var item2 in i)
-                     {
-                         if (item2 == "-1")
-                             break;
-                         if (stop)
-                             return;
-                     }
-                     integerList.Sort();
-                     integerList.Reverse();
-                     if (count % 1 == 0 && count < 100)
-                         worker.ReportProgress((int)count / 1, "Doing calculations..");
-                 });
-                watch.Stop();
-            }
-            if (Text == "Multi-Core")
-            {
-                var options = new ParallelOptions()
+                Parallel.ForEach(floatList, options, i =>
+                {
+                    count += 1;
+                    for (int j = 0; j < floatList.Count(); j++)
+                    {
+
+                        if (stop)
+                            return;
+                        floatList[j] /= 1;
+                        floatList[j] *= 1;
+                        floatList[j] += 1;
+                        floatList[j] -= 1;
+                        intList[j] /= 1;
+                        intList[j] *= 1;
+                        intList[j] += 1;
+                        intList[j] -= 1;
+                        IsPrime(intList[j]);
+                    }
+                    stringList.Sort();
+                    if (count % 100 == 0)
+                        percent++;
+                    worker.ReportProgress(percent, "Doing calculations..");
+                });
+                options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount(),
                 };
                 Proc.ProcessorAffinity = (IntPtr)((1 << Environment.ProcessorCount) - 1);
+                var thread1 = new Thread(() =>
+                {
+                    Parallel.ForEach(floatList, options, i =>
+                    {
+                        count += 1;
+                        for (int j = 0; j < floatList.Count(); j++)
+                        {
+                            if (stop)
+                                return;
+                            floatList[j] /= 1;
+                            floatList[j] *= 1;
+                            floatList[j] += 1;
+                            floatList[j] -= 1;
+                            intList[j] /= 1;
+                            intList[j] *= 1;
+                            intList[j] += 1;
+                            intList[j] -= 1;
+                        }
+                        if (count % 100 == 0)
+                            percent++;
+                        worker.ReportProgress(percent, "Doing calculations..");
+                    });
+                });
+
+                watch.Stop();
+            }
+            if (Text == "GPU")
+            {
+                //guna2Button1.Visible = false;
                 watch.Start();
-                Parallel.ForEach(L, options, i =>
-                 {
-                     count += 1;
-                     foreach (var item2 in i)
-                     {
-                         if (item2 == "-1")
-                             break;
-                         if (stop)
-                             return;
-                     }
-                     integerList.Sort();
-                     integerList.Reverse();
-                     if (count % 1 == 0 && count < 100)
-                         worker.ReportProgress((int)count / 1, "Doing calculations..");
-                 });
+                string kernel = @"__kernel void concat_kernel(__global float *D,__global int *I, const int Size)
+                                    {
+                                        int gid = get_global_id(0);
+
+                                        int i;
+                                        int w;
+                                        for(i=gid; i< Size; i++){
+                                            D[i] = D[i]/1;
+                                            D[i] = D[i]*1;
+                                            D[i] = D[i]+1;
+                                            D[i] = D[i]-1;
+                                            I[i] = I[i]/1;
+                                            I[i] = I[i]*1;
+                                            I[i] = I[i]+1;
+                                            I[i] = I[i]-1;
+                                        }
+                                    }";
+                MultiCL cl = new MultiCL();
+                cl.ProgressChangedEvent += Cl_ProgressChangedEvent1;
+                int size = 10000;
+                int work_size = 1;
+                double[] doubleList = new double[size];
+                int[] iList = new int[size];
+                for (int i = 0; i < size; i++)
+                {
+                    doubleList[i] = 1.1;
+                    iList[i] = i;
+                }
+                cl.SetKernel(kernel, "concat_kernel");
+                cl.SetParameter(doubleList, iList, size);
+
+                var thread1 = new Thread(() =>
+                {
+                    for (int i = 0; i < 2000; i++)
+                    {
+                        if (stop)
+                            return;
+                        iterationGPU++;
+                        cl.Invoke(0, size, work_size);
+                    }
+                });
+
+                thread1.Start();
+                thread1.Join();
                 watch.Stop();
             }
             elapsedMs = watch.ElapsedMilliseconds;
             if (stop)
                 return;
         }
-
+        private void Cl_ProgressChangedEvent1(object sender, double e)
+        {
+            var percent = Convert.ToInt32(e * 100 * iterationGPU / 1000);
+            if (percent > guna2CircleProgressBar1.Value)
+            {
+                guna2CircleProgressBar1.Value = percent;
+            }
+        }
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (e.ProgressPercentage > progressBar1.Value)
+            if (e.ProgressPercentage > guna2CircleProgressBar1.Value)
             {
-                progressBar1.Value = e.ProgressPercentage;
+                guna2CircleProgressBar1.Value = e.ProgressPercentage;
             }
-            label1.Text = e.UserState.ToString();
+            //label1.Text = e.UserState.ToString();
         }
-        public ProgressForm(int s, ToolStripMenuItem t1, ToolStripMenuItem t, string n, Label l, int c, KryptonButton b1, KryptonButton b2, Color outter)
+        public ProgressForm(int s, ToolStripMenuItem t1, ToolStripMenuItem t, string n, Label l, int c, Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, Color outter)
         {
             InitializeComponent();
             //benching = b;
@@ -198,15 +283,21 @@ namespace Benchmark
             {
                 BackColor = Color.DimGray;
                 ForeColor = Color.White;
-                button2.BackColor = Color.Black;
-                button2.ForeColor = Color.White;
+                guna2GroupBox1.BorderColor = Color.FromArgb(56, 56, 56);
+                guna2GroupBox1.CustomBorderColor = Color.FromArgb(56, 56, 56);
+                guna2GroupBox1.FillColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar1.ForeColor = Color.White;
+                guna2CircleProgressBar1.InnerColor = Color.FromArgb(56, 56, 56);
             }
             if (outter == Color.White)
             {
                 BackColor = Color.White;
                 ForeColor = Color.Black;
-                button2.BackColor = Color.Gainsboro;
-                button2.ForeColor = Color.Black;
+                guna2GroupBox1.BorderColor = SystemColors.Control;
+                guna2GroupBox1.CustomBorderColor = SystemColors.Control;
+                guna2GroupBox1.FillColor = SystemColors.Control;
+                guna2CircleProgressBar1.ForeColor = Color.DimGray;
+                guna2CircleProgressBar1.InnerColor = SystemColors.Control;
             }
             worker.RunWorkerAsync();
         }
@@ -238,20 +329,35 @@ namespace Benchmark
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            TimeSpan elapsed = DateTime.Now - StartTime;
-            string text = "";
-            if (elapsed.Days > 0)
-                text += elapsed.Days.ToString() + ".";
+            //TimeSpan elapsed = DateTime.Now - StartTime;
+            //string text = "";
+            //if (elapsed.Days > 0)
+            //    text += elapsed.Days.ToString() + ".";
 
-            // Преобразование миллисекунд в десятые доли секунды.
-            int tenths = elapsed.Milliseconds / 100;
+            //// Преобразование миллисекунд в десятые доли секунды.
+            //int tenths = elapsed.Milliseconds / 100;
 
-            // Запишите оставшееся время.
-            text +=
-                elapsed.Minutes.ToString("00") + ":" +
-                elapsed.Seconds.ToString("00");
+            //// Запишите оставшееся время.
+            //text +=
+            //    elapsed.Minutes.ToString("00") + ":" +
+            //    elapsed.Seconds.ToString("00");
 
-            label1.Text = text;
+            ////label1.Text = text;
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            stop = true;
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            stop = true;
+        }
+
+        private void ProgressForm_Shown(object sender, EventArgs e)
+        {
+
         }
     }
     static class Extensions
@@ -263,7 +369,7 @@ namespace Benchmark
     }
     public class Benchmark
     {
-        public int N = 10000000;
+        public int N = 100000000;
         public int testint { get; set; }
         public float testfloat { get; set; }
         public List<int> integerList { get; set; }
@@ -283,7 +389,7 @@ namespace Benchmark
         }
         public void int_calculation(string type, bool stop, int percent)
         {
-            if (type == "Single-Core")
+            if (type == "CPU")
             {
                 for (int i = 0; i < 100; i++)
                 {
@@ -300,9 +406,6 @@ namespace Benchmark
                     floatList.Sort();
                     floatList.Reverse();
                 }
-            }
-            if (type == "Multi-Core")
-            {
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount()
@@ -324,10 +427,14 @@ namespace Benchmark
                     floatList.Reverse();
                 });
             }
+            if (type == "GPU")
+            {
+
+            }
         }
         public void float_calculation(string type, bool stop)
         {
-            if (type == "Single-Core")
+            if (type == "CPU")
             {
                 foreach (var i in floatList)
                 {
@@ -342,9 +449,6 @@ namespace Benchmark
                     //Thread.Sleep(1);
 
                 }
-            }
-            if (type == "Multi-Core")
-            {
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount()
@@ -362,11 +466,15 @@ namespace Benchmark
                     Thread.Sleep(1);
                 });
             }
+            if (type == "GPU")
+            {
+
+            }
 
         }
         public void sorting_calculation(string type, bool stop)
         {
-            if (type == "Single-Core")
+            if (type == "CPU")
             {
                 for (int i = 0; i < N / 1000000; i++)
                 {
@@ -378,23 +486,24 @@ namespace Benchmark
                     floatList.Reverse();
                     //Thread.Sleep(1);
                 }
-            }
-            if (type == "Multi-Core")
-            {
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount()
                 };
                 Parallel.For(0, N, options, i =>
-                 {
-                     if (stop)
-                         return;
-                     integerList.Sort();
-                     integerList.Reverse();
-                     floatList.Sort();
-                     floatList.Reverse();
-                     Thread.Sleep(1);
-                 });
+                {
+                    if (stop)
+                        return;
+                    integerList.Sort();
+                    integerList.Reverse();
+                    floatList.Sort();
+                    floatList.Reverse();
+                    Thread.Sleep(1);
+                });
+            }
+            if (type == "GPU")
+            {
+
             }
         }
         public static bool isPrime(int number)
@@ -419,7 +528,7 @@ namespace Benchmark
         }
         public void findingprime_calculation(string type, bool stop)
         {
-            if (type == "Single-Core")
+            if (type == "CPU")
             {
                 for (int i = 0; i < N / 100; i++)
                 {
@@ -428,20 +537,21 @@ namespace Benchmark
                     var prime = isPrime(i);
                     //Thread.Sleep(1);
                 }
-            }
-            if (type == "Multi-Core")
-            {
                 var options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount()
                 };
                 Parallel.For(0, N, options, i =>
-                 {
-                     if (stop)
-                         return;
-                     var prime = isPrime(i);
-                     Thread.Sleep(1);
-                 });
+                {
+                    if (stop)
+                        return;
+                    var prime = isPrime(i);
+                    Thread.Sleep(1);
+                });
+            }
+            if (type == "GPU")
+            {
+
             }
         }
     }

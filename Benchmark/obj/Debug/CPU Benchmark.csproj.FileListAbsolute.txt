@@ -26,9 +26,9 @@ E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benc
 E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CopyComplete
 E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.exe
 E:\Microsoft Visual Studio\2019\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.pdb
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.exe.config
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.exe
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Benchmark.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ToroBench.exe.config
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ToroBench.exe
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ToroBench.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Microsoft.Win32.Primitives.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\netstandard.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.AppContext.dll
@@ -124,11 +124,9 @@ E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XmlDocument.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XmlSerializer.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XPath.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Xml.XPath.XDocument.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Docking.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Navigator.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Workspace.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\AutoUpdater.NET.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\CircularProgressBar.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\DevExpress.Data.v21.1.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Dropbox.Api.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Auth.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Auth.PlatformServices.dll
@@ -137,9 +135,12 @@ E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v2.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v3.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.PlatformServices.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Guna.UI2.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Newtonsoft.Json.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Npgsql.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\NvAPIWrapper.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\OpenCLlib.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Buffers.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Memory.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Numerics.Vectors.dll
@@ -149,11 +150,17 @@ E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Json.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Channels.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Tasks.Extensions.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ValueTuple.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\WinFormAnimation.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Cloo.dll
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\AutoUpdater.NET.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\AutoUpdater.NET.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\CircularProgressBar.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Docking.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Navigator.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Ribbon.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ComponentFactory.Krypton.Workspace.pdb
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\DevExpress.Data.v21.1.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Dropbox.Api.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.xml
@@ -168,6 +175,8 @@ E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Google.Apis.Drive.v3.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Newtonsoft.Json.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Npgsql.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\NvAPIWrapper.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\OpenCLlib.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Buffers.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Memory.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Numerics.Vectors.xml
@@ -177,15 +186,17 @@ E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Text.Json.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Channels.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.Threading.Tasks.Extensions.xml
 E:\Repos\CPU Benchmark\Benchmark\bin\Debug\System.ValueTuple.xml
+E:\Repos\CPU Benchmark\Benchmark\bin\Debug\Cloo.xml
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.AssemblyReference.cache
-E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.exe.config
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\ToroBench.exe.config
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.ErrorForm.resources
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.MainForm.resources
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.ProgressForm.resources
-E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.Properties.Resources.resources
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\ToroBench.Properties.Resources.resources
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.RankForm.resources
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.StressForm.resources
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.GenerateResource.cache
 E:\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CoreCompileInputs.cache
-E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.exe
-E:\Repos\CPU Benchmark\Benchmark\obj\Debug\Benchmark.pdb
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\CPU Benchmark.csproj.CopyComplete
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\ToroBench.exe
+E:\Repos\CPU Benchmark\Benchmark\obj\Debug\ToroBench.pdb

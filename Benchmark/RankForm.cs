@@ -4,21 +4,20 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Benchmark
 {
     public partial class RankForm : Form
     {
         public List<Scores> l { get; set; }
-        public KryptonButton button2 { get; set; }
+        public Guna.UI2.WinForms.Guna2Button button2 { get; set; }
 
-        public KryptonButton button1 { get; set; }
+        public Guna.UI2.WinForms.Guna2Button button1 { get; set; }
         public ToolStripMenuItem file { get; set; }
         public ToolStripMenuItem settings { get; set; }
         public Color backcolor { get; set; }
 
-        public RankForm(KryptonButton b1, KryptonButton b2, ToolStripMenuItem f, ToolStripMenuItem s, Color b, List<Scores> list)
+        public RankForm(Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, ToolStripMenuItem f, ToolStripMenuItem s, Color b, List<Scores> list)
         {
             InitializeComponent();
             button1 = b1;
