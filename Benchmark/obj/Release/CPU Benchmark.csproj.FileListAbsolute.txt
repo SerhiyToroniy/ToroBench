@@ -143,11 +143,6 @@ E:\Repos\CPU Benchmark\Benchmark\obj\Release\Benchmark.RankForm.resources
 E:\Repos\CPU Benchmark\Benchmark\obj\Release\Benchmark.StressForm.resources
 E:\Repos\CPU Benchmark\Benchmark\obj\Release\CPU Benchmark.csproj.GenerateResource.cache
 E:\Repos\CPU Benchmark\Benchmark\obj\Release\CPU Benchmark.csproj.CoreCompileInputs.cache
-E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Docking.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Navigator.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Ribbon.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Toolkit.dll
-E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Workspace.dll
 E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Docking.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Navigator.pdb
 E:\Repos\CPU Benchmark\Benchmark\bin\Release\ComponentFactory.Krypton.Ribbon.pdb

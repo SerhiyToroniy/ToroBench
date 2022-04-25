@@ -19,7 +19,7 @@ using System.Threading;
 //using NvAPIWrapper;
 //using System.Linq;
 using AutoUpdaterDotNET;
-
+using Microsoft.Win32;
 
 namespace Benchmark
 {
@@ -38,12 +38,15 @@ namespace Benchmark
         ToolStripMenuItem tool1 = new ToolStripMenuItem();
         public static string downloaded = "";
         public static string FileName = "";
+        Thread threadSystemMode;
         //bool benching = false;
         List<string> l1;
         int size = 1000;
         int N = 1000000;
         char[] A;
         char[] B;
+        string fullPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize";
+        string valueName = "AppsUseLightTheme";
 
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -108,8 +111,8 @@ namespace Benchmark
             {
                 l1.Add($"{i}");
             }
-            A = new char[size*size];
-            B = new char[size*size];
+            A = new char[size * size];
+            B = new char[size * size];
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
@@ -227,29 +230,24 @@ namespace Benchmark
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //while (!benching)
-            //{
-            //    label7.Text = label7.Text.Substring(0, 8) + $"{HardwareInfo.GetCpuSpeedInGHz()}";
-            //    //worker.ReportProgress(0, label7.Text.Substring(0, 8) + $"{HardwareInfo.GetCpuSpeedInGHz()} ({HardwareInfo.GetCurrentCPUTemperature()}°С)");
-            //    //worker.ReportProgress(0, label7.Text.Substring(0, 8) + $"{HardwareInfo.GetCpuSpeedInGHz()}");
-            //}
-            //worker = new BackgroundWorker();
-            //worker.WorkerReportsProgress = true;
-            //worker.ProgressChanged += worker_ProgressChanged;
-            //worker.DoWork += worker_DoWork;
-            //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            //label1.Text += HardwareInfo.GetOSInformation();
-            //label2.Text += HardwareInfo.GetPhysicalMemory();
-            //label3.Text += $"{HardwareInfo.GetProcessorInformation()}";
-            //label4.Text += $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)";
-            //label7.Text += $"{HardwareInfo.GetCpuSpeedInGHz("current")} ({HardwareInfo.GetCurrentCPUTemperature()}°С)";
-            //worker.RunWorkerAsync();
+
+
             string mode = System.IO.File.ReadAllText("Theme.txt");
+            if (mode == "system")
+            {
+                whiteToolStripMenuItem_Click_1(sender, e);
+            }
             if (mode == "dark")
             {
+                label8.ForeColor = Color.White;
+                label9.ForeColor = Color.White;
+                label10.ForeColor = Color.White;
+                label11.ForeColor = Color.White;
                 //refreshToolStripMenuItem.Image = Image.FromFile("img/update_fordark.png");
                 //exitToolStripMenuItem.Image = Image.FromFile("img/exit_dark.png");
                 themeModeToolStripMenuItem.Image = Image.FromFile("img/theme_fordark2.png");
+                whiteToolStripMenuItem.Image = Image.FromFile("img/SystemForDark.png");
+
 
                 BackColor = Color.DimGray;
                 ForeColor = Color.White;
@@ -318,14 +316,23 @@ namespace Benchmark
                 toolStripMenuItem3.BackColor = Color.Black;
                 toolStripMenuItem3.ForeColor = Color.White;
 
+                toolStripMenuItem4.BackColor = Color.Black;
+                toolStripMenuItem4.ForeColor = Color.White;
+
                 themeModeToolStripMenuItem.BackColor = Color.Black;
                 themeModeToolStripMenuItem.ForeColor = Color.White;
             }
             if (mode == "white")
             {
+                label8.ForeColor = Color.Black;
+                label9.ForeColor = Color.Black;
+                label10.ForeColor = Color.Black;
+                label11.ForeColor = Color.Black;
                 //refreshToolStripMenuItem.Image = Image.FromFile("img/update.png");
                 //exitToolStripMenuItem.Image = Image.FromFile("img/exit_icon.png");
                 themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
+                whiteToolStripMenuItem.Image = Image.FromFile("img/System.png");
+
 
                 BackColor = Color.White;
                 ForeColor = Color.Black;
@@ -366,6 +373,9 @@ namespace Benchmark
                 toolStripMenuItem3.BackColor = Color.WhiteSmoke;
                 toolStripMenuItem3.ForeColor = Color.Black;
 
+                toolStripMenuItem4.BackColor = Color.WhiteSmoke;
+                toolStripMenuItem4.ForeColor = Color.Black;
+
                 themeModeToolStripMenuItem.BackColor = Color.WhiteSmoke;
                 themeModeToolStripMenuItem.ForeColor = Color.Black;
             }
@@ -385,10 +395,12 @@ namespace Benchmark
 
         private void darkToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             System.IO.File.WriteAllText("Theme.txt", "dark");
             //refreshToolStripMenuItem.Image = Image.FromFile("img/update_fordark.png");
             //exitToolStripMenuItem.Image = Image.FromFile("img/exit_dark.png");
             themeModeToolStripMenuItem.Image = Image.FromFile("img/theme_fordark2.png");
+            whiteToolStripMenuItem.Image = Image.FromFile("img/SystemForDark.png");
 
             BackColor = Color.DimGray;
             ForeColor = Color.White;
@@ -420,6 +432,10 @@ namespace Benchmark
             label6.BackColor = Color.FromArgb(56, 56, 56);
             label5.ForeColor = Color.White;
             label6.ForeColor = Color.White;
+            label8.ForeColor = Color.White;
+            label9.ForeColor = Color.White;
+            label10.ForeColor = Color.White;
+            label11.ForeColor = Color.White;
             //StateCommon.Back.Color1 = Color.DimGray;
             //StateCommon.Back.Color2 = Color.DimGray;
             //StateCommon.Header.Back.Color1 = Color.DimGray;
@@ -461,6 +477,9 @@ namespace Benchmark
             toolStripMenuItem3.BackColor = Color.Black;
             toolStripMenuItem3.ForeColor = Color.White;
 
+            toolStripMenuItem4.BackColor = Color.Black;
+            toolStripMenuItem4.ForeColor = Color.White;
+
             themeModeToolStripMenuItem.BackColor = Color.Black;
             themeModeToolStripMenuItem.ForeColor = Color.White;
 
@@ -468,85 +487,89 @@ namespace Benchmark
 
         private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText("Theme.txt", "white");
-            //refreshToolStripMenuItem.Image = Image.FromFile("img/update.png");
-            //exitToolStripMenuItem.Image = Image.FromFile("img/exit_icon.png");
-            themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
+            //System.IO.File.WriteAllText("Theme.txt", "white");
+            ////refreshToolStripMenuItem.Image = Image.FromFile("img/update.png");
+            ////exitToolStripMenuItem.Image = Image.FromFile("img/exit_icon.png");
+            //themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
 
-            BackColor = Color.White;
-            ForeColor = Color.Black;
-            //kryptonGroupBox1.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox6.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox7.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox2.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox3.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox4.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox5.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            guna2GroupBox1.BorderColor = SystemColors.Control;
-            guna2GroupBox1.CustomBorderColor = SystemColors.Control;
-            guna2GroupBox1.FillColor = SystemColors.Control;
-            guna2GroupBox2.BorderColor = SystemColors.Control;
-            guna2GroupBox2.CustomBorderColor = SystemColors.Control;
-            guna2GroupBox2.FillColor = SystemColors.Control;
-            guna2GroupBox3.BorderColor = SystemColors.Control;
-            guna2GroupBox3.CustomBorderColor = SystemColors.Control;
-            guna2GroupBox3.FillColor = SystemColors.Control;
-            label1.BackColor = Color.WhiteSmoke;
-            label2.BackColor = Color.WhiteSmoke;
-            label3.BackColor = Color.WhiteSmoke;
-            label7.BackColor = Color.WhiteSmoke;
-            label1.ForeColor = Color.Black;
-            label2.ForeColor = Color.Black;
-            label3.ForeColor = Color.Black;
-            label7.ForeColor = Color.Black;
-            label5.BackColor = SystemColors.Control;
-            label6.BackColor = SystemColors.Control;
-            label5.ForeColor = Color.Black;
-            label6.ForeColor = Color.Black;
-            //StateCommon.Back.Color1 = Color.White;
-            //StateCommon.Back.Color2 = Color.White;
-            //StateCommon.Header.Back.Color1 = Color.White;
-            //StateCommon.Header.Back.Color2 = Color.White;
-            //StateCommon.Header.Content.ShortText.Color1 = Color.Black;
-            //groupBox2.ForeColor = Color.Black;
-            //groupBox3.ForeColor = Color.Black;
-            menuStrip1.BackColor = Color.WhiteSmoke;
-            menuStrip1.ForeColor = Color.Black;
-            //kryptonButton1.BackColor = Color.Gainsboro;
-            //kryptonButton1.ForeColor = Color.Black;
-            //kryptonButton2.BackColor = Color.Gainsboro;
-            //kryptonButton2.ForeColor = Color.Black;
+            //BackColor = Color.White;
+            //ForeColor = Color.Black;
+            ////kryptonGroupBox1.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            ////kryptonGroupBox6.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            ////kryptonGroupBox7.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            ////kryptonGroupBox2.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            ////kryptonGroupBox3.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            ////kryptonGroupBox4.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            ////kryptonGroupBox5.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            //guna2GroupBox1.BorderColor = SystemColors.Control;
+            //guna2GroupBox1.CustomBorderColor = SystemColors.Control;
+            //guna2GroupBox1.FillColor = SystemColors.Control;
+            //guna2GroupBox2.BorderColor = SystemColors.Control;
+            //guna2GroupBox2.CustomBorderColor = SystemColors.Control;
+            //guna2GroupBox2.FillColor = SystemColors.Control;
+            //guna2GroupBox3.BorderColor = SystemColors.Control;
+            //guna2GroupBox3.CustomBorderColor = SystemColors.Control;
+            //guna2GroupBox3.FillColor = SystemColors.Control;
+            //label1.BackColor = Color.WhiteSmoke;
+            //label2.BackColor = Color.WhiteSmoke;
+            //label3.BackColor = Color.WhiteSmoke;
+            //label7.BackColor = Color.WhiteSmoke;
+            //label1.ForeColor = Color.Black;
+            //label2.ForeColor = Color.Black;
+            //label3.ForeColor = Color.Black;
+            //label7.ForeColor = Color.Black;
+            //label5.BackColor = SystemColors.Control;
+            //label6.BackColor = SystemColors.Control;
+            //label5.ForeColor = Color.Black;
+            //label6.ForeColor = Color.Black;
+            //label8.ForeColor = Color.Black;
+            //label9.ForeColor = Color.Black;
+            //label10.ForeColor = Color.Black;
+            //label11.ForeColor = Color.Black;
+            ////StateCommon.Back.Color1 = Color.White;
+            ////StateCommon.Back.Color2 = Color.White;
+            ////StateCommon.Header.Back.Color1 = Color.White;
+            ////StateCommon.Header.Back.Color2 = Color.White;
+            ////StateCommon.Header.Content.ShortText.Color1 = Color.Black;
+            ////groupBox2.ForeColor = Color.Black;
+            ////groupBox3.ForeColor = Color.Black;
+            //menuStrip1.BackColor = Color.WhiteSmoke;
+            //menuStrip1.ForeColor = Color.Black;
+            ////kryptonButton1.BackColor = Color.Gainsboro;
+            ////kryptonButton1.ForeColor = Color.Black;
+            ////kryptonButton2.BackColor = Color.Gainsboro;
+            ////kryptonButton2.ForeColor = Color.Black;
 
-            fileToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            fileToolStripMenuItem.ForeColor = Color.Black;
+            //fileToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            //fileToolStripMenuItem.ForeColor = Color.Black;
 
-            //exitToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //exitToolStripMenuItem.ForeColor = Color.Black;
+            ////exitToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            ////exitToolStripMenuItem.ForeColor = Color.Black;
 
-            darkToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            darkToolStripMenuItem.ForeColor = Color.Black;
+            //darkToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            //darkToolStripMenuItem.ForeColor = Color.Black;
 
-            whiteToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            whiteToolStripMenuItem.ForeColor = Color.Black;
+            //whiteToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            //whiteToolStripMenuItem.ForeColor = Color.Black;
 
-            settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            settingsToolStripMenuItem.ForeColor = Color.Black;
+            //settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            //settingsToolStripMenuItem.ForeColor = Color.Black;
 
-            //refreshToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //refreshToolStripMenuItem.ForeColor = Color.Black;
+            ////refreshToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            ////refreshToolStripMenuItem.ForeColor = Color.Black;
 
-            toolStripMenuItem1.BackColor = Color.WhiteSmoke;
-            toolStripMenuItem1.ForeColor = Color.Black;
+            //toolStripMenuItem1.BackColor = Color.WhiteSmoke;
+            //toolStripMenuItem1.ForeColor = Color.Black;
 
-            toolStripMenuItem2.BackColor = Color.WhiteSmoke;
-            toolStripMenuItem2.ForeColor = Color.Black;
+            //toolStripMenuItem2.BackColor = Color.WhiteSmoke;
+            //toolStripMenuItem2.ForeColor = Color.Black;
 
-            toolStripMenuItem3.BackColor = Color.WhiteSmoke;
-            toolStripMenuItem3.ForeColor = Color.Black;
+            //toolStripMenuItem3.BackColor = Color.WhiteSmoke;
+            //toolStripMenuItem3.ForeColor = Color.Black;
 
 
-            themeModeToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            themeModeToolStripMenuItem.ForeColor = Color.Black;
+            //themeModeToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            //themeModeToolStripMenuItem.ForeColor = Color.Black;
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -903,6 +926,8 @@ namespace Benchmark
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
+            using (Process p = Process.GetCurrentProcess())
+                p.PriorityClass = ProcessPriorityClass.AboveNormal;
             guna2Button1.Enabled = false;
             guna2Button2.Enabled = false;
             if (BackColor == Color.DimGray)
@@ -918,6 +943,8 @@ namespace Benchmark
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
+            using (Process p = Process.GetCurrentProcess())
+                p.PriorityClass = ProcessPriorityClass.AboveNormal;
             guna2Button1.Enabled = false;
             guna2Button2.Enabled = false;
             if (BackColor == Color.DimGray)
@@ -949,6 +976,111 @@ namespace Benchmark
         private void kryptonGroupBox4_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void whiteToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            int mode = Convert.ToInt32(Registry.GetValue(fullPath, valueName, 0));
+            if (mode == 0)
+            {
+                darkToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                toolStripMenuItem4_Click(sender, e);
+            }
+            File.WriteAllText("Theme.txt", "system");
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+
+            System.IO.File.WriteAllText("Theme.txt", "white");
+            //refreshToolStripMenuItem.Image = Image.FromFile("img/update.png");
+            //exitToolStripMenuItem.Image = Image.FromFile("img/exit_icon.png");
+            themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
+            whiteToolStripMenuItem.Image = Image.FromFile("img/System.png");
+
+            BackColor = Color.White;
+            ForeColor = Color.Black;
+            //kryptonGroupBox1.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            //kryptonGroupBox6.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            //kryptonGroupBox7.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            //kryptonGroupBox2.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            //kryptonGroupBox3.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            //kryptonGroupBox4.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            //kryptonGroupBox5.StateCommon.Back.Color1 = Color.WhiteSmoke;
+            guna2GroupBox1.BorderColor = SystemColors.Control;
+            guna2GroupBox1.CustomBorderColor = SystemColors.Control;
+            guna2GroupBox1.FillColor = SystemColors.Control;
+            guna2GroupBox2.BorderColor = SystemColors.Control;
+            guna2GroupBox2.CustomBorderColor = SystemColors.Control;
+            guna2GroupBox2.FillColor = SystemColors.Control;
+            guna2GroupBox3.BorderColor = SystemColors.Control;
+            guna2GroupBox3.CustomBorderColor = SystemColors.Control;
+            guna2GroupBox3.FillColor = SystemColors.Control;
+            label1.BackColor = Color.WhiteSmoke;
+            label2.BackColor = Color.WhiteSmoke;
+            label3.BackColor = Color.WhiteSmoke;
+            label7.BackColor = Color.WhiteSmoke;
+            label1.ForeColor = Color.Black;
+            label2.ForeColor = Color.Black;
+            label3.ForeColor = Color.Black;
+            label7.ForeColor = Color.Black;
+            label5.BackColor = SystemColors.Control;
+            label6.BackColor = SystemColors.Control;
+            label5.ForeColor = Color.Black;
+            label6.ForeColor = Color.Black;
+            label8.ForeColor = Color.Black;
+            label9.ForeColor = Color.Black;
+            label10.ForeColor = Color.Black;
+            label11.ForeColor = Color.Black;
+            //StateCommon.Back.Color1 = Color.White;
+            //StateCommon.Back.Color2 = Color.White;
+            //StateCommon.Header.Back.Color1 = Color.White;
+            //StateCommon.Header.Back.Color2 = Color.White;
+            //StateCommon.Header.Content.ShortText.Color1 = Color.Black;
+            //groupBox2.ForeColor = Color.Black;
+            //groupBox3.ForeColor = Color.Black;
+            menuStrip1.BackColor = Color.WhiteSmoke;
+            menuStrip1.ForeColor = Color.Black;
+            //kryptonButton1.BackColor = Color.Gainsboro;
+            //kryptonButton1.ForeColor = Color.Black;
+            //kryptonButton2.BackColor = Color.Gainsboro;
+            //kryptonButton2.ForeColor = Color.Black;
+
+            fileToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            fileToolStripMenuItem.ForeColor = Color.Black;
+
+            //exitToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            //exitToolStripMenuItem.ForeColor = Color.Black;
+
+            darkToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            darkToolStripMenuItem.ForeColor = Color.Black;
+
+            whiteToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            whiteToolStripMenuItem.ForeColor = Color.Black;
+
+            settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            settingsToolStripMenuItem.ForeColor = Color.Black;
+
+            //refreshToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            //refreshToolStripMenuItem.ForeColor = Color.Black;
+
+            toolStripMenuItem1.BackColor = Color.WhiteSmoke;
+            toolStripMenuItem1.ForeColor = Color.Black;
+
+            toolStripMenuItem2.BackColor = Color.WhiteSmoke;
+            toolStripMenuItem2.ForeColor = Color.Black;
+
+            toolStripMenuItem3.BackColor = Color.WhiteSmoke;
+            toolStripMenuItem3.ForeColor = Color.Black;
+
+            toolStripMenuItem4.BackColor = Color.WhiteSmoke;
+            toolStripMenuItem4.ForeColor = Color.Black;
+
+            themeModeToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            themeModeToolStripMenuItem.ForeColor = Color.Black;
         }
     }
 

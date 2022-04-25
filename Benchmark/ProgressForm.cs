@@ -53,6 +53,8 @@ namespace Benchmark
             //benching = false;
             //worker2.RunWorkerAsync();
             Proc.ProcessorAffinity = (IntPtr)((1 << Environment.ProcessorCount) - 1);
+            using (Process p = Process.GetCurrentProcess())
+                p.PriorityClass = ProcessPriorityClass.Normal;
             Dispose();
             Close();
         }
@@ -95,6 +97,7 @@ namespace Benchmark
             if (stop)
                 return;
             int N = 5000;
+            int percent_mod = Convert.ToInt32(N / 100) * 2;
             var floatList = new List<float>();
             for (float i = 1; i <= N; i++)
             {
@@ -116,13 +119,6 @@ namespace Benchmark
                     return;
                 stringList.Add(i.ToString());
             }
-            //List<List<string>> L = new List<List<string>>();
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    if (stop)
-            //        return;
-            //    L.Add(l1);
-            //}
             var watch = new Stopwatch();
             int count = 0;
             int percent = 0;
@@ -141,7 +137,6 @@ namespace Benchmark
                     count += 1;
                     for (int j = 0; j < floatList.Count(); j++)
                     {
-
                         if (stop)
                             return;
                         floatList[j] /= 1;
@@ -155,44 +150,42 @@ namespace Benchmark
                         IsPrime(intList[j]);
                     }
                     stringList.Sort();
-                    if (count % 100 == 0)
+                    if (count % percent_mod == 0)
                         percent++;
-                    worker.ReportProgress(percent, "Doing calculations..");
+                    worker.ReportProgress(percent);
                 });
+                count = 0;
                 options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount(),
                 };
                 Proc.ProcessorAffinity = (IntPtr)((1 << Environment.ProcessorCount) - 1);
-                var thread1 = new Thread(() =>
+                Parallel.ForEach(floatList, options, i =>
                 {
-                    Parallel.ForEach(floatList, options, i =>
+                    count += 1;
+                    for (int j = 0; j < floatList.Count(); j++)
                     {
-                        count += 1;
-                        for (int j = 0; j < floatList.Count(); j++)
-                        {
-                            if (stop)
-                                return;
-                            floatList[j] /= 1;
-                            floatList[j] *= 1;
-                            floatList[j] += 1;
-                            floatList[j] -= 1;
-                            intList[j] /= 1;
-                            intList[j] *= 1;
-                            intList[j] += 1;
-                            intList[j] -= 1;
-                        }
-                        if (count % 100 == 0)
-                            percent++;
-                        worker.ReportProgress(percent, "Doing calculations..");
-                    });
+                        if (stop)
+                            return;
+                        floatList[j] /= 1;
+                        floatList[j] *= 1;
+                        floatList[j] += 1;
+                        floatList[j] -= 1;
+                        intList[j] /= 1;
+                        intList[j] *= 1;
+                        intList[j] += 1;
+                        intList[j] -= 1;
+                        IsPrime(intList[j]);
+                    }
+                    stringList.Sort();
+                    if (count % percent_mod == 0)
+                        percent++;
+                    worker.ReportProgress(percent);
                 });
-
                 watch.Stop();
             }
             if (Text == "GPU")
             {
-                //guna2Button1.Visible = false;
                 watch.Start();
                 string kernel = @"__kernel void concat_kernel(__global float *D,__global int *I, const int Size)
                                     {
@@ -212,8 +205,10 @@ namespace Benchmark
                                         }
                                     }";
                 MultiCL cl = new MultiCL();
-                cl.ProgressChangedEvent += Cl_ProgressChangedEvent1;
                 int size = 10000;
+                int size_for = 2000;
+                int size_for_mod = size_for / 100;
+                percent = 0;
                 int work_size = 1;
                 double[] doubleList = new double[size];
                 int[] iList = new int[size];
@@ -227,12 +222,15 @@ namespace Benchmark
 
                 var thread1 = new Thread(() =>
                 {
-                    for (int i = 0; i < 2000; i++)
+                    for (int i = 0; i < size_for; i++)
                     {
                         if (stop)
                             return;
                         iterationGPU++;
                         cl.Invoke(0, size, work_size);
+                        if (i % size_for_mod == 0)
+                            percent++;
+                            worker.ReportProgress(percent);
                     }
                 });
 
@@ -244,26 +242,17 @@ namespace Benchmark
             if (stop)
                 return;
         }
-        private void Cl_ProgressChangedEvent1(object sender, double e)
-        {
-            var percent = Convert.ToInt32(e * 100 * iterationGPU / 1000);
-            if (percent > guna2CircleProgressBar1.Value)
-            {
-                guna2CircleProgressBar1.Value = percent;
-            }
-        }
+
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (e.ProgressPercentage > guna2CircleProgressBar1.Value)
             {
                 guna2CircleProgressBar1.Value = e.ProgressPercentage;
             }
-            //label1.Text = e.UserState.ToString();
         }
         public ProgressForm(int s, ToolStripMenuItem t1, ToolStripMenuItem t, string n, Label l, int c, Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, Color outter)
         {
             InitializeComponent();
-            //benching = b;
             Score = s;
             worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
@@ -276,7 +265,6 @@ namespace Benchmark
             tool = t;
             tool1 = t1;
             o = outter;
-            //worker2 = w;
             this.b1 = b1;
             this.b2 = b2;
             if (outter == Color.DimGray)
@@ -329,20 +317,7 @@ namespace Benchmark
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //TimeSpan elapsed = DateTime.Now - StartTime;
-            //string text = "";
-            //if (elapsed.Days > 0)
-            //    text += elapsed.Days.ToString() + ".";
 
-            //// Преобразование миллисекунд в десятые доли секунды.
-            //int tenths = elapsed.Milliseconds / 100;
-
-            //// Запишите оставшееся время.
-            //text +=
-            //    elapsed.Minutes.ToString("00") + ":" +
-            //    elapsed.Seconds.ToString("00");
-
-            ////label1.Text = text;
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
@@ -395,12 +370,7 @@ namespace Benchmark
                 {
                     if (i % 10 == 0)
                         percent = i;
-                    //testint = 0;
-                    //testint += 1;
-                    //testint -= 1;
-                    //testint *= 1;
-                    //testint /= 1;
-                    //testint %= 1;
+
                     integerList.Sort();
                     integerList.Reverse();
                     floatList.Sort();
@@ -414,13 +384,7 @@ namespace Benchmark
                 {
                     if (stop)
                         return;
-                    //testint = 0;
-                    //testint = 0;
-                    //testint += 1;
-                    //testint -= 1;
-                    //testint *= 1;
-                    //testint /= 1;
-                    //testint %= 1;
+
                     integerList.Sort();
                     integerList.Reverse();
                     floatList.Sort();
@@ -446,7 +410,6 @@ namespace Benchmark
                     testfloat *= i;
                     testfloat /= i;
                     testfloat %= i;
-                    //Thread.Sleep(1);
 
                 }
                 var options = new ParallelOptions()
