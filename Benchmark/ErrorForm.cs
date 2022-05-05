@@ -60,5 +60,10 @@ namespace Benchmark
             if (errortext.Contains("CPU"))
                 m.Close();
         }
+
+        private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

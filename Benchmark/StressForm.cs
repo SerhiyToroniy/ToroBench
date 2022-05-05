@@ -15,7 +15,8 @@ namespace Benchmark
 {
     public partial class StressForm : Form
     {
-
+        private bool mouseDown;
+        private Point lastLocation;
         public System.Windows.Forms.Timer _timer;
         public DateTime _startTime = DateTime.MinValue;
         public TimeSpan _currentElapsedTime = TimeSpan.Zero;
@@ -23,6 +24,7 @@ namespace Benchmark
         public bool _timerRunnig = false;
 
         BackgroundWorker worker;
+
         public List<float> floatList { get; set; }
 
         public List<int> LoadsGPU { get; set; }
@@ -48,6 +50,7 @@ namespace Benchmark
         int scoreGPU = -1;
         Thread thread1;
         Thread thread2;
+        Thread thread3;
         List<string> l1 = new List<string>();
         char[] a;
         char[] B;
@@ -121,7 +124,11 @@ namespace Benchmark
             stopWatchCPU.Start();
             Parallel.ForEach(L, i =>
             {
-                Parallel.For(0, 10000, j =>
+                if (stop)
+                {
+                    return;
+                }
+                Parallel.For(0, 1000000, j =>
                 {
                     if (stop)
                     {
@@ -137,9 +144,12 @@ namespace Benchmark
             {
                 return;
             }
-            cl.Execute(size * size);
+            for (int i = 0; i < 100; i++)
+            {
+                cl.Execute(128);
+            }
             stopWatchGPU.Stop();
-            scoreGPU = Convert.ToInt32(100000 / stopWatchGPU.ElapsedMilliseconds);
+            scoreGPU = Convert.ToInt32(1000000 / stopWatchGPU.ElapsedMilliseconds);
             computer.Close();
         }
         public void WhileCPU(List<List<string>> L)
@@ -175,9 +185,7 @@ namespace Benchmark
                 {
                     return;
                 }
-                cl.Execute(size * size);
-                cl.Execute(size * size);
-                cl.Execute(size * size);
+                cl.Execute(128);
             }
         }
         void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -199,7 +207,7 @@ namespace Benchmark
             cl.Accelerator = AcceleratorDevice.GPU;
 
             //string kernel = File.ReadAllText(@"./kernel.cl");
-            string kernel = "kernel void MatrixMulti(global int * dimension, global char * a, global char * b, global char * c){int id = get_global_id(0);for (int i = 0; i < 500; i++){c[id] = a[id] + b[id];}}";
+            string kernel = "kernel void MatrixMulti(global int * dimension, global char * a, global char * b, global char * c){int id = get_global_id(0);for (int i = 0; i < dimension; i++){c[id] = a[id] * b[id];}}";
 
             char[] c = new char[size * size];
             int[] dimensions = new int[3] { size, size, size };
@@ -214,7 +222,7 @@ namespace Benchmark
             //thread3.Start();
             while (!stop)
             {
-                var thread3 = new Thread(() => WhileMonitor(L));
+                thread3 = new Thread(() => WhileMonitor(L));
                 thread3.Start();
                 thread3.Join();
                 //Thread.Sleep(1000);
@@ -503,8 +511,12 @@ namespace Benchmark
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             stop = true;
-            thread1.Abort();
-            thread2.Abort();
+            if (thread1 != null)
+                thread1.Abort();
+            if (thread2 != null)
+                thread2.Abort();
+            if (thread3 != null)
+                thread3.Abort();
             //thread3.Abort();
             Close();
         }
@@ -532,6 +544,67 @@ namespace Benchmark
         private void guna2GroupBox1_Click_2(object sender, EventArgs e)
         {
 
+        }
+
+        private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
+        {
+            stop = true;
+            if (thread1 != null)
+                thread1.Abort();
+            if (thread2 != null)
+                thread2.Abort();
+            //thread3.Abort();
+            Close();
+        }
+
+        private void guna2GradientCircleButton2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void guna2GroupBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void guna2GroupBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void guna2GroupBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void guna2GroupBox1_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void guna2GroupBox1_MouseUp_1(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+
+        }
+
+        private void guna2GroupBox1_MouseDown_1(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
         }
     }
 

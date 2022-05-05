@@ -30,6 +30,7 @@ namespace Benchmark
         [System.Obsolete]
         private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +40,7 @@ namespace Benchmark
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,7 +58,10 @@ namespace Benchmark
             this.label6 = new System.Windows.Forms.Label();
             this.guna2GroupBox3 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
+            this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
+            this.guna2GradientCircleButton1 = new Guna.UI2.WinForms.Guna2GradientCircleButton();
+            this.guna2GradientCircleButton2 = new Guna.UI2.WinForms.Guna2GradientCircleButton();
             this.menuStrip1.SuspendLayout();
             this.guna2GroupBox1.SuspendLayout();
             this.guna2GroupBox2.SuspendLayout();
@@ -66,16 +71,17 @@ namespace Benchmark
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(36, 28);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(394, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(130, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Tag = "";
             this.menuStrip1.Text = "menuStrip1";
@@ -104,7 +110,7 @@ namespace Benchmark
             this.toolStripMenuItem1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItem1.Text = "Stress Test";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -113,7 +119,7 @@ namespace Benchmark
             this.toolStripMenuItem2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItem2.Text = "Ranking";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -122,7 +128,7 @@ namespace Benchmark
             this.toolStripMenuItem3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItem3.Text = "Updates";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -146,7 +152,7 @@ namespace Benchmark
             this.whiteToolStripMenuItem});
             this.themeModeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("themeModeToolStripMenuItem.Image")));
             this.themeModeToolStripMenuItem.Name = "themeModeToolStripMenuItem";
-            this.themeModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeModeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.themeModeToolStripMenuItem.Text = "Theme mode";
             // 
             // darkToolStripMenuItem
@@ -154,16 +160,25 @@ namespace Benchmark
             this.darkToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
             this.darkToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("darkToolStripMenuItem.Image")));
             this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
-            this.darkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.darkToolStripMenuItem.Text = "Dark";
             this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.toolStripMenuItem4.Text = "Light";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // whiteToolStripMenuItem
             // 
             this.whiteToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
             this.whiteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("whiteToolStripMenuItem.Image")));
             this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
-            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.whiteToolStripMenuItem.Text = "System";
             this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click_1);
             // 
@@ -183,7 +198,7 @@ namespace Benchmark
             // 
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(71, 276);
+            this.label4.Location = new System.Drawing.Point(83, 302);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(284, 17);
             this.label4.TabIndex = 3;
@@ -240,7 +255,7 @@ namespace Benchmark
             // 
             this.guna2GroupBox1.BackColor = System.Drawing.Color.Transparent;
             this.guna2GroupBox1.BorderColor = System.Drawing.SystemColors.Control;
-            this.guna2GroupBox1.BorderRadius = 30;
+            this.guna2GroupBox1.BorderRadius = 20;
             this.guna2GroupBox1.Controls.Add(this.label11);
             this.guna2GroupBox1.Controls.Add(this.label10);
             this.guna2GroupBox1.Controls.Add(this.label9);
@@ -249,12 +264,13 @@ namespace Benchmark
             this.guna2GroupBox1.FillColor = System.Drawing.SystemColors.Control;
             this.guna2GroupBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
-            this.guna2GroupBox1.Location = new System.Drawing.Point(12, 45);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(29, 71);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
             this.guna2GroupBox1.ShadowDecoration.BorderRadius = 40;
+            this.guna2GroupBox1.ShadowDecoration.Depth = 20;
             this.guna2GroupBox1.ShadowDecoration.Enabled = true;
             this.guna2GroupBox1.ShadowDecoration.Parent = this.guna2GroupBox1;
-            this.guna2GroupBox1.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(1, 0, 1, 5);
+            this.guna2GroupBox1.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(1, 0, 1, 7);
             this.guna2GroupBox1.Size = new System.Drawing.Size(370, 179);
             this.guna2GroupBox1.TabIndex = 34;
             // 
@@ -310,19 +326,20 @@ namespace Benchmark
             // 
             this.guna2GroupBox2.BackColor = System.Drawing.Color.Transparent;
             this.guna2GroupBox2.BorderColor = System.Drawing.SystemColors.Control;
-            this.guna2GroupBox2.BorderRadius = 30;
+            this.guna2GroupBox2.BorderRadius = 20;
             this.guna2GroupBox2.Controls.Add(this.guna2Button1);
             this.guna2GroupBox2.Controls.Add(this.label5);
             this.guna2GroupBox2.CustomBorderColor = System.Drawing.SystemColors.Control;
             this.guna2GroupBox2.FillColor = System.Drawing.SystemColors.Control;
             this.guna2GroupBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
-            this.guna2GroupBox2.Location = new System.Drawing.Point(12, 239);
+            this.guna2GroupBox2.Location = new System.Drawing.Point(29, 265);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
             this.guna2GroupBox2.ShadowDecoration.BorderRadius = 40;
+            this.guna2GroupBox2.ShadowDecoration.Depth = 20;
             this.guna2GroupBox2.ShadowDecoration.Enabled = true;
             this.guna2GroupBox2.ShadowDecoration.Parent = this.guna2GroupBox2;
-            this.guna2GroupBox2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(1, 0, 1, 5);
+            this.guna2GroupBox2.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(1, 0, 1, 7);
             this.guna2GroupBox2.Size = new System.Drawing.Size(370, 114);
             this.guna2GroupBox2.TabIndex = 35;
             // 
@@ -370,19 +387,20 @@ namespace Benchmark
             // 
             this.guna2GroupBox3.BackColor = System.Drawing.Color.Transparent;
             this.guna2GroupBox3.BorderColor = System.Drawing.SystemColors.Control;
-            this.guna2GroupBox3.BorderRadius = 30;
+            this.guna2GroupBox3.BorderRadius = 20;
             this.guna2GroupBox3.Controls.Add(this.guna2Button2);
             this.guna2GroupBox3.Controls.Add(this.label6);
             this.guna2GroupBox3.CustomBorderColor = System.Drawing.SystemColors.Control;
             this.guna2GroupBox3.FillColor = System.Drawing.SystemColors.Control;
             this.guna2GroupBox3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2GroupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
-            this.guna2GroupBox3.Location = new System.Drawing.Point(12, 369);
+            this.guna2GroupBox3.Location = new System.Drawing.Point(29, 395);
             this.guna2GroupBox3.Name = "guna2GroupBox3";
             this.guna2GroupBox3.ShadowDecoration.BorderRadius = 40;
+            this.guna2GroupBox3.ShadowDecoration.Depth = 20;
             this.guna2GroupBox3.ShadowDecoration.Enabled = true;
             this.guna2GroupBox3.ShadowDecoration.Parent = this.guna2GroupBox3;
-            this.guna2GroupBox3.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(1, 0, 1, 5);
+            this.guna2GroupBox3.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(1, 0, 1, 7);
             this.guna2GroupBox3.Size = new System.Drawing.Size(370, 114);
             this.guna2GroupBox3.TabIndex = 36;
             // 
@@ -416,14 +434,66 @@ namespace Benchmark
             this.guna2Button2.UseTransparentBackground = true;
             this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
             // 
-            // toolStripMenuItem4
+            // guna2AnimateWindow1
             // 
-            this.toolStripMenuItem4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem4.Text = "Light";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            this.guna2AnimateWindow1.AnimationType = Guna.UI2.WinForms.Guna2AnimateWindow.AnimateWindowType.AW_SLIDE;
+            this.guna2AnimateWindow1.Interval = 300;
+            this.guna2AnimateWindow1.TargetForm = this;
+            // 
+            // guna2BorderlessForm1
+            // 
+            this.guna2BorderlessForm1.AnimationInterval = 100;
+            this.guna2BorderlessForm1.BorderRadius = 35;
+            this.guna2BorderlessForm1.ContainerControl = this;
+            this.guna2BorderlessForm1.DockForm = false;
+            this.guna2BorderlessForm1.ResizeForm = false;
+            // 
+            // guna2GradientCircleButton1
+            // 
+            this.guna2GradientCircleButton1.CheckedState.Parent = this.guna2GradientCircleButton1;
+            this.guna2GradientCircleButton1.CustomImages.Parent = this.guna2GradientCircleButton1;
+            this.guna2GradientCircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2GradientCircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2GradientCircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2GradientCircleButton1.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2GradientCircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2GradientCircleButton1.DisabledState.Parent = this.guna2GradientCircleButton1;
+            this.guna2GradientCircleButton1.FillColor = System.Drawing.Color.Red;
+            this.guna2GradientCircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2GradientCircleButton1.ForeColor = System.Drawing.Color.White;
+            this.guna2GradientCircleButton1.HoverState.Parent = this.guna2GradientCircleButton1;
+            this.guna2GradientCircleButton1.Location = new System.Drawing.Point(405, 12);
+            this.guna2GradientCircleButton1.Name = "guna2GradientCircleButton1";
+            this.guna2GradientCircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2GradientCircleButton1.ShadowDecoration.Parent = this.guna2GradientCircleButton1;
+            this.guna2GradientCircleButton1.Size = new System.Drawing.Size(15, 15);
+            this.guna2GradientCircleButton1.TabIndex = 37;
+            this.guna2GradientCircleButton1.Text = "guna2GradientCircleButton1";
+            this.guna2GradientCircleButton1.Click += new System.EventHandler(this.guna2GradientCircleButton1_Click);
+            // 
+            // guna2GradientCircleButton2
+            // 
+            this.guna2GradientCircleButton2.CheckedState.Parent = this.guna2GradientCircleButton2;
+            this.guna2GradientCircleButton2.CustomImages.Parent = this.guna2GradientCircleButton2;
+            this.guna2GradientCircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2GradientCircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2GradientCircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2GradientCircleButton2.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2GradientCircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2GradientCircleButton2.DisabledState.Parent = this.guna2GradientCircleButton2;
+            this.guna2GradientCircleButton2.FillColor = System.Drawing.Color.Orange;
+            this.guna2GradientCircleButton2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.guna2GradientCircleButton2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2GradientCircleButton2.ForeColor = System.Drawing.Color.White;
+            this.guna2GradientCircleButton2.HoverState.Parent = this.guna2GradientCircleButton2;
+            this.guna2GradientCircleButton2.Location = new System.Drawing.Point(384, 12);
+            this.guna2GradientCircleButton2.Name = "guna2GradientCircleButton2";
+            this.guna2GradientCircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2GradientCircleButton2.ShadowDecoration.Parent = this.guna2GradientCircleButton2;
+            this.guna2GradientCircleButton2.Size = new System.Drawing.Size(15, 15);
+            this.guna2GradientCircleButton2.TabIndex = 38;
+            this.guna2GradientCircleButton2.Text = "guna2GradientCircleButton2";
+            this.guna2GradientCircleButton2.Click += new System.EventHandler(this.guna2GradientCircleButton2_Click);
             // 
             // MainForm
             // 
@@ -431,14 +501,16 @@ namespace Benchmark
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(394, 508);
+            this.ClientSize = new System.Drawing.Size(430, 554);
+            this.Controls.Add(this.guna2GradientCircleButton2);
+            this.Controls.Add(this.guna2GradientCircleButton1);
             this.Controls.Add(this.guna2GroupBox3);
             this.Controls.Add(this.guna2GroupBox2);
             this.Controls.Add(this.guna2GroupBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -489,6 +561,10 @@ namespace Benchmark
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
+        private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
+        private Guna.UI2.WinForms.Guna2GradientCircleButton guna2GradientCircleButton1;
+        private Guna.UI2.WinForms.Guna2GradientCircleButton guna2GradientCircleButton2;
     }
 }
 

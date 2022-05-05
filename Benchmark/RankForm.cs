@@ -5,10 +5,22 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+
 namespace Benchmark
 {
     public partial class RankForm : Form
     {
+        //public const int WM_NCLBUTTONDOWN = 0xA1;
+        //public const int HT_CAPTION = 0x2;
+
+        //[System.Runtime.InteropServices.DllImport("user32.dll")]
+        //public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        //[System.Runtime.InteropServices.DllImport("user32.dll")]
+        //public static extern bool ReleaseCapture();
+
+
+        private bool mouseDown;
+        private Point lastLocation;
         public List<Scores> l { get; set; }
         public Guna.UI2.WinForms.Guna2Button button2 { get; set; }
 
@@ -16,6 +28,7 @@ namespace Benchmark
         public ToolStripMenuItem file { get; set; }
         public ToolStripMenuItem settings { get; set; }
         public Color backcolor { get; set; }
+        private bool sortAscending = false;
 
         public RankForm(Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, ToolStripMenuItem f, ToolStripMenuItem s, Color b, List<Scores> list)
         {
@@ -24,37 +37,37 @@ namespace Benchmark
             button2 = b2;
             file = f;
             settings = s;
-            dataGridView1.Update();
-            dataGridView1.Refresh();
-            dataGridView1.DataSource = list;
+            guna2DataGridView1.Update();
+            guna2DataGridView1.Refresh();
+            guna2DataGridView1.DataSource = list;
             l = list;
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            foreach (DataGridViewColumn column in guna2DataGridView1.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
             }
             backcolor = b;
             if (b == Color.DimGray)
             {
-                textBox1.BackColor = Color.Black;
+                guna2TextBox1.ShadowDecoration.Color = Color.White;
                 BackColor = Color.DimGray;
-                dataGridView1.DefaultCellStyle.BackColor = Color.Black;
-                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.Black;
-                dataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
-                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
-                dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
-                dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                dataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Black;
-                dataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+                //guna2DataGridView1.DefaultCellStyle.BackColor = Color.Silver;
+                //guna2DataGridView1.DefaultCellStyle.SelectionBackColor = Color.Black;
+                //guna2DataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
+                guna2DataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
+                guna2DataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                guna2DataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
+                guna2DataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Black;
+                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.White;
                 ForeColor = Color.White;
             }
             if (b == Color.White)
             {
-                textBox1.BackColor = Color.White;
+                guna2Button1.ShadowDecoration.Color = Color.Black;
                 BackColor = Color.White;
                 ForeColor = Color.Black;
             }
-            textBox1.KeyDown += new KeyEventHandler(tb_KeyDown);
+            guna2TextBox1.KeyDown += new KeyEventHandler(tb_KeyDown);
         }
 
         public void tb_KeyDown(object sender, KeyEventArgs f)
@@ -62,12 +75,12 @@ namespace Benchmark
             if (f.KeyCode == Keys.Enter)
             {
                 f.Handled = f.SuppressKeyPress = true;
-                dataGridView1.Update();
-                dataGridView1.Refresh();
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = l.Where(e => (e.Cores.ToUpper().Contains(textBox1.Text.ToUpper())) || (e.CPU.ToUpper().Contains(textBox1.Text.ToUpper())) || (e.CPUSpeed.ToUpper().Contains(textBox1.Text.ToUpper())) || ($"{e.MultiCore}".ToUpper().Contains(textBox1.Text.ToUpper())) || (e.OS.ToUpper().Contains(textBox1.Text.ToUpper())) || (e.RAM.ToUpper().Contains(textBox1.Text.ToUpper())) || ($"{e.SingleCore}".ToUpper().Contains(textBox1.Text.ToUpper()))).ToList();
-                dataGridView1.Update();
-                dataGridView1.Refresh();
+                guna2DataGridView1.Update();
+                guna2DataGridView1.Refresh();
+                guna2DataGridView1.DataSource = null;
+                guna2DataGridView1.DataSource = l.Where(e => (e.Cores.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.CPU.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.CPUSpeed.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || ($"{e.MultiCore}".ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.OS.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.RAM.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || ($"{e.SingleCore}".ToUpper().Contains(guna2TextBox1.Text.ToUpper()))).ToList();
+                guna2DataGridView1.Update();
+                guna2DataGridView1.Refresh();
             }
         }
         private void RankForm_Load(object sender, EventArgs e)
@@ -79,19 +92,22 @@ namespace Benchmark
         {
             if (backcolor == Color.White)
             {
-                textBox1.ForeColor = Color.Black;
-                textBox1.Text = "";
+                guna2TextBox1.Text = "";
             }
             if (backcolor == Color.DimGray)
             {
-                textBox1.ForeColor = Color.White;
-                textBox1.Text = "";
+                guna2TextBox1.Text = "";
             }
         }
 
-        private void textBox1_Enter(object sender, EventArgs e)
+        private void textBox1_Enter(object sender, EventArgs a)
         {
-
+            guna2DataGridView1.Update();
+            guna2DataGridView1.Refresh();
+            guna2DataGridView1.DataSource = null;
+            guna2DataGridView1.DataSource = l.Where(e => (e.Cores.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.CPU.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.CPUSpeed.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || ($"{e.MultiCore}".ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.OS.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.RAM.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || ($"{e.SingleCore}".ToUpper().Contains(guna2TextBox1.Text.ToUpper()))).ToList();
+            guna2DataGridView1.Update();
+            guna2DataGridView1.Refresh();
         }
 
         private void RankForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -107,18 +123,73 @@ namespace Benchmark
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
+            //if (textBox1.Text == "")
+            //{
+            //    textBox1.ForeColor = Color.LightGray;
+            //    textBox1.Text = "CPU name, score result or anything else..";
+            //}
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs a)
+        {
+            guna2DataGridView1.Update();
+            guna2DataGridView1.Refresh();
+            guna2DataGridView1.DataSource = null;
+            guna2DataGridView1.DataSource = l.Where(e => (e.Cores.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.CPU.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.CPUSpeed.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || ($"{e.MultiCore}".ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.OS.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || (e.RAM.ToUpper().Contains(guna2TextBox1.Text.ToUpper())) || ($"{e.SingleCore}".ToUpper().Contains(guna2TextBox1.Text.ToUpper()))).ToList();
+            guna2DataGridView1.Update();
+            guna2DataGridView1.Refresh();
+        }
+
+        private void guna2DataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //guna2DataGridView1.Update();
+            //guna2DataGridView1.Refresh();
+            //guna2DataGridView1.DataSource = null;
+            if (sortAscending)
+                guna2DataGridView1.DataSource = l.OrderBy(c => guna2DataGridView1.Columns[e.ColumnIndex].DataPropertyName).ToList();
+            else
+                guna2DataGridView1.DataSource = l.OrderBy(c => guna2DataGridView1.Columns[e.ColumnIndex].DataPropertyName).Reverse().ToList();
+            sortAscending = !sortAscending;
+        }
+
+        private void guna2DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            guna2DataGridView1.ClearSelection();
+        }
+
+        private void RankForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            //if (e.Button == MouseButtons.Left)
+            //{
+            //    ReleaseCapture();
+            //    SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            //}
+
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void RankForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void RankForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
             {
-                textBox1.ForeColor = Color.LightGray;
-                textBox1.Text = "CPU name, score result or anything else..";
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
             }
+        }
+
+        private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

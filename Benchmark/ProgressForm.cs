@@ -15,6 +15,9 @@ namespace Benchmark
 {
     public partial class ProgressForm : Form
     {
+
+        private bool mouseDown;
+        private Point lastLocation;
         BackgroundWorker worker;
         long elapsedMs = -1;
         Label score = new Label();
@@ -29,14 +32,21 @@ namespace Benchmark
         Process Proc = Process.GetCurrentProcess();
         int iterationGPU = 0;
         public int Score { get; set; }
-
+        ResultsStorage rS = new ResultsStorage();
         //bool benching;
         //BackgroundWorker worker2;
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (!stop)
             {
-                score.Text = $"Your score is {100000000 / elapsedMs}";
+                if (Text == "CPU")
+                {
+                    score.Text = $"Your CPU score is {rS.CPUSingle + rS.CPUMulti}";
+                }
+                else
+                {
+                    score.Text = $"Your GPU score is {rS.GpuScore}";
+                }
                 score.Font = new Font("Segoe UI", 20);
                 Score = 100000000 / (int)elapsedMs;
             }
@@ -50,8 +60,6 @@ namespace Benchmark
             tool.Enabled = true;
             tool1.Enabled = true;
             stop = false;
-            //benching = false;
-            //worker2.RunWorkerAsync();
             Proc.ProcessorAffinity = (IntPtr)((1 << Environment.ProcessorCount) - 1);
             using (Process p = Process.GetCurrentProcess())
                 p.PriorityClass = ProcessPriorityClass.Normal;
@@ -96,32 +104,37 @@ namespace Benchmark
         {
             if (stop)
                 return;
-            int N = 5000;
+            int N = 2000;
             int percent_mod = Convert.ToInt32(N / 100) * 2;
             var floatList = new List<float>();
             for (float i = 1; i <= N; i++)
             {
                 if (stop)
                     return;
-                floatList.Add(i);
+                floatList.Add(1);
             }
             var intList = new List<int>();
             for (int i = 1; i <= N; i++)
             {
                 if (stop)
                     return;
-                intList.Add(i);
+                intList.Add(1);
             }
             List<string> stringList = new List<string>();
             for (int i = 0; i < N; i++)
             {
                 if (stop)
                     return;
-                stringList.Add(i.ToString());
+                stringList.Add("word");
             }
-            var watch = new Stopwatch();
+            var watchSingleCore = new Stopwatch();
+            var watchMultiCore = new Stopwatch();
+            var watchGPU = new Stopwatch();
+
             int count = 0;
             int percent = 0;
+            double result = 0;
+
             if (Text == "CPU")
             {
                 var options = new ParallelOptions()
@@ -131,11 +144,11 @@ namespace Benchmark
                 long AffinityMask = (long)Proc.ProcessorAffinity;
                 AffinityMask &= 0x0001;
                 Proc.ProcessorAffinity = (IntPtr)AffinityMask;
-                watch.Start();
-                Parallel.ForEach(floatList, options, i =>
+                watchSingleCore.Start();
+                for (int i = 0; i < floatList.Count; i++)
                 {
                     count += 1;
-                    for (int j = 0; j < floatList.Count(); j++)
+                    for (int j = 0; j < floatList.Count; j++)
                     {
                         if (stop)
                             return;
@@ -147,23 +160,62 @@ namespace Benchmark
                         intList[j] *= 1;
                         intList[j] += 1;
                         intList[j] -= 1;
+                        result = Math.Pow(100.111, 100.111);
+                        result = Math.Asin(0.111);
+                        result = Math.Acos(0.111);
+                        result = Math.Atan(0.111);
+                        result = Math.Sin(0.111);
+                        result = Math.Cos(0.111);
+                        result = Math.Tan(0.111);
+                        result = Math.Exp(100.111);
                         IsPrime(intList[j]);
+                        stringList[j] += "a";
+                        stringList[j].Replace("a", "");
                     }
-                    stringList.Sort();
+                    //stringList.Sort();
+                    //stringList.Reverse();
                     if (count % percent_mod == 0)
+                    {
                         percent++;
-                    worker.ReportProgress(percent);
-                });
+                        worker.ReportProgress(percent);
+                    }
+                }
+                watchSingleCore.Stop();
+                floatList = new List<float>();
+                for (float i = 1; i <= N; i++)
+                {
+                    if (stop)
+                        return;
+                    floatList.Add(1);
+                }
+                intList = new List<int>();
+                for (int i = 1; i <= N; i++)
+                {
+                    if (stop)
+                        return;
+                    intList.Add(1);
+                }
+                stringList = new List<string>();
+                for (int i = 0; i < N; i++)
+                {
+                    if (stop)
+                        return;
+                    stringList.Add("word");
+                }
+                rS.CPUSingle = 100000000 / (int)watchSingleCore.ElapsedMilliseconds;
                 count = 0;
                 options = new ParallelOptions()
                 {
                     MaxDegreeOfParallelism = HardwareInfo.GetLogicalCoresCount(),
                 };
+                result = 0;
+
                 Proc.ProcessorAffinity = (IntPtr)((1 << Environment.ProcessorCount) - 1);
-                Parallel.ForEach(floatList, options, i =>
+                watchMultiCore.Start();
+                Parallel.For(0, floatList.Count, i =>
                 {
                     count += 1;
-                    for (int j = 0; j < floatList.Count(); j++)
+                    for (int j = 0; j < floatList.Count; j++)
                     {
                         if (stop)
                             return;
@@ -175,18 +227,31 @@ namespace Benchmark
                         intList[j] *= 1;
                         intList[j] += 1;
                         intList[j] -= 1;
+                        result = Math.Pow(100.111, 100.111);
+                        result = Math.Asin(0.111);
+                        result = Math.Acos(0.111);
+                        result = Math.Atan(0.111);
+                        result = Math.Sin(0.111);
+                        result = Math.Cos(0.111);
+                        result = Math.Tan(0.111);
+                        result = Math.Exp(100.111);
                         IsPrime(intList[j]);
+                        stringList[j] += "a";
+                        stringList[j].Replace("a", "");
                     }
-                    stringList.Sort();
+                    //stringList.Sort();
+                    //stringList.Reverse();
                     if (count % percent_mod == 0)
+                    {
                         percent++;
-                    worker.ReportProgress(percent);
+                        worker.ReportProgress(percent);
+                    }
                 });
-                watch.Stop();
+                watchMultiCore.Stop();
+                rS.CPUMulti = 100000000 / (int)watchMultiCore.ElapsedMilliseconds;
             }
             if (Text == "GPU")
             {
-                watch.Start();
                 string kernel = @"__kernel void concat_kernel(__global float *D,__global int *I, const int Size)
                                     {
                                         int gid = get_global_id(0);
@@ -204,12 +269,12 @@ namespace Benchmark
                                             I[i] = I[i]-1;
                                         }
                                     }";
-                MultiCL cl = new MultiCL();
-                int size = 10000;
-                int size_for = 2000;
+                OpenCL.OpenCL cl = new OpenCL.OpenCL();
+                int size = 50000;
+                int size_for = 5000;
                 int size_for_mod = size_for / 100;
                 percent = 0;
-                int work_size = 1;
+                int work_size = 128;
                 double[] doubleList = new double[size];
                 int[] iList = new int[size];
                 for (int i = 0; i < size; i++)
@@ -224,21 +289,23 @@ namespace Benchmark
                 {
                     for (int i = 0; i < size_for; i++)
                     {
-                        if (stop)
-                            return;
-                        iterationGPU++;
-                        cl.Invoke(0, size, work_size);
+                        //cl.Invoke(0, size, work_size);
+                        cl.Execute(work_size);
                         if (i % size_for_mod == 0)
+                        {
+                            if (stop)
+                                return;
                             percent++;
                             worker.ReportProgress(percent);
+                        }
                     }
                 });
-
+                watchGPU.Start();
                 thread1.Start();
                 thread1.Join();
-                watch.Stop();
+                watchGPU.Stop();
+                rS.GpuScore = 1000000000 / (int)watchGPU.ElapsedMilliseconds;
             }
-            elapsedMs = watch.ElapsedMilliseconds;
             if (stop)
                 return;
         }
@@ -250,7 +317,7 @@ namespace Benchmark
                 guna2CircleProgressBar1.Value = e.ProgressPercentage;
             }
         }
-        public ProgressForm(int s, ToolStripMenuItem t1, ToolStripMenuItem t, string n, Label l, int c, Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, Color outter)
+        public ProgressForm(int s, ToolStripMenuItem t1, ToolStripMenuItem t, string n, Label l, int c, Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, Color outter, ResultsStorage resultsStorage)
         {
             InitializeComponent();
             Score = s;
@@ -264,6 +331,7 @@ namespace Benchmark
             cores = c;
             tool = t;
             tool1 = t1;
+            rS = resultsStorage;
             o = outter;
             this.b1 = b1;
             this.b2 = b2;
@@ -333,6 +401,50 @@ namespace Benchmark
         private void ProgressForm_Shown(object sender, EventArgs e)
         {
 
+        }
+
+        private void guna2GroupBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void ProgressForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            //mouseDown = false;
+        }
+
+        private void ProgressForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            //mouseDown = true;
+            //lastLocation = e.Location;
+        }
+
+        private void ProgressForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            //if (mouseDown)
+            //{
+            //    this.Location = new Point(
+            //        (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+            //    this.Update();
+            //}
+        }
+
+        private void guna2GroupBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void guna2GroupBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
         }
     }
     static class Extensions

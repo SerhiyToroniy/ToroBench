@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CudafyModule Version="1.29.5576.13786" Name="ProgressForm" DebugInfo="false" HasCudaSourceCode="false" HasPTX="false" HasBinary="false">
+  <CudaSourceCode></CudaSourceCode>
+  <PTXMODULES />
+  <BinaryModules />
+  <SourceCodes>
+    <SourceCodeFile ID="260e0fd3-2224-4580-a3a0-bc6bf19f0d0f" Language="OpenCL" Arch="OpenCL">I2lmIGRlZmluZWQoY2xfa2hyX2ZwNjQpDQojcHJhZ21hIE9QRU5DTCBFWFRFTlNJT04gY2xfa2hyX2ZwNjQ6IGVuYWJsZQ0KI2VsaWYgZGVmaW5lZChjbF9hbWRfZnA2NCkNCiNwcmFnbWEgT1BFTkNMIEVYVEVOU0lPTiBjbF9hbWRfZnA2NDogZW5hYmxlDQojZW5kaWYNCg0KLy8gQmVuY2htYXJrLlByb2dyZXNzRm9ybQ0KX19rZXJuZWwgIHZvaWQgR1BVKGdsb2JhbCBpbnQqIGExLCBpbnQgYTFMZW4wLCBnbG9iYWwgaW50KiBiMSwgaW50IGIxTGVuMCwgZ2xvYmFsIGludCogYzEsIGludCBjMUxlbjApOw0KDQovLyBCZW5jaG1hcmsuUHJvZ3Jlc3NGb3JtDQpfX2tlcm5lbCAgdm9pZCBHUFUoZ2xvYmFsIGludCogYTEsIGludCBhMUxlbjAsIGdsb2JhbCBpbnQqIGIxLCBpbnQgYjFMZW4wLCBnbG9iYWwgaW50KiBjMSwgaW50IGMxTGVuMCkNCnsNCglpbnQgeCA9IGdldF9sb2NhbF9pZCgwKTsNCglib29sIGZsYWcgPSB4IDwgR1BVX047DQoJaWYgKGZsYWcpDQoJew0KCQlmb3IgKGludCBpID0gMDsgaSA8IDUwMDAwMDsgaSsrKQ0KCQl7DQoJCQljMVsoeCldID0gKGludClwb3coMTAwLjExMSwgMTAwLjExMSk7DQoJCQljMVsoeCldID0gKGludClhc2luKDAuMTExKTsNCgkJCWMxWyh4KV0gPSAoaW50KWFjb3MoMC4xMTEpOw0KCQkJYzFbKHgpXSA9IChpbnQpYXRhbigwLjExMSk7DQoJCQljMVsoeCldID0gKGludClzaW4oMC4xMTEpOw0KCQkJYzFbKHgpXSA9IChpbnQpY29zKDAuMTExKTsNCgkJCWMxWyh4KV0gPSAoaW50KXRhbigwLjExMSk7DQoJCQljMVsoeCldID0gKGludClleHAoMC4xMTEpOw0KCQkJYzFbKHgpXSA9IGExWyh4KV0gKiBiMVsoeCldOw0KCQkJYzFbKHgpXSA9IGExWyh4KV0gKyBiMVsoeCldOw0KCQkJYzFbKHgpXSA9IGExWyh4KV0gLSBiMVsoeCldOw0KCQl9DQoJfQ0KfQ0K</SourceCodeFile>
+  </SourceCodes>
+  <Functions>
+    <CudafyKernelMethod Name="GPU" Type="Global" IsDummy="false" DummyBehaviour="Default">
+      <Type>Benchmark.ProgressForm</Type>
+      <Assembly>ToroBench, Version=2.0.0.5, Culture=neutral, PublicKeyToken=null</Assembly>
+      <AssemblyName>ToroBench</AssemblyName>
+      <AssemblyPath>E:\Repos\CPU Benchmark\Benchmark\bin\Debug\ToroBench.exe</AssemblyPath>
+      <Checksum>1042255804</Checksum>
+      <Parameters>
+        <ReturnType>System.Void</ReturnType>
+        <Parameter Type="Cudafy.GThread" Name="thread" Position="0" />
+        <Parameter Type="System.Int32[]" Name="a1" Position="1" />
+        <Parameter Type="System.Int32[]" Name="b1" Position="2" />
+        <Parameter Type="System.Int32[]" Name="c1" Position="3" />
+      </Parameters>
+    </CudafyKernelMethod>
+  </Functions>
+  <Constants />
+  <Types />
+</CudafyModule>

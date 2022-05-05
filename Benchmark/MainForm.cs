@@ -33,12 +33,12 @@ namespace Benchmark
         public TimeSpan _currentElapsedTime = TimeSpan.Zero;
         public TimeSpan _totalElapsedTime = TimeSpan.Zero;
         public bool _timerRunnig = false;
+        public ResultsStorage resultsStorage;
         //BackgroundWorker worker;
         ToolStripMenuItem tool = new ToolStripMenuItem();
         ToolStripMenuItem tool1 = new ToolStripMenuItem();
         public static string downloaded = "";
         public static string FileName = "";
-        Thread threadSystemMode;
         //bool benching = false;
         List<string> l1;
         int size = 1000;
@@ -106,6 +106,7 @@ namespace Benchmark
                     }
                 }
             }
+            resultsStorage = new ResultsStorage();
             l1 = new List<string>();
             for (int i = 0; i < N; i++)
             {
@@ -646,7 +647,7 @@ namespace Benchmark
             guna2Button2.Enabled = false;
             fileToolStripMenuItem.Enabled = false;
             settingsToolStripMenuItem.Enabled = false;
-            StressForm a = new StressForm(BackColor, guna2Button1, guna2Button2, settingsToolStripMenuItem, fileToolStripMenuItem, label3.Text, label7.Text, l1, A, B);
+            StressForm a = new StressForm(BackColor, guna2Button1, guna2Button2, settingsToolStripMenuItem, fileToolStripMenuItem, label10.Text, label11.Text, l1, A, B);
             a.Show();
         }
 
@@ -775,17 +776,17 @@ namespace Benchmark
                 task.Wait();
 
                 var a = JsonConvert.DeserializeObject<List<Scores>>(downloaded);
-                if (!(label5.Text.Contains("!")) && !(label6.Text.Contains("!")))
+                if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
                 {
-                    Single = Convert.ToInt32(label5.Text.Remove(0, 14));
-                    Multi = Convert.ToInt32(label6.Text.Remove(0, 14));
-                    var temp = new Scores("0", $"{HardwareInfo.GetProcessorInformation()}", HardwareInfo.GetPhysicalMemory(), HardwareInfo.GetOSInformation(), $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)", ref Single, ref Multi, $"{HardwareInfo.GetCpuSpeedInGHz()}");
+                    //Single = Convert.ToInt32(label5.Text.Remove(0, 14));
+                    //Multi = Convert.ToInt32(label6.Text.Remove(0, 14));
+                    var temp = new Scores("0", $"{HardwareInfo.GetProcessorInformation()}", label11.Text.Replace("GPU: ", ""), HardwareInfo.GetPhysicalMemory(), HardwareInfo.GetOSInformation(), $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)", resultsStorage.CPUSingle, resultsStorage.CPUMulti, $"{HardwareInfo.GetCpuSpeedInGHz()}", resultsStorage.GpuScore);
                     a.Add(temp);
                 }
                 ScoresList = a;
-                ScoresList = ScoresList.OrderByDescending(r => r.MultiCore).ThenByDescending(o => o.SingleCore).DistinctBy(y => y.CPU).ToList();
+                ScoresList = ScoresList.OrderByDescending(r => r.MultiCore).ThenByDescending(o => o.GPUScore).DistinctBy(y => y.CPU).ToList();
 
-                if (!(label5.Text.Contains("!")) && !(label6.Text.Contains("!")))
+                if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
                 {
                     for (int i = 0; i < ScoresList.Count; i++)
                     {
@@ -794,7 +795,7 @@ namespace Benchmark
                 }
 
                 //upload
-                if (!(label5.Text.Contains("!")) && !(label6.Text.Contains("!")))
+                if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
                 {
                     var task2 = Task.Run((Func<Task>)MainForm.Upload);
                     task2.Wait();
@@ -937,7 +938,7 @@ namespace Benchmark
             }
             fileToolStripMenuItem.Enabled = false;
             settingsToolStripMenuItem.Enabled = false;
-            ProgressForm q = new ProgressForm(Single, settingsToolStripMenuItem, fileToolStripMenuItem, "CPU", label5, HardwareInfo.GetCPUCoresCount(), guna2Button1, guna2Button2, BackColor);
+            ProgressForm q = new ProgressForm(Single, settingsToolStripMenuItem, fileToolStripMenuItem, "CPU", label5, HardwareInfo.GetCPUCoresCount(), guna2Button1, guna2Button2, BackColor, resultsStorage);
             q.Show();
         }
 
@@ -954,7 +955,7 @@ namespace Benchmark
             }
             fileToolStripMenuItem.Enabled = false;
             settingsToolStripMenuItem.Enabled = false;
-            ProgressForm q = new ProgressForm(Multi, settingsToolStripMenuItem, fileToolStripMenuItem, "GPU", label6, HardwareInfo.GetCPUCoresCount(), guna2Button1, guna2Button2, BackColor);
+            ProgressForm q = new ProgressForm(Multi, settingsToolStripMenuItem, fileToolStripMenuItem, "GPU", label6, HardwareInfo.GetCPUCoresCount(), guna2Button1, guna2Button2, BackColor, resultsStorage);
             q.Show();
         }
 
@@ -1081,6 +1082,16 @@ namespace Benchmark
 
             themeModeToolStripMenuItem.BackColor = Color.WhiteSmoke;
             themeModeToolStripMenuItem.ForeColor = Color.Black;
+        }
+
+        private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void guna2GradientCircleButton2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 
@@ -1664,23 +1675,29 @@ namespace Benchmark
     {
         public string Rank { get; set; }
         public string CPU { get; set; }
+        public string GPU { get; set; }
         public string RAM { get; set; }
         public string OS { get; set; }
         public string Cores { get; set; }
         public int SingleCore { get; set; }
         public int MultiCore { get; set; }
         public string CPUSpeed { get; set; }
+        public int GPUScore { get; set; }
 
-        public Scores(string Ra, string C, string R, string O, string Co, ref int S, ref int M, string CS)
+
+
+        public Scores(string Ra, string C, string G, string R, string O, string Co, int S, int M, string CS, int GS)
         {
             Rank = Ra;
             CPU = C;
+            GPU = G;
             RAM = R;
             OS = O;
             Cores = Co;
             SingleCore = S;
             MultiCore = M;
             CPUSpeed = CS;
+            GPUScore = GS;
         }
     }
 
@@ -1691,6 +1708,28 @@ namespace Benchmark
         {
             //base.OnRenderMenuItemBackground(e);
             e.Item.BackColor = Color.Black;
+        }
+    }
+
+    public class ResultsStorage
+    {
+        public int CPUSingle { get; set; }
+        public int CPUMulti { get; set; }
+        public int GpuScore { get; set; }
+
+
+        public ResultsStorage(int cs, int cm, int gs)
+        {
+            CPUSingle = cs;
+            CPUMulti = cm;
+            GpuScore = gs;
+        }
+
+        public ResultsStorage()
+        {
+            CPUSingle = 0;
+            CPUMulti = 0;
+            GpuScore = 0;
         }
     }
 }
