@@ -11,13 +11,9 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Data;
 using Dropbox.Api.Files;
 using Newtonsoft.Json;
 using System.Threading;
-//using ComponentFactory.Krypton.Toolkit;
-//using NvAPIWrapper;
-//using System.Linq;
 using AutoUpdaterDotNET;
 using Microsoft.Win32;
 
@@ -34,12 +30,10 @@ namespace Benchmark
         public TimeSpan _totalElapsedTime = TimeSpan.Zero;
         public bool _timerRunnig = false;
         public ResultsStorage resultsStorage;
-        //BackgroundWorker worker;
         ToolStripMenuItem tool = new ToolStripMenuItem();
         ToolStripMenuItem tool1 = new ToolStripMenuItem();
         public static string downloaded = "";
         public static string FileName = "";
-        //bool benching = false;
         List<string> l1;
         int size = 1000;
         int N = 1000000;
@@ -56,39 +50,19 @@ namespace Benchmark
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                while (true)
-                {
-                    //worker.ReportProgress(0, label7.Text.Substring(0, 8) + $"{HardwareInfo.GetCpuSpeedInGHz()} ({HardwareInfo.GetCurrentCPUTemperature()}°С)");
-                    //worker.ReportProgress(0, label7.Text.Substring(0, 8) + $"{HardwareInfo.GetCpuSpeedInGHz()}");
-                }
-            }
-            catch (Exception)
-            {
-
-            }
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //label7.Text = e.UserState.ToString();
         }
 
         [Obsolete]
         public MainForm()
         {
             InitializeComponent();
-            //worker = new BackgroundWorker();
-            //worker.WorkerReportsProgress = true;
-            //worker.ProgressChanged += worker_ProgressChanged;
-            //worker.DoWork += worker_DoWork;
-            //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             label8.Text += HardwareInfo.GetOSInformation();
             label9.Text += HardwareInfo.GetPhysicalMemory();
             label10.Text += $"{HardwareInfo.GetProcessorInformation()}";
-            //label4.Text += $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)";
-            //label7.Text += $"{HardwareInfo.GetCpuSpeedInGHz()} ({HardwareInfo.GetCurrentCPUTemperature()}°С)";
             using (var searcher = new ManagementObjectSearcher("select * from Win32_VideoController"))
             {
                 foreach (ManagementObject obj in searcher.Get())
@@ -122,7 +96,6 @@ namespace Benchmark
                     B[i * size + j] = 'b';
                 }
             }
-            //worker.RunWorkerAsync();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -142,17 +115,7 @@ namespace Benchmark
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //kryptonButton1.Enabled = false;
-            //kryptonButton2.Enabled = false;
-            //if (BackColor == Color.DimGray)
-            //{
-            //    kryptonButton1.BackColor = Color.Gray;
-            //    kryptonButton2.BackColor = Color.Gray;
-            //}
-            //fileToolStripMenuItem.Enabled = false;
-            //settingsToolStripMenuItem.Enabled = false;
-            //ProgressForm q = new ProgressForm(Single, settingsToolStripMenuItem, fileToolStripMenuItem, "Single-Core", label5, HardwareInfo.GetCPUCoresCount(), kryptonButton1, kryptonButton2, BackColor);
-            //q.Show();
+
         }
 
         private void dropShadow(object sender, PaintEventArgs e)
@@ -197,17 +160,7 @@ namespace Benchmark
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //kryptonButton1.Enabled = false;
-            //kryptonButton2.Enabled = false;
-            //if (BackColor == Color.DimGray)
-            //{
-            //    kryptonButton1.BackColor = Color.Gray;
-            //    kryptonButton2.BackColor = Color.Gray;
-            //}
-            //fileToolStripMenuItem.Enabled = false;
-            //settingsToolStripMenuItem.Enabled = false;
-            //ProgressForm q = new ProgressForm(Multi, settingsToolStripMenuItem, fileToolStripMenuItem, "Multi-Core", label6, HardwareInfo.GetCPUCoresCount(), kryptonButton1, kryptonButton2, BackColor);
-            //q.Show();
+            
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -244,26 +197,16 @@ namespace Benchmark
                 label9.ForeColor = Color.White;
                 label10.ForeColor = Color.White;
                 label11.ForeColor = Color.White;
-                //refreshToolStripMenuItem.Image = Image.FromFile("img/update_fordark.png");
-                //exitToolStripMenuItem.Image = Image.FromFile("img/exit_dark.png");
+
                 themeModeToolStripMenuItem.Image = Image.FromFile("img/theme_fordark2.png");
                 whiteToolStripMenuItem.Image = Image.FromFile("img/SystemForDark.png");
 
 
                 BackColor = Color.DimGray;
                 ForeColor = Color.White;
-                //kryptonGroupBox1.ForeColor = Color.White;
-                //groupBox2.ForeColor = Color.White;
-                //groupBox3.ForeColor = Color.White;
+
                 menuStrip1.BackColor = Color.Black;
                 menuStrip1.ForeColor = Color.White;
-                //button1.BackColor = Color.Black;
-                //button1.ForeColor = Color.White;
-                //button2.BackColor = Color.Black;
-                //button2.ForeColor = Color.White;
-                //kryptonGroupBox1.StateCommon.Back.Color1 = Color.Black;
-                //kryptonGroupBox6.StateCommon.Back.Color1 = Color.Black;
-                //kryptonGroupBox7.StateCommon.Back.Color1 = Color.Black;
                 guna2GroupBox1.BorderColor = Color.FromArgb(56, 56, 56);
                 guna2GroupBox1.CustomBorderColor = Color.FromArgb(56, 56, 56);
                 guna2GroupBox1.FillColor = Color.FromArgb(56, 56, 56);
@@ -273,10 +216,7 @@ namespace Benchmark
                 guna2GroupBox3.BorderColor = Color.FromArgb(56, 56, 56);
                 guna2GroupBox3.CustomBorderColor = Color.FromArgb(56, 56, 56);
                 guna2GroupBox3.FillColor = Color.FromArgb(56, 56, 56);
-                //kryptonGroupBox2.StateCommon.Back.Color1 = Color.DimGray;
-                //kryptonGroupBox3.StateCommon.Back.Color1 = Color.DimGray;
-                //kryptonGroupBox4.StateCommon.Back.Color1 = Color.DimGray;
-                //kryptonGroupBox5.StateCommon.Back.Color1 = Color.DimGray;
+
                 label1.BackColor = Color.DimGray;
                 label2.BackColor = Color.DimGray;
                 label3.BackColor = Color.DimGray;
@@ -293,8 +233,7 @@ namespace Benchmark
                 fileToolStripMenuItem.BackColor = Color.Black;
                 fileToolStripMenuItem.ForeColor = Color.White;
 
-                //exitToolStripMenuItem.BackColor = Color.Black;
-                //exitToolStripMenuItem.ForeColor = Color.White;
+
 
                 darkToolStripMenuItem.BackColor = Color.Black;
                 darkToolStripMenuItem.ForeColor = Color.White;
@@ -305,8 +244,7 @@ namespace Benchmark
                 settingsToolStripMenuItem.BackColor = Color.Black;
                 settingsToolStripMenuItem.ForeColor = Color.White;
 
-                //refreshToolStripMenuItem.BackColor = Color.Black;
-                //refreshToolStripMenuItem.ForeColor = Color.White;
+
 
                 toolStripMenuItem1.BackColor = Color.Black;
                 toolStripMenuItem1.ForeColor = Color.White;
@@ -329,29 +267,22 @@ namespace Benchmark
                 label9.ForeColor = Color.Black;
                 label10.ForeColor = Color.Black;
                 label11.ForeColor = Color.Black;
-                //refreshToolStripMenuItem.Image = Image.FromFile("img/update.png");
-                //exitToolStripMenuItem.Image = Image.FromFile("img/exit_icon.png");
+
                 themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
                 whiteToolStripMenuItem.Image = Image.FromFile("img/System.png");
 
 
                 BackColor = Color.White;
                 ForeColor = Color.Black;
-                //kryptonGroupBox1.ForeColor = Color.Black;
-                //groupBox2.ForeColor = Color.Black;
-                //groupBox3.ForeColor = Color.Black;
+
                 menuStrip1.BackColor = Color.WhiteSmoke;
                 menuStrip1.ForeColor = Color.Black;
-                //button1.BackColor = Color.Gainsboro;
-                //button1.ForeColor = Color.Black;
-                //button2.BackColor = Color.Gainsboro;
-                //button2.ForeColor = Color.Black;
+
 
                 fileToolStripMenuItem.BackColor = Color.WhiteSmoke;
                 fileToolStripMenuItem.ForeColor = Color.Black;
 
-                //exitToolStripMenuItem.BackColor = Color.WhiteSmoke;
-                //exitToolStripMenuItem.ForeColor = Color.Black;
+
 
                 darkToolStripMenuItem.BackColor = Color.WhiteSmoke;
                 darkToolStripMenuItem.ForeColor = Color.Black;
@@ -362,8 +293,6 @@ namespace Benchmark
                 settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
                 settingsToolStripMenuItem.ForeColor = Color.Black;
 
-                //refreshToolStripMenuItem.BackColor = Color.WhiteSmoke;
-                //refreshToolStripMenuItem.ForeColor = Color.Black;
 
                 toolStripMenuItem1.BackColor = Color.WhiteSmoke;
                 toolStripMenuItem1.ForeColor = Color.Black;
@@ -390,24 +319,20 @@ namespace Benchmark
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             label7.Text = label7.Text.Substring(0, 29) + $"{HardwareInfo.GetCpuSpeedInGHz()}/{HardwareInfo.GetCpuSpeedInGHz()}";
-            //ScoresForm a = new CPUSpeed(BackColor);
-            //a.Show();
+
         }
 
         private void darkToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             System.IO.File.WriteAllText("Theme.txt", "dark");
-            //refreshToolStripMenuItem.Image = Image.FromFile("img/update_fordark.png");
-            //exitToolStripMenuItem.Image = Image.FromFile("img/exit_dark.png");
+
             themeModeToolStripMenuItem.Image = Image.FromFile("img/theme_fordark2.png");
             whiteToolStripMenuItem.Image = Image.FromFile("img/SystemForDark.png");
 
             BackColor = Color.DimGray;
             ForeColor = Color.White;
-            //kryptonGroupBox1.StateCommon.Back.Color1 = Color.Black;
-            //kryptonGroupBox6.StateCommon.Back.Color1 = Color.Black;
-            //kryptonGroupBox7.StateCommon.Back.Color1 = Color.Black;
+
             guna2GroupBox1.BorderColor = Color.FromArgb(56, 56, 56);
             guna2GroupBox1.CustomBorderColor = Color.FromArgb(56, 56, 56);
             guna2GroupBox1.FillColor = Color.FromArgb(56, 56, 56);
@@ -417,10 +342,7 @@ namespace Benchmark
             guna2GroupBox3.BorderColor = Color.FromArgb(56, 56, 56);
             guna2GroupBox3.CustomBorderColor = Color.FromArgb(56, 56, 56);
             guna2GroupBox3.FillColor = Color.FromArgb(56, 56, 56);
-            //kryptonGroupBox2.StateCommon.Back.Color1 = Color.DimGray;
-            //kryptonGroupBox3.StateCommon.Back.Color1 = Color.DimGray;
-            //kryptonGroupBox4.StateCommon.Back.Color1 = Color.DimGray;
-            //kryptonGroupBox5.StateCommon.Back.Color1 = Color.DimGray;
+
             label1.BackColor = Color.DimGray;
             label2.BackColor = Color.DimGray;
             label3.BackColor = Color.DimGray;
@@ -437,25 +359,15 @@ namespace Benchmark
             label9.ForeColor = Color.White;
             label10.ForeColor = Color.White;
             label11.ForeColor = Color.White;
-            //StateCommon.Back.Color1 = Color.DimGray;
-            //StateCommon.Back.Color2 = Color.DimGray;
-            //StateCommon.Header.Back.Color1 = Color.DimGray;
-            //StateCommon.Header.Back.Color2 = Color.DimGray;
-            //StateCommon.Header.Content.ShortText.Color1 = Color.White;
-            //groupBox2.ForeColor = Color.White;
-            //groupBox3.ForeColor = Color.White;
+
             menuStrip1.BackColor = Color.Black;
             menuStrip1.ForeColor = Color.White;
-            //guna2Button1.BackColor = Color.Black;
-            //guna2Button2.ForeColor = Color.White;
-            //kryptonButton2.BackColor = Color.Black;
-            //kryptonButton2.ForeColor = Color.White;
+
 
             fileToolStripMenuItem.BackColor = Color.Black;
             fileToolStripMenuItem.ForeColor = Color.White;
 
-            //exitToolStripMenuItem.BackColor = Color.Black;
-            //exitToolStripMenuItem.ForeColor = Color.White;
+
 
             darkToolStripMenuItem.BackColor = Color.Black;
             darkToolStripMenuItem.ForeColor = Color.White;
@@ -466,8 +378,7 @@ namespace Benchmark
             settingsToolStripMenuItem.BackColor = Color.Black;
             settingsToolStripMenuItem.ForeColor = Color.White;
 
-            //refreshToolStripMenuItem.BackColor = Color.Black;
-            //refreshToolStripMenuItem.ForeColor = Color.White;
+
 
             toolStripMenuItem1.BackColor = Color.Black;
             toolStripMenuItem1.ForeColor = Color.White;
@@ -488,89 +399,6 @@ namespace Benchmark
 
         private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //System.IO.File.WriteAllText("Theme.txt", "white");
-            ////refreshToolStripMenuItem.Image = Image.FromFile("img/update.png");
-            ////exitToolStripMenuItem.Image = Image.FromFile("img/exit_icon.png");
-            //themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
-
-            //BackColor = Color.White;
-            //ForeColor = Color.Black;
-            ////kryptonGroupBox1.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            ////kryptonGroupBox6.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            ////kryptonGroupBox7.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            ////kryptonGroupBox2.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            ////kryptonGroupBox3.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            ////kryptonGroupBox4.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            ////kryptonGroupBox5.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //guna2GroupBox1.BorderColor = SystemColors.Control;
-            //guna2GroupBox1.CustomBorderColor = SystemColors.Control;
-            //guna2GroupBox1.FillColor = SystemColors.Control;
-            //guna2GroupBox2.BorderColor = SystemColors.Control;
-            //guna2GroupBox2.CustomBorderColor = SystemColors.Control;
-            //guna2GroupBox2.FillColor = SystemColors.Control;
-            //guna2GroupBox3.BorderColor = SystemColors.Control;
-            //guna2GroupBox3.CustomBorderColor = SystemColors.Control;
-            //guna2GroupBox3.FillColor = SystemColors.Control;
-            //label1.BackColor = Color.WhiteSmoke;
-            //label2.BackColor = Color.WhiteSmoke;
-            //label3.BackColor = Color.WhiteSmoke;
-            //label7.BackColor = Color.WhiteSmoke;
-            //label1.ForeColor = Color.Black;
-            //label2.ForeColor = Color.Black;
-            //label3.ForeColor = Color.Black;
-            //label7.ForeColor = Color.Black;
-            //label5.BackColor = SystemColors.Control;
-            //label6.BackColor = SystemColors.Control;
-            //label5.ForeColor = Color.Black;
-            //label6.ForeColor = Color.Black;
-            //label8.ForeColor = Color.Black;
-            //label9.ForeColor = Color.Black;
-            //label10.ForeColor = Color.Black;
-            //label11.ForeColor = Color.Black;
-            ////StateCommon.Back.Color1 = Color.White;
-            ////StateCommon.Back.Color2 = Color.White;
-            ////StateCommon.Header.Back.Color1 = Color.White;
-            ////StateCommon.Header.Back.Color2 = Color.White;
-            ////StateCommon.Header.Content.ShortText.Color1 = Color.Black;
-            ////groupBox2.ForeColor = Color.Black;
-            ////groupBox3.ForeColor = Color.Black;
-            //menuStrip1.BackColor = Color.WhiteSmoke;
-            //menuStrip1.ForeColor = Color.Black;
-            ////kryptonButton1.BackColor = Color.Gainsboro;
-            ////kryptonButton1.ForeColor = Color.Black;
-            ////kryptonButton2.BackColor = Color.Gainsboro;
-            ////kryptonButton2.ForeColor = Color.Black;
-
-            //fileToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //fileToolStripMenuItem.ForeColor = Color.Black;
-
-            ////exitToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            ////exitToolStripMenuItem.ForeColor = Color.Black;
-
-            //darkToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //darkToolStripMenuItem.ForeColor = Color.Black;
-
-            //whiteToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //whiteToolStripMenuItem.ForeColor = Color.Black;
-
-            //settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //settingsToolStripMenuItem.ForeColor = Color.Black;
-
-            ////refreshToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            ////refreshToolStripMenuItem.ForeColor = Color.Black;
-
-            //toolStripMenuItem1.BackColor = Color.WhiteSmoke;
-            //toolStripMenuItem1.ForeColor = Color.Black;
-
-            //toolStripMenuItem2.BackColor = Color.WhiteSmoke;
-            //toolStripMenuItem2.ForeColor = Color.Black;
-
-            //toolStripMenuItem3.BackColor = Color.WhiteSmoke;
-            //toolStripMenuItem3.ForeColor = Color.Black;
-
-
-            //themeModeToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //themeModeToolStripMenuItem.ForeColor = Color.Black;
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -622,9 +450,6 @@ namespace Benchmark
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //label7.Text = label7.Text.Substring(0, 29) + $"{HardwareInfo.GetCpuSpeedInGHz()}/{HardwareInfo.GetCpuSpeedInGHz()}";
-            //ScoresForm a = new CPUSpeed(BackColor);
-            //a.Show();
         }
 
         private void button2_EnabledChanged(object sender, EventArgs e)
@@ -638,11 +463,6 @@ namespace Benchmark
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (BackColor == Color.DimGray)
-            {
-                //kryptonButton1.BackColor = Color.Gray;
-                //kryptonButton2.BackColor = Color.Gray;
-            }
             guna2Button1.Enabled = false;
             guna2Button2.Enabled = false;
             fileToolStripMenuItem.Enabled = false;
@@ -705,8 +525,6 @@ namespace Benchmark
 
             using (var dbx = new DropboxClient("Om2hCVZQDAsAAAAAAAAAAXaFNfMemQFCm6LvxnoJ2HY5AHWr9ByMtGcAYf82jMsJ"))
             {
-                //var full = await dbx.Users.GetCurrentAccountAsync();
-                //MessageBox.Show(full.Email, full.Name.DisplayName);
                 using (var response = await dbx.Files.DownloadAsync("/Scores" + "/" + "scores.json"))
                 {
                     downloaded = await response.GetContentAsStringAsync();
@@ -733,12 +551,6 @@ namespace Benchmark
             {
                 var list = await dbx.Files.ListFolderAsync("/Updates");
 
-                //// show folders then files
-                //foreach (var item in list.Entries.Where(i => i.IsFolder))
-                //{
-                //    Console.WriteLine("D  {0}/", item.Name);
-                //}
-
                 var file = list.Entries.Where(i => i.IsFile).OrderByDescending(v => v.Name).First();
                 FileName = file.Name;
             }
@@ -761,11 +573,6 @@ namespace Benchmark
         {
             try
             {
-                if (BackColor == Color.DimGray)
-                {
-                    //kryptonButton1.BackColor = Color.Gray;
-                    //kryptonButton2.BackColor = Color.Gray;
-                }
                 guna2Button1.Enabled = false;
                 guna2Button2.Enabled = false;
                 fileToolStripMenuItem.Enabled = false;
@@ -778,8 +585,6 @@ namespace Benchmark
                 var a = JsonConvert.DeserializeObject<List<Scores>>(downloaded);
                 if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
                 {
-                    //Single = Convert.ToInt32(label5.Text.Remove(0, 14));
-                    //Multi = Convert.ToInt32(label6.Text.Remove(0, 14));
                     var temp = new Scores("0", $"{HardwareInfo.GetProcessorInformation()}", label11.Text.Replace("GPU: ", ""), HardwareInfo.GetPhysicalMemory(), HardwareInfo.GetOSInformation(), $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)", resultsStorage.CPUSingle, resultsStorage.CPUMulti, $"{HardwareInfo.GetCpuSpeedInGHz()}", resultsStorage.GpuScore);
                     a.Add(temp);
                 }
@@ -815,61 +620,6 @@ namespace Benchmark
         {
             AutoUpdater.Start("https://dl.dropboxusercontent.com/s/ijic5tsumi9gwuk/AutoUpdater.xml?dl=1");
             AutoUpdater.ReportErrors = true;
-            //var q = new ErrorForm(this, guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor, "You already have all updates!", "Checked", "CheckedU.png");
-            //try
-            //{
-            //    if (BackColor == Color.DimGray)
-            //    {
-            //        //kryptonButton1.BackColor = Color.Gray;
-            //        //kryptonButton2.BackColor = Color.Gray;
-            //    }
-            //    bool ready = true;
-            //    guna2Button1.Enabled = false;
-            //    guna2Button2.Enabled = false;
-            //    fileToolStripMenuItem.Enabled = false;
-            //    settingsToolStripMenuItem.Enabled = false;
-            //    var task = Task.Run((Func<Task>)MainForm.GetList);
-            //    task.Wait();
-            //    string[] files = Directory.GetFiles($"{Path.GetFullPath("updates")}", "*.msi");
-            //    string online_V = FileName;
-            //    foreach (var f in files)
-            //    {
-            //        var a = $"{Path.GetFullPath("updates")}\\{online_V}";
-            //        if (f.CompareTo(a) > 0 || f == a)
-            //        {
-            //            q.Show();
-            //            ready = false;
-            //        }
-            //    }
-            //    if (ready)
-            //    {
-            //        DirectoryInfo di = new DirectoryInfo($"{Path.GetFullPath("updates")}");
-            //        FileInfo[] files_folder = di.GetFiles();
-            //        foreach (var f in files_folder)
-            //        {
-            //            f.Delete();
-            //        }
-            //        var task2 = Task.Run((Func<Task>)MainForm.InstallUpdates);
-            //        task2.Wait();
-            //        q = new ErrorForm(this, guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor, $"We have downloaded actual installer in\n{Path.GetFullPath("updates")}\nDelete the CPU Benchmark, then run that installer!", "Downloaded", "Downloaded.png");
-            //        q.Show();
-
-            //        //Process process = new Process();
-            //        //ProcessStartInfo startInfo = new ProcessStartInfo();
-            //        //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //        //startInfo.FileName = @"C:\Windows\System32\cmd.exe";
-            //        //startInfo.Arguments = $"/C {FileName}";
-            //        //startInfo.WorkingDirectory = Path.GetFullPath("updates");
-            //        //process.StartInfo = startInfo;
-            //        //process.Start();
-            //        //process.WaitForExit(30000);
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    q = new ErrorForm(this, guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor, "You aren't connected to the internet!", "Error", "NoInternet.png");
-            //    q.Show();
-            //}
         }
 
         private void button3_Click_4(object sender, EventArgs e)
@@ -892,32 +642,12 @@ namespace Benchmark
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            //kryptonButton1.Enabled = false;
-            //kryptonButton2.Enabled = false;
-            //if (BackColor == Color.DimGray)
-            //{
-            //    kryptonButton1.BackColor = Color.Gray;
-            //    kryptonButton2.BackColor = Color.Gray;
-            //}
-            //fileToolStripMenuItem.Enabled = false;
-            //settingsToolStripMenuItem.Enabled = false;
-            //ProgressForm q = new ProgressForm(Single, settingsToolStripMenuItem, fileToolStripMenuItem, "Single-Core", label5, HardwareInfo.GetCPUCoresCount(), kryptonButton1, kryptonButton2, BackColor);
-            //q.Show();
+
         }
 
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
-            //kryptonButton1.Enabled = false;
-            //kryptonButton2.Enabled = false;
-            //if (BackColor == Color.DimGray)
-            //{
-            //    kryptonButton1.BackColor = Color.Gray;
-            //    kryptonButton2.BackColor = Color.Gray;
-            //}
-            //fileToolStripMenuItem.Enabled = false;
-            //settingsToolStripMenuItem.Enabled = false;
-            //ProgressForm q = new ProgressForm(Multi, settingsToolStripMenuItem, fileToolStripMenuItem, "Multi-Core", label6, HardwareInfo.GetCPUCoresCount(), kryptonButton1, kryptonButton2, BackColor);
-            //q.Show();
+
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -997,20 +727,13 @@ namespace Benchmark
         {
 
             System.IO.File.WriteAllText("Theme.txt", "white");
-            //refreshToolStripMenuItem.Image = Image.FromFile("img/update.png");
-            //exitToolStripMenuItem.Image = Image.FromFile("img/exit_icon.png");
+
             themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
             whiteToolStripMenuItem.Image = Image.FromFile("img/System.png");
 
             BackColor = Color.White;
             ForeColor = Color.Black;
-            //kryptonGroupBox1.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox6.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox7.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox2.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox3.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox4.StateCommon.Back.Color1 = Color.WhiteSmoke;
-            //kryptonGroupBox5.StateCommon.Back.Color1 = Color.WhiteSmoke;
+
             guna2GroupBox1.BorderColor = SystemColors.Control;
             guna2GroupBox1.CustomBorderColor = SystemColors.Control;
             guna2GroupBox1.FillColor = SystemColors.Control;
@@ -1036,25 +759,15 @@ namespace Benchmark
             label9.ForeColor = Color.Black;
             label10.ForeColor = Color.Black;
             label11.ForeColor = Color.Black;
-            //StateCommon.Back.Color1 = Color.White;
-            //StateCommon.Back.Color2 = Color.White;
-            //StateCommon.Header.Back.Color1 = Color.White;
-            //StateCommon.Header.Back.Color2 = Color.White;
-            //StateCommon.Header.Content.ShortText.Color1 = Color.Black;
-            //groupBox2.ForeColor = Color.Black;
-            //groupBox3.ForeColor = Color.Black;
+
             menuStrip1.BackColor = Color.WhiteSmoke;
             menuStrip1.ForeColor = Color.Black;
-            //kryptonButton1.BackColor = Color.Gainsboro;
-            //kryptonButton1.ForeColor = Color.Black;
-            //kryptonButton2.BackColor = Color.Gainsboro;
-            //kryptonButton2.ForeColor = Color.Black;
+
 
             fileToolStripMenuItem.BackColor = Color.WhiteSmoke;
             fileToolStripMenuItem.ForeColor = Color.Black;
 
-            //exitToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //exitToolStripMenuItem.ForeColor = Color.Black;
+
 
             darkToolStripMenuItem.BackColor = Color.WhiteSmoke;
             darkToolStripMenuItem.ForeColor = Color.Black;
@@ -1065,8 +778,7 @@ namespace Benchmark
             settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
             settingsToolStripMenuItem.ForeColor = Color.Black;
 
-            //refreshToolStripMenuItem.BackColor = Color.WhiteSmoke;
-            //refreshToolStripMenuItem.ForeColor = Color.Black;
+
 
             toolStripMenuItem1.BackColor = Color.WhiteSmoke;
             toolStripMenuItem1.ForeColor = Color.Black;

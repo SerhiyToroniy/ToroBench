@@ -41,11 +41,6 @@ namespace Benchmark
             }
         }
 
-        private void ErrorForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void ErrorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (BackColor == Color.DimGray)

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
-using OpenCL;
 
 
 namespace Benchmark
@@ -27,14 +26,11 @@ namespace Benchmark
         bool stop = false;
         Color o = new Color();
         ToolStripMenuItem tool = new ToolStripMenuItem();
-        //DateTime StartTime;
         ToolStripMenuItem tool1 = new ToolStripMenuItem();
         Process Proc = Process.GetCurrentProcess();
-        int iterationGPU = 0;
         public int Score { get; set; }
         ResultsStorage rS = new ResultsStorage();
-        //bool benching;
-        //BackgroundWorker worker2;
+
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (!stop)
@@ -172,8 +168,7 @@ namespace Benchmark
                         stringList[j] += "a";
                         stringList[j].Replace("a", "");
                     }
-                    //stringList.Sort();
-                    //stringList.Reverse();
+
                     if (count % percent_mod == 0)
                     {
                         percent++;
@@ -239,8 +234,7 @@ namespace Benchmark
                         stringList[j] += "a";
                         stringList[j].Replace("a", "");
                     }
-                    //stringList.Sort();
-                    //stringList.Reverse();
+
                     if (count % percent_mod == 0)
                     {
                         percent++;
@@ -289,7 +283,6 @@ namespace Benchmark
                 {
                     for (int i = 0; i < size_for; i++)
                     {
-                        //cl.Invoke(0, size, work_size);
                         cl.Execute(work_size);
                         if (i % size_for_mod == 0)
                         {
@@ -410,24 +403,16 @@ namespace Benchmark
 
         private void ProgressForm_MouseUp(object sender, MouseEventArgs e)
         {
-            //mouseDown = false;
         }
 
         private void ProgressForm_MouseDown(object sender, MouseEventArgs e)
         {
-            //mouseDown = true;
-            //lastLocation = e.Location;
+
         }
 
         private void ProgressForm_MouseMove(object sender, MouseEventArgs e)
         {
-            //if (mouseDown)
-            //{
-            //    this.Location = new Point(
-            //        (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
 
-            //    this.Update();
-            //}
         }
 
         private void guna2GroupBox1_MouseMove(object sender, MouseEventArgs e)
