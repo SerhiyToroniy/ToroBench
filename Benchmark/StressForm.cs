@@ -270,7 +270,7 @@ namespace Benchmark
                     {
                         return;
                     }
-                    Parallel.For(0, 100000, j =>
+                    Parallel.For(0, 50000, j =>
                     {
                         if (stop)
                         {
