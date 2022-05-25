@@ -56,7 +56,6 @@ namespace Benchmark
         char[] B;
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //clear = false;
             stop = false;
             button1_.Enabled = true;
             button2_.Enabled = true;
@@ -206,7 +205,6 @@ namespace Benchmark
             cl = new OpenCL.OpenCL();
             cl.Accelerator = AcceleratorDevice.GPU;
 
-            //string kernel = File.ReadAllText(@"./kernel.cl");
             string kernel = "kernel void MatrixMulti(global int * dimension, global char * a, global char * b, global char * c){int id = get_global_id(0);for (int i = 0; i < dimension; i++){c[id] = a[id] * b[id];}}";
 
             char[] c = new char[size * size];
@@ -216,52 +214,13 @@ namespace Benchmark
 
             thread1 = new Thread(() => WhileGPU());
             thread2 = new Thread(() => WhileCPU(L));
-            //var thread3 = new Thread(() => WhileMonitor());
             thread1.Start();
             thread2.Start();
-            //thread3.Start();
             while (!stop)
             {
                 thread3 = new Thread(() => WhileMonitor(L));
                 thread3.Start();
                 thread3.Join();
-                //Thread.Sleep(1000);
-                //for (int i = 0; i < computer.Hardware.Length; i++)
-                //{
-                //    if (computer.Hardware[i].HardwareType == HardwareType.CPU)
-                //    {
-                //        for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
-                //        {
-                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
-                //            {
-                //                tempCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                //            }
-                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
-                //            {
-                //                loadCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                //            }
-                //        }
-                //        break;
-                //    }
-                //}
-                //for (int i = 0; i < computer.Hardware.Length; i++)
-                //{
-                //    if (computer.Hardware[i].HardwareType == HardwareType.GpuAti || computer.Hardware[i].HardwareType == HardwareType.GpuNvidia)
-                //    {
-                //        for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
-                //        {
-                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
-                //            {
-                //                tempGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                //            }
-                //            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
-                //            {
-                //                loadGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                //            }
-                //        }
-                //        break;
-                //    }
-                //}
                 LoadsCPU.Add(loadCPU);
                 TempsCPU.Add(tempCPU);
                 LoadsGPU.Add(loadGPU);
@@ -277,15 +236,6 @@ namespace Benchmark
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //guna2DataGridView1.Update();
-            //guna2DataGridView1.Refresh();
-            //guna2DataGridView1.DataSource = e.UserState;
-            //if (e.ProgressPercentage == 0)
-            //{
-            //    guna2DataGridView1.Rows[0].HeaderCell.Value = "CPU usage";
-            //    guna2DataGridView1.Rows[1].HeaderCell.Value = "Real-time score";
-            //    guna2DataGridView1.Rows[2].HeaderCell.Value = "Temperature";
-            //}
             var l = e.UserState as Stress;
             label12.Text = l.CPUload;
             label5.Text = l.CPUloadMax;
@@ -331,11 +281,7 @@ namespace Benchmark
         public StressForm(Color b, Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, ToolStripMenuItem t, ToolStripMenuItem t1, string _CPUname, string _GPUname, List<string> _l1, char[] _a, char[] _B)
         {
             InitializeComponent();
-            //floatList = new List<float>();
-            //for (float i = 1; i <= N; i++)
-            //{
-            //    floatList.Add(i);
-            //}
+
             l1 = _l1;
             a = _a;
             B = _B;
@@ -362,11 +308,6 @@ namespace Benchmark
             button1_ = b1;
             button2_ = b2;
 
-
-            //var thread1 = new Thread(() => WhileGPU());
-            //var thread2 = new Thread(() => WhileCPU(L));
-            //var thread3 = new Thread(() => WhileMonitor());
-            //thread3.Priority = ThreadPriority.Highest;
             if (b == Color.DimGray)
             {
                 BackColor = Color.DimGray;
@@ -396,23 +337,6 @@ namespace Benchmark
                 label11.ForeColor = Color.White;
                 label14.ForeColor = Color.White;
                 label15.ForeColor = Color.White;
-                //guna2DataGridView1.DefaultCellStyle.BackColor = Color.Black;
-                //guna2DataGridView1.DefaultCellStyle.ForeColor = Color.White;
-                //guna2DataGridView1.DefaultCellStyle.SelectionBackColor = Color.Black;
-                //guna2DataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
-                //guna2DataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
-                //guna2DataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                //guna2DataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
-                //guna2DataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Black;
-                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-                //guna2GroupBox1.BorderColor = Color.Black;
-                //guna2GroupBox1.CustomBorderColor = Color.Black;
-                //guna2GroupBox1.FillColor = Color.Black;
-                //label1.ForeColor = Color.White;
-                //ForeColor = Color.White;
-                //button2.BackColor = Color.Black;
-                //button2.ForeColor = Color.White;
             }
             if (b == Color.White)
             {
@@ -443,13 +367,7 @@ namespace Benchmark
                 label11.ForeColor = Color.DimGray;
                 label14.ForeColor = Color.DimGray;
                 label15.ForeColor = Color.DimGray;
-
-                //button2.BackColor = Color.Gainsboro;
-                //button2.ForeColor = Color.Black;
             }
-            //thread1.Start();
-            //thread2.Start();
-            //thread3.Start();
 
             if (!_timerRunnig)
             {
@@ -490,7 +408,6 @@ namespace Benchmark
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //clear = true;
         }
 
         private void StressForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -505,7 +422,7 @@ namespace Benchmark
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            //guna2DataGridView1.ClearSelection();
+
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -517,7 +434,6 @@ namespace Benchmark
                 thread2.Abort();
             if (thread3 != null)
                 thread3.Abort();
-            //thread3.Abort();
             Close();
         }
 
@@ -553,7 +469,6 @@ namespace Benchmark
                 thread1.Abort();
             if (thread2 != null)
                 thread2.Abort();
-            //thread3.Abort();
             Close();
         }
 

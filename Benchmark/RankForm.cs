@@ -10,13 +10,7 @@ namespace Benchmark
 {
     public partial class RankForm : Form
     {
-        //public const int WM_NCLBUTTONDOWN = 0xA1;
-        //public const int HT_CAPTION = 0x2;
 
-        //[System.Runtime.InteropServices.DllImport("user32.dll")]
-        //public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        //[System.Runtime.InteropServices.DllImport("user32.dll")]
-        //public static extern bool ReleaseCapture();
 
 
         private bool mouseDown;
@@ -50,15 +44,12 @@ namespace Benchmark
             {
                 guna2TextBox1.ShadowDecoration.Color = Color.White;
                 BackColor = Color.DimGray;
-                //guna2DataGridView1.DefaultCellStyle.BackColor = Color.Silver;
-                //guna2DataGridView1.DefaultCellStyle.SelectionBackColor = Color.Black;
-                //guna2DataGridView1.DefaultCellStyle.SelectionForeColor = Color.White;
+
                 guna2DataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
                 guna2DataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
                 guna2DataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
                 guna2DataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Black;
-                //guna2DataGridView1.RowHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+
                 ForeColor = Color.White;
             }
             if (b == Color.White)
@@ -125,11 +116,7 @@ namespace Benchmark
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            //if (textBox1.Text == "")
-            //{
-            //    textBox1.ForeColor = Color.LightGray;
-            //    textBox1.Text = "CPU name, score result or anything else..";
-            //}
+
         }
 
         private void guna2Button1_Click(object sender, EventArgs a)
@@ -144,9 +131,7 @@ namespace Benchmark
 
         private void guna2DataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //guna2DataGridView1.Update();
-            //guna2DataGridView1.Refresh();
-            //guna2DataGridView1.DataSource = null;
+
             if (sortAscending)
                 guna2DataGridView1.DataSource = l.OrderBy(c => guna2DataGridView1.Columns[e.ColumnIndex].DataPropertyName).ToList();
             else
@@ -161,11 +146,7 @@ namespace Benchmark
 
         private void RankForm_MouseDown(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    ReleaseCapture();
-            //    SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            //}
+
 
             mouseDown = true;
             lastLocation = e.Location;
