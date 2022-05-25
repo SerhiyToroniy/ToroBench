@@ -218,9 +218,82 @@ namespace Benchmark
             thread2.Start();
             while (!stop)
             {
-                thread3 = new Thread(() => WhileMonitor(L));
-                thread3.Start();
-                thread3.Join();
+                //thread3 = new Thread(() => WhileMonitor(L));
+                //thread3.Start();
+                //thread3.Join();
+                computer.Open();
+                computer.CPUEnabled = true;
+                computer.GPUEnabled = true;
+                computer.Accept(updateVisitor);
+
+                for (int i = 0; i < computer.Hardware.Length; i++)
+                {
+                    if (computer.Hardware[i].HardwareType == HardwareType.CPU)
+                    {
+                        for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                        {
+                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                            {
+                                tempCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                            }
+                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
+                            {
+                                loadCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                            }
+                        }
+                        break;
+                    }
+                }
+                for (int i = 0; i < computer.Hardware.Length; i++)
+                {
+                    if (computer.Hardware[i].HardwareType == HardwareType.GpuAti || computer.Hardware[i].HardwareType == HardwareType.GpuNvidia)
+                    {
+                        for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                        {
+                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                            {
+                                tempGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                            }
+                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
+                            {
+                                loadGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                            }
+                        }
+                        break;
+                    }
+                }
+                Stopwatch stopWatchCPU = new Stopwatch();
+                stopWatchCPU.Start();
+                Parallel.ForEach(L, i =>
+                {
+                    if (stop)
+                    {
+                        return;
+                    }
+                    Parallel.For(0, 100000, j =>
+                    {
+                        if (stop)
+                        {
+                            return;
+                        }
+                    });
+                });
+                stopWatchCPU.Stop();
+                scoreCPU = Convert.ToInt32(10000 / stopWatchCPU.ElapsedMilliseconds);
+                Stopwatch stopWatchGPU = new Stopwatch();
+                stopWatchGPU.Start();
+                if (stop)
+                {
+                    return;
+                }
+                for (int i = 0; i < 1; i++)
+                {
+                    cl.Execute(128);
+                }
+                stopWatchGPU.Stop();
+                scoreGPU = Convert.ToInt32(10000 / stopWatchGPU.ElapsedMilliseconds);
+                computer.Close();
+
                 LoadsCPU.Add(loadCPU);
                 TempsCPU.Add(tempCPU);
                 LoadsGPU.Add(loadGPU);

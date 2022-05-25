@@ -154,6 +154,7 @@ E:\Repos\Курсова робота\ToroBench\Benchmark\bin\Release\System.Text
 E:\Repos\Курсова робота\ToroBench\Benchmark\bin\Release\System.Threading.Channels.xml
 E:\Repos\Курсова робота\ToroBench\Benchmark\bin\Release\System.Threading.Tasks.Extensions.xml
 E:\Repos\Курсова робота\ToroBench\Benchmark\bin\Release\System.ValueTuple.xml
+E:\Repos\Курсова робота\ToroBench\Benchmark\obj\Release\ToroBench.csproj.AssemblyReference.cache
 E:\Repos\Курсова робота\ToroBench\Benchmark\obj\Release\ToroBench.exe.config
 E:\Repos\Курсова робота\ToroBench\Benchmark\obj\Release\Benchmark.ErrorForm.resources
 E:\Repos\Курсова робота\ToroBench\Benchmark\obj\Release\Benchmark.MainForm.resources
