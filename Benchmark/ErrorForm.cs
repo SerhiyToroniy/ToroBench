@@ -60,5 +60,10 @@ namespace Benchmark
         {
             Close();
         }
+
+        private void ErrorForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

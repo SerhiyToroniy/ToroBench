@@ -1,15 +1,15 @@
-﻿using System;
+﻿using OpenCL;
+using OpenHardwareMonitor.Hardware;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Management;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Management;
-using System.Diagnostics;
-using OpenHardwareMonitor.Hardware;
-using OpenCL;
-using System.Threading;
 
 namespace Benchmark
 {
@@ -121,13 +121,13 @@ namespace Benchmark
             }
             Stopwatch stopWatchCPU = new Stopwatch();
             stopWatchCPU.Start();
-            Parallel.ForEach(L, i =>
+            _ = Parallel.ForEach(L, i =>
             {
                 if (stop)
                 {
                     return;
                 }
-                Parallel.For(0, 1000000, j =>
+                _ = Parallel.For(0, 1000000, j =>
                 {
                     if (stop)
                     {
@@ -159,13 +159,13 @@ namespace Benchmark
                 {
                     return;
                 }
-                Parallel.ForEach(L, i =>
+                _ = Parallel.ForEach(L, i =>
                 {
                     if (stop)
                     {
                         return;
                     }
-                    Parallel.For(0, 1000000, j =>
+                    _ = Parallel.For(0, 1000000, j =>
                     {
                         if (stop)
                         {
@@ -264,13 +264,13 @@ namespace Benchmark
                 }
                 Stopwatch stopWatchCPU = new Stopwatch();
                 stopWatchCPU.Start();
-                Parallel.ForEach(L, i =>
+                _ = Parallel.ForEach(L, i =>
                 {
                     if (stop)
                     {
                         return;
                     }
-                    Parallel.For(0, 50000, j =>
+                    _ = Parallel.For(0, 50000, j =>
                     {
                         if (stop)
                         {

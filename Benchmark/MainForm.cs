@@ -1,21 +1,22 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using AutoUpdaterDotNET;
 using Dropbox.Api;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Management;
-using System.Diagnostics;
-using OpenHardwareMonitor.Hardware;
-using System.IO;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Dropbox.Api.Files;
-using Newtonsoft.Json;
-using System.Threading;
-using AutoUpdaterDotNET;
 using Microsoft.Win32;
+using Newtonsoft.Json;
+using OpenHardwareMonitor.Hardware;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Management;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ToroBench;
 
 namespace Benchmark
 {
@@ -160,7 +161,7 @@ namespace Benchmark
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -244,6 +245,9 @@ namespace Benchmark
                 settingsToolStripMenuItem.BackColor = Color.Black;
                 settingsToolStripMenuItem.ForeColor = Color.White;
 
+                internetTestToolStripMenuItem.BackColor = Color.Black;
+                internetTestToolStripMenuItem.ForeColor = Color.White;
+
 
 
                 toolStripMenuItem1.BackColor = Color.Black;
@@ -292,6 +296,9 @@ namespace Benchmark
 
                 settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
                 settingsToolStripMenuItem.ForeColor = Color.Black;
+
+                internetTestToolStripMenuItem.BackColor = Color.WhiteSmoke;
+                internetTestToolStripMenuItem.ForeColor = Color.Black;
 
 
                 toolStripMenuItem1.BackColor = Color.WhiteSmoke;
@@ -377,6 +384,9 @@ namespace Benchmark
 
             settingsToolStripMenuItem.BackColor = Color.Black;
             settingsToolStripMenuItem.ForeColor = Color.White;
+
+            internetTestToolStripMenuItem.BackColor = Color.Black;
+            internetTestToolStripMenuItem.ForeColor = Color.White;
 
 
 
@@ -778,6 +788,8 @@ namespace Benchmark
             settingsToolStripMenuItem.BackColor = Color.WhiteSmoke;
             settingsToolStripMenuItem.ForeColor = Color.Black;
 
+            internetTestToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            internetTestToolStripMenuItem.ForeColor = Color.Black;
 
 
             toolStripMenuItem1.BackColor = Color.WhiteSmoke;
@@ -804,6 +816,16 @@ namespace Benchmark
         private void guna2GradientCircleButton2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void internetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            guna2Button1.Enabled = false;
+            guna2Button2.Enabled = false;
+            fileToolStripMenuItem.Enabled = false;
+            settingsToolStripMenuItem.Enabled = false;
+            InternetForm a = new InternetForm(guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor);
+            a.Show();
         }
     }
 
@@ -1119,12 +1141,11 @@ namespace Benchmark
             ManagementObjectCollection oCollection = oSearcher.Get();
 
             long MemSize = 0;
-            long mCap = 0;
 
             // In case more than one Memory sticks are installed
             foreach (ManagementObject obj in oCollection)
             {
-                mCap = Convert.ToInt64(obj["Capacity"]);
+                long mCap = Convert.ToInt64(obj["Capacity"]);
                 MemSize += mCap;
             }
             MemSize = (MemSize / 1024) / 1024;

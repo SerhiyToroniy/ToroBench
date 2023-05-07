@@ -19,7 +19,7 @@ namespace ToroBench.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,47 @@ namespace ToroBench.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1742947_200 {
+            get {
+                object obj = ResourceManager.GetObject("1742947-200", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_internet_internet_icon_1600 {
+            get {
+                object obj = ResourceManager.GetObject("png-internet-internet-icon-1600", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_transparent_speedtest_net_wi_fi_iphone_iphone_blue_computer_network_angle_removebg_preview__2_ {
+            get {
+                object obj = ResourceManager.GetObject("png-transparent-speedtest-net-wi-fi-iphone-iphone-blue-computer-network-angle-rem" +
+                        "ovebg-preview (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_speed_meter_png_png_image_3805999_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-speed-meter-png-png-image_3805999-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

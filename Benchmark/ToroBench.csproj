@@ -182,6 +182,12 @@
     <Compile Include="ErrorForm.Designer.cs">
       <DependentUpon>ErrorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InternetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InternetForm.Designer.cs">
+      <DependentUpon>InternetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     </Compile>
     <EmbeddedResource Include="ErrorForm.resx">
       <DependentUpon>ErrorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InternetForm.resx">
+      <DependentUpon>InternetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -262,6 +271,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="main.ico" />
+    <None Include="Resources\png-transparent-speedtest-net-wi-fi-iphone-iphone-blue-computer-network-angle-removebg-preview %282%29.png" />
+    <None Include="Resources\pngtree-speed-meter-png-png-image_3805999-removebg-preview.png" />
+    <None Include="Resources\1742947-200.png" />
+    <None Include="Resources\png-internet-internet-icon-1600.png" />
     <Content Include="Theme.txt" />
   </ItemGroup>
   <ItemGroup>
