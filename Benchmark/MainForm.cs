@@ -743,7 +743,7 @@ namespace Benchmark
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
 
-            System.IO.File.WriteAllText("Theme.txt", "white");
+            File.WriteAllText("Theme.txt", "white");
 
             themeModeToolStripMenuItem.Image = Image.FromFile("img/theme.png");
             whiteToolStripMenuItem.Image = Image.FromFile("img/System.png");
