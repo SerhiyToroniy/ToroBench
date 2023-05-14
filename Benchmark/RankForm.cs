@@ -76,7 +76,6 @@ namespace Benchmark
         }
         private void RankForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void textBox1_MouseClick(object sender, MouseEventArgs e)

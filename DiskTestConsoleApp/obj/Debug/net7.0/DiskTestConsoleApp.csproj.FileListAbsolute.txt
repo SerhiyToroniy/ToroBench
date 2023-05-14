@@ -1,0 +1,15 @@
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\bin\Debug\net7.0\DiskTestConsoleApp.exe
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\bin\Debug\net7.0\DiskTestConsoleApp.deps.json
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\bin\Debug\net7.0\DiskTestConsoleApp.runtimeconfig.json
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\bin\Debug\net7.0\DiskTestConsoleApp.dll
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\bin\Debug\net7.0\DiskTestConsoleApp.pdb
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.csproj.AssemblyReference.cache
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.AssemblyInfoInputs.cache
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.AssemblyInfo.cs
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.dll
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\refint\DiskTestConsoleApp.dll
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.pdb
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\DiskTestConsoleApp.genruntimeconfig.cache
+C:\Users\toron\source\repos\ToroBench\DiskTestConsoleApp\obj\Debug\net7.0\ref\DiskTestConsoleApp.dll

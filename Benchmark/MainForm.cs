@@ -36,7 +36,7 @@ namespace Benchmark
         public static string downloaded = "";
         public static string FileName = "";
         List<string> l1;
-        int size = 1000;
+        int size = 1;
         int N = 1000000;
         char[] A;
         char[] B;
@@ -248,6 +248,8 @@ namespace Benchmark
                 internetTestToolStripMenuItem.BackColor = Color.Black;
                 internetTestToolStripMenuItem.ForeColor = Color.White;
 
+                diskTestToolStripMenuItem.BackColor = Color.Black;
+                diskTestToolStripMenuItem.ForeColor = Color.White;
 
 
                 toolStripMenuItem1.BackColor = Color.Black;
@@ -299,6 +301,9 @@ namespace Benchmark
 
                 internetTestToolStripMenuItem.BackColor = Color.WhiteSmoke;
                 internetTestToolStripMenuItem.ForeColor = Color.Black;
+
+                diskTestToolStripMenuItem.BackColor = Color.WhiteSmoke;
+                diskTestToolStripMenuItem.ForeColor = Color.Black;
 
 
                 toolStripMenuItem1.BackColor = Color.WhiteSmoke;
@@ -388,6 +393,8 @@ namespace Benchmark
             internetTestToolStripMenuItem.BackColor = Color.Black;
             internetTestToolStripMenuItem.ForeColor = Color.White;
 
+            diskTestToolStripMenuItem.BackColor = Color.Black;
+            diskTestToolStripMenuItem.ForeColor = Color.White;
 
 
             toolStripMenuItem1.BackColor = Color.Black;
@@ -791,6 +798,9 @@ namespace Benchmark
             internetTestToolStripMenuItem.BackColor = Color.WhiteSmoke;
             internetTestToolStripMenuItem.ForeColor = Color.Black;
 
+            diskTestToolStripMenuItem.BackColor = Color.WhiteSmoke;
+            diskTestToolStripMenuItem.ForeColor = Color.Black;
+
 
             toolStripMenuItem1.BackColor = Color.WhiteSmoke;
             toolStripMenuItem1.ForeColor = Color.Black;
@@ -826,6 +836,20 @@ namespace Benchmark
             settingsToolStripMenuItem.Enabled = false;
             InternetForm a = new InternetForm(guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor);
             a.Show();
+        }
+
+        private void diskTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            guna2Button1.Enabled = false;
+            guna2Button2.Enabled = false;
+            fileToolStripMenuItem.Enabled = false;
+            settingsToolStripMenuItem.Enabled = false;
+            DiskForm a = new DiskForm(guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor);
+            a.Show();
+        }
+
+        private void tesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
         }
     }
 

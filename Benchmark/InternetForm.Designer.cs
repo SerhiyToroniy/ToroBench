@@ -34,9 +34,9 @@
             this.guna2GradientCircleButton1 = new Guna.UI2.WinForms.Guna2GradientCircleButton();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CircleProgressBar4 = new Guna.UI2.WinForms.Guna2CircleProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,6 +52,7 @@
             // 
             this.guna2BorderlessForm1.BorderRadius = 60;
             this.guna2BorderlessForm1.ContainerControl = this;
+            this.guna2BorderlessForm1.ResizeForm = false;
             // 
             // guna2GradientCircleButton1
             // 
@@ -114,6 +115,16 @@
             this.guna2CircleProgressBar4.TabIndex = 53;
             this.guna2CircleProgressBar4.Text = "guna2CircleProgressBar1";
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 7F);
+            this.label1.Location = new System.Drawing.Point(74, 143);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 25);
+            this.label1.TabIndex = 49;
+            this.label1.Text = "Download";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Segoe UI", 25F);
@@ -153,16 +164,6 @@
             this.guna2Button1.Text = "Stop";
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 7F);
-            this.label1.Location = new System.Drawing.Point(74, 143);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 25);
-            this.label1.TabIndex = 49;
-            this.label1.Text = "Download";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 

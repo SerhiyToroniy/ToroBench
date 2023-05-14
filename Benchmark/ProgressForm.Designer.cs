@@ -115,6 +115,7 @@ namespace Benchmark
             this.guna2GroupBox1.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(1, 0, 1, 5);
             this.guna2GroupBox1.Size = new System.Drawing.Size(386, 244);
             this.guna2GroupBox1.TabIndex = 33;
+            this.guna2GroupBox1.Click += new System.EventHandler(this.guna2GroupBox1_Click);
             this.guna2GroupBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.guna2GroupBox1_MouseDown);
             this.guna2GroupBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.guna2GroupBox1_MouseMove);
             this.guna2GroupBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.guna2GroupBox1_MouseUp);

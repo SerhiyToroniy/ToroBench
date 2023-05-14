@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToroBench", "Benchmark\ToroBench.csproj", "{D250C1F7-B93C-490C-B533-46CFA1D6DF69}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ToroBenchSetup", "Setup1\Setup1.vdproj", "{47ED2B8E-B7BC-4E54-B8CC-B6B916B8D42E}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ToroBench_SetUp", "ToroBench_SetUp\ToroBench_SetUp.vdproj", "{2CF033F9-B70D-4D52-8BF6-4A3C1295FC05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{D250C1F7-B93C-490C-B533-46CFA1D6DF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D250C1F7-B93C-490C-B533-46CFA1D6DF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D250C1F7-B93C-490C-B533-46CFA1D6DF69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47ED2B8E-B7BC-4E54-B8CC-B6B916B8D42E}.Debug|Any CPU.ActiveCfg = Debug
-		{47ED2B8E-B7BC-4E54-B8CC-B6B916B8D42E}.Release|Any CPU.ActiveCfg = Release
+		{2CF033F9-B70D-4D52-8BF6-4A3C1295FC05}.Debug|Any CPU.ActiveCfg = Debug
+		{2CF033F9-B70D-4D52-8BF6-4A3C1295FC05}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

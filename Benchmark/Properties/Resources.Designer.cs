@@ -83,6 +83,17 @@ namespace ToroBench.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap png_transparent_macintosh_hard_drives_macos_high_sierra_computer_icons_ntfs_driving_driving_text_computer_program_thumbnail_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("png-transparent-macintosh-hard-drives-macos-high-sierra-computer-icons-ntfs-drivi" +
+                        "ng-driving-text-computer-program-thumbnail-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap png_transparent_speedtest_net_wi_fi_iphone_iphone_blue_computer_network_angle_removebg_preview__2_ {
             get {
                 object obj = ResourceManager.GetObject("png-transparent-speedtest-net-wi-fi-iphone-iphone-blue-computer-network-angle-rem" +

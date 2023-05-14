@@ -1,5 +1,4 @@
 ﻿using OpenCL;
-using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +9,9 @@ using System.Management;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OpenHardwareMonitor.Hardware;
+using LibreHardwareMonitor.Hardware;
+using System.IO;
 
 namespace Benchmark
 {
@@ -22,8 +24,10 @@ namespace Benchmark
         public TimeSpan _currentElapsedTime = TimeSpan.Zero;
         public TimeSpan _totalElapsedTime = TimeSpan.Zero;
         public bool _timerRunnig = false;
+        public bool IsReadNow { get; set; }
 
         BackgroundWorker worker;
+        BackgroundWorker worker2;
 
         public List<float> floatList { get; set; }
 
@@ -33,9 +37,12 @@ namespace Benchmark
         public List<int> TempsGPU { get; set; }
         public List<int> ScoresCPU { get; set; }
         public List<int> ScoresGPU { get; set; }
+        public List<int> LoadsDisk { get; set; }
+        public List<int> TempsDisk { get; set; }
+        public List<int> ScoresDisk { get; set; }
         public float testfloat { get; set; }
         bool stop = false;
-        int size = 1000;
+        int size = 1;
         OpenCL.OpenCL cl;
         PerformanceCounter cpuCounter;
         Guna.UI2.WinForms.Guna2Button button1_;
@@ -74,169 +81,117 @@ namespace Benchmark
         {
             return Convert.ToInt32(cpuCounter.NextValue());
         }
-        public void WhileMonitor(List<List<string>> L)
-        {
-            UpdateVisitor updateVisitor = new UpdateVisitor();
-            Computer computer = new Computer();
-            computer.Open();
-            computer.CPUEnabled = true;
-            computer.GPUEnabled = true;
-            computer.Accept(updateVisitor);
 
-            for (int i = 0; i < computer.Hardware.Length; i++)
-            {
-                if (computer.Hardware[i].HardwareType == HardwareType.CPU)
-                {
-                    for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
-                    {
-                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
-                        {
-                            tempCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                        }
-                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
-                        {
-                            loadCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                        }
-                    }
-                    break;
-                }
-            }
-            for (int i = 0; i < computer.Hardware.Length; i++)
-            {
-                if (computer.Hardware[i].HardwareType == HardwareType.GpuAti || computer.Hardware[i].HardwareType == HardwareType.GpuNvidia)
-                {
-                    for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
-                    {
-                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
-                        {
-                            tempGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                        }
-                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
-                        {
-                            loadGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                        }
-                    }
-                    break;
-                }
-            }
-            Stopwatch stopWatchCPU = new Stopwatch();
-            stopWatchCPU.Start();
-            _ = Parallel.ForEach(L, i =>
-            {
-                if (stop)
-                {
-                    return;
-                }
-                _ = Parallel.For(0, 1000000, j =>
-                {
-                    if (stop)
-                    {
-                        return;
-                    }
-                });
-            });
-            stopWatchCPU.Stop();
-            scoreCPU = Convert.ToInt32(1000 / stopWatchCPU.ElapsedMilliseconds);
-            Stopwatch stopWatchGPU = new Stopwatch();
-            stopWatchGPU.Start();
-            if (stop)
-            {
-                return;
-            }
-            for (int i = 0; i < 100; i++)
-            {
-                cl.Execute(128);
-            }
-            stopWatchGPU.Stop();
-            scoreGPU = Convert.ToInt32(1000000 / stopWatchGPU.ElapsedMilliseconds);
-            computer.Close();
-        }
-        public void WhileCPU(List<List<string>> L)
+        public async Task<int> WhileCPU()
         {
-            while (true)
+            await Task.Run(() =>
             {
-                if (stop)
-                {
-                    return;
-                }
-                _ = Parallel.ForEach(L, i =>
+                var L = GetListL();
+                while (true)
                 {
                     if (stop)
                     {
-                        return;
+                        break;
                     }
-                    _ = Parallel.For(0, 1000000, j =>
+                    _ = Parallel.ForEach(L, i =>
                     {
                         if (stop)
                         {
                             return;
                         }
+                        _ = Parallel.For(0, 1000000, j =>
+                        {
+                            if (stop)
+                            {
+                                return;
+                            }
+                        });
                     });
-                });
-            }
-        }
-        public void WhileGPU()
-        {
-
-            while (true)
-            {
-                if (stop)
-                {
-                    return;
                 }
-                cl.Execute(128);
-            }
+            });
+
+            return 0;
         }
-        void worker_DoWork(object sender, DoWorkEventArgs e)
+        public async Task<int> WhileGPU()
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+                    if (stop)
+                    {
+                        break;
+                    }
+                    cl.Execute(1);
+                }
+            });
+            return 0;
+        }
+
+        private List<List<string>> GetListL()
         {
             List<List<string>> L = new List<List<string>>();
             for (int i = 0; i < 128; i++)
             {
                 if (stop)
-                    return;
+                    break;
                 L.Add(l1);
             }
-            UpdateVisitor updateVisitor = new UpdateVisitor();
-            Computer computer = new Computer();
-            computer.Open();
-            computer.CPUEnabled = true;
-            computer.GPUEnabled = true;
-            computer.Accept(updateVisitor);
-            cl = new OpenCL.OpenCL();
-            cl.Accelerator = AcceleratorDevice.GPU;
+            return L;
+        }
 
-            string kernel = "kernel void MatrixMulti(global int * dimension, global char * a, global char * b, global char * c){int id = get_global_id(0);for (int i = 0; i < dimension; i++){c[id] = a[id] * b[id];}}";
-
-            char[] c = new char[size * size];
-            int[] dimensions = new int[3] { size, size, size };
-            cl.SetKernel(kernel, "MatrixMulti");
-            cl.SetParameter(dimensions, a, B, c);
-
-            thread1 = new Thread(() => WhileGPU());
-            thread2 = new Thread(() => WhileCPU(L));
-            thread1.Start();
-            thread2.Start();
+        void worker_DoWork2(object sende, DoWorkEventArgs e)
+        {
             while (!stop)
             {
-                //thread3 = new Thread(() => WhileMonitor(L));
-                //thread3.Start();
-                //thread3.Join();
+
+                string pathToConsoleApp = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DiskTestConsoleApp\\bin\\Debug\\net7.0\\DiskTestConsoleApp.exe");
+
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = pathToConsoleApp,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                };
+                Process process = new Process { StartInfo = startInfo };
+                process.OutputDataReceived += new DataReceivedEventHandler(Process_OutputDataReceived);
+                process.Start();
+                process.BeginOutputReadLine();
+                process.WaitForExit();
+                IsReadNow = false;
+
+                //worker2.ReportProgress(1);
+            }
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var L = GetListL();
+
+            worker2.RunWorkerAsync();
+
+            while (!stop)
+            {
+                UpdateVisitor updateVisitor = new UpdateVisitor();
+                OpenHardwareMonitor.Hardware.Computer computer = new OpenHardwareMonitor.Hardware.Computer();
                 computer.Open();
                 computer.CPUEnabled = true;
                 computer.GPUEnabled = true;
-                computer.Accept(updateVisitor);
+                computer.Accept((OpenHardwareMonitor.Hardware.IVisitor)updateVisitor);
+                computer.Hardware[0].Update();
 
                 for (int i = 0; i < computer.Hardware.Length; i++)
                 {
-                    if (computer.Hardware[i].HardwareType == HardwareType.CPU)
+                    if (computer.Hardware[i].HardwareType == OpenHardwareMonitor.Hardware.HardwareType.CPU)
                     {
                         for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
                         {
-                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                            if (computer.Hardware[i].Sensors[j].SensorType == OpenHardwareMonitor.Hardware.SensorType.Temperature)
                             {
                                 tempCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
                             }
-                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
+                            if (computer.Hardware[i].Sensors[j].SensorType == OpenHardwareMonitor.Hardware.SensorType.Load)
                             {
                                 loadCPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
                             }
@@ -244,24 +199,26 @@ namespace Benchmark
                         break;
                     }
                 }
-                for (int i = 0; i < computer.Hardware.Length; i++)
+
+                // Get the GPU hardware
+                foreach (var hardware in computer.Hardware)
                 {
-                    if (computer.Hardware[i].HardwareType == HardwareType.GpuAti || computer.Hardware[i].HardwareType == HardwareType.GpuNvidia)
+                    if (hardware.HardwareType == OpenHardwareMonitor.Hardware.HardwareType.GpuNvidia || hardware.HardwareType == OpenHardwareMonitor.Hardware.HardwareType.GpuAti)
                     {
-                        for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                        hardware.Update();
+                        // Get the temperature sensor for the GPU
+                        foreach (var sensor in hardware.Sensors)
                         {
-                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
+                            if (sensor.SensorType == OpenHardwareMonitor.Hardware.SensorType.Temperature && sensor.Name.Contains("GPU Core"))
                             {
-                                tempGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
-                            }
-                            if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Load)
-                            {
-                                loadGPU = Convert.ToInt32(computer.Hardware[i].Sensors[j].Value);
+                                // Get the GPU temperature
+                                tempGPU = (int)sensor.Value;
                             }
                         }
-                        break;
                     }
                 }
+                loadGPU = 100;
+
                 Stopwatch stopWatchCPU = new Stopwatch();
                 stopWatchCPU.Start();
                 _ = Parallel.ForEach(L, i =>
@@ -270,7 +227,7 @@ namespace Benchmark
                     {
                         return;
                     }
-                    _ = Parallel.For(0, 50000, j =>
+                    _ = Parallel.For(0, 10000000, j =>
                     {
                         if (stop)
                         {
@@ -279,24 +236,25 @@ namespace Benchmark
                     });
                 });
                 stopWatchCPU.Stop();
-                scoreCPU = Convert.ToInt32(10000 / stopWatchCPU.ElapsedMilliseconds);
+                scoreCPU = Convert.ToInt32(10000000 / stopWatchCPU.ElapsedMilliseconds);
                 Stopwatch stopWatchGPU = new Stopwatch();
-                stopWatchGPU.Start();
                 if (stop)
                 {
                     return;
                 }
-                for (int i = 0; i < 1; i++)
-                {
-                    cl.Execute(128);
-                }
+                stopWatchGPU.Start();
+                cl.Execute(1);
                 stopWatchGPU.Stop();
-                scoreGPU = Convert.ToInt32(10000 / stopWatchGPU.ElapsedMilliseconds);
+                scoreGPU = Convert.ToInt32(100000000 / (stopWatchGPU.ElapsedMilliseconds));
                 computer.Close();
 
+
+
+
+
                 LoadsCPU.Add(loadCPU);
-                TempsCPU.Add(tempCPU);
                 LoadsGPU.Add(loadGPU);
+                TempsCPU.Add(tempCPU);
                 TempsGPU.Add(tempGPU);
                 ScoresCPU.Add(scoreCPU);
                 ScoresGPU.Add(scoreGPU);
@@ -304,9 +262,67 @@ namespace Benchmark
                 var l = new Stress($"{loadCPU}%", $"Max: {LoadsCPU.Max()}%", $"{tempCPU}℃", $"Max: {TempsCPU.Max()}℃", $"{loadGPU}%", $"Max: {LoadsGPU.Max()}%", $"{tempGPU}℃", $"Max: {TempsGPU.Max()}℃", $"{scoreCPU}", $"Max: {ScoresCPU.Max()}", $"{scoreGPU}", $"Max: {ScoresGPU.Max()}", lInt);
                 worker.ReportProgress(1, l);
             }
-            computer.Close();
+
         }
 
+        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                if (e.Data == "*")
+                {
+                    IsReadNow = true;
+                }
+                if (e.Data.StartsWith("Read:"))
+                {
+                    float temperatureDisk = 0.0f;
+                    LibreHardwareMonitor.Hardware.Computer computer1 = new LibreHardwareMonitor.Hardware.Computer();
+                    computer1.Open();
+                    computer1.IsStorageEnabled = true;
+
+                    foreach (var hardwareItem in computer1.Hardware)
+                    {
+                        if (hardwareItem.HardwareType == LibreHardwareMonitor.Hardware.HardwareType.Storage)
+                        {
+                            hardwareItem.Update();
+
+                            foreach (var sensor in hardwareItem.Sensors)
+                            {
+                                if (sensor.SensorType == LibreHardwareMonitor.Hardware.SensorType.Temperature)
+                                {
+                                    temperatureDisk = sensor.Value ?? 0;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    computer1.Close();
+                    TempsDisk.Add(Convert.ToInt32(temperatureDisk));
+
+                    BeginInvoke((MethodInvoker)delegate { label19.Text = $"{Convert.ToInt32(temperatureDisk)}℃"; });
+                    BeginInvoke((MethodInvoker)delegate { label18.Text = $"Max: {TempsDisk.Max()}℃"; });
+
+                    if (Convert.ToInt32(temperatureDisk) < 100)
+                        BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar8.Value = Convert.ToInt32(temperatureDisk); });
+                    else
+                        BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar8.Value = 100; });
+
+                    ScoresDisk.Add(Convert.ToInt32(e.Data.Split()[1]));
+                    BeginInvoke((MethodInvoker)delegate { label16.Text = $"{e.Data.Split()[1]}"; });
+                    BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar7.Value = Convert.ToInt32(Convert.ToInt32(e.Data.Split()[1]) / (5000 / 100)); });
+                    BeginInvoke((MethodInvoker)delegate { label17.Text = $"Min: {ScoresDisk.Min()}"; });
+
+                }
+                if (e.Data.StartsWith("Load:"))
+                {
+                    LoadsDisk.Add(Convert.ToInt32(e.Data.Split()[1]));
+                    BeginInvoke((MethodInvoker)delegate { label20.Text = $"{e.Data.Split()[1]}%"; });
+                    BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar9.Value = Convert.ToInt32(e.Data.Split()[1]); });
+                    BeginInvoke((MethodInvoker)delegate { label21.Text = $"Max: {LoadsDisk.Max()}%"; });
+
+                }
+            }
+        }
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             var l = e.UserState as Stress;
@@ -354,28 +370,36 @@ namespace Benchmark
         public StressForm(Color b, Guna.UI2.WinForms.Guna2Button b1, Guna.UI2.WinForms.Guna2Button b2, ToolStripMenuItem t, ToolStripMenuItem t1, string _CPUname, string _GPUname, List<string> _l1, char[] _a, char[] _B)
         {
             InitializeComponent();
-
             l1 = _l1;
             a = _a;
             B = _B;
 
             LoadsCPU = new List<int>();
             LoadsGPU = new List<int>();
+            LoadsDisk = new List<int>();
             TempsCPU = new List<int>();
             TempsGPU = new List<int>();
+            TempsDisk = new List<int>();
             ScoresCPU = new List<int>();
             ScoresGPU = new List<int>();
+            ScoresDisk = new List<int>();
+
             worker = new BackgroundWorker();
+            worker2 = new BackgroundWorker();
             tool = t;
             tool1 = t1;
             label2.Text = _CPUname;
             label3.Text = _GPUname;
+            label22.Text = $"Disk: {GetDiskName()}";
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000;
             _timer.Tick += new EventHandler(_timer_Tick);
             worker.WorkerReportsProgress = true;
+            worker2.WorkerReportsProgress = true;
             worker.ProgressChanged += worker_ProgressChanged;
+            worker2.ProgressChanged += worker_ProgressChanged;
             worker.DoWork += worker_DoWork;
+            worker2.DoWork += worker_DoWork2;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             button1_ = b1;
@@ -454,13 +478,61 @@ namespace Benchmark
                 _timer.Stop();
                 _timerRunnig = false;
             }
+
+            cl = new OpenCL.OpenCL
+            {
+                Accelerator = AcceleratorDevice.GPU
+            };
+
+            string kernel = "kernel void MatrixMulti(global int * dimension, global char * a, global char * b, global char * c){int id = get_global_id(0);for (int i = 0; i < dimension; i++){a[id]+=a[id];}}";
+            size = 10;
+            char[] c = new char[size * size];
+            int[] dimensions = new int[3] { size, size, size };
+            cl.SetKernel(kernel, "MatrixMulti");
+            cl.SetParameter(dimensions, a, B, c);
+
             worker.RunWorkerAsync();
 
         }
 
-        private void StressForm_Load(object sender, EventArgs e)
+        private string GetDiskName()
         {
+            string deviceName = "";
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
 
+            foreach (ManagementObject queryObj in searcher.Get())
+            {
+                deviceName = $"{queryObj["Model"]}";
+                break;
+            }
+            return deviceName;
+        }
+
+        private async void StressForm_Load(object sender, EventArgs e)
+        {
+            //cl = new OpenCL.OpenCL();
+            //cl.Accelerator = AcceleratorDevice.GPU;
+
+            //string kernel = "kernel void MatrixMulti(global int * dimension, global char * a, global char * b, global char * c){int id = get_global_id(0);for (int i = 0; i < dimension; i++){c[id] = a[id] * b[id];}}";
+
+            //char[] c = new char[size * size];
+            //int[] dimensions = new int[3] { size, size, size };
+            //cl.SetKernel(kernel, "MatrixMulti");
+            //cl.SetParameter(dimensions, a, B, c);
+
+
+            _ = await RunStressTestAsync();
+        }
+
+        private async Task<int> RunStressTestAsync()
+        {
+            var taskCPU = WhileCPU();
+            var taskGPU = WhileGPU();
+
+            _ = await taskCPU;
+            _ = await taskGPU;
+
+            return 0;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -594,21 +666,29 @@ namespace Benchmark
             mouseDown = true;
             lastLocation = e.Location;
         }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
-    public class UpdateVisitor : IVisitor
+    public class UpdateVisitor : OpenHardwareMonitor.Hardware.IVisitor
     {
-        public void VisitComputer(IComputer computer)
+        public void VisitComputer(OpenHardwareMonitor.Hardware.IComputer computer)
         {
             computer.Traverse(this);
         }
-        public void VisitHardware(IHardware hardware)
+        public void VisitHardware(OpenHardwareMonitor.Hardware.IHardware hardware)
         {
             hardware.Update();
-            foreach (IHardware subHardware in hardware.SubHardware) subHardware.Accept(this);
+            foreach (OpenHardwareMonitor.Hardware.IHardware subHardware in hardware.SubHardware) subHardware.Accept(this);
         }
-        public void VisitSensor(ISensor sensor) { }
-        public void VisitParameter(IParameter parameter) { }
+        public void VisitSensor(OpenHardwareMonitor.Hardware.ISensor sensor) { }
+
+        public void VisitParameter(OpenHardwareMonitor.Hardware.IParameter parameter)
+        {
+        }
     }
     public class Temperature
     {

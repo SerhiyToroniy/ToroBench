@@ -34,7 +34,16 @@ namespace Benchmark
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.internetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.themeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -55,14 +64,6 @@ namespace Benchmark
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2GradientCircleButton1 = new Guna.UI2.WinForms.Guna2GradientCircleButton();
             this.guna2GradientCircleButton2 = new Guna.UI2.WinForms.Guna2GradientCircleButton();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.internetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.themeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.guna2GroupBox1.SuspendLayout();
             this.guna2GroupBox2.SuspendLayout();
@@ -94,7 +95,8 @@ namespace Benchmark
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.toolStripMenuItem3,
-            this.internetTestToolStripMenuItem});
+            this.internetTestToolStripMenuItem,
+            this.diskTestToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "Tools";
@@ -107,6 +109,51 @@ namespace Benchmark
             this.fileToolStripMenuItem.MouseLeave += new System.EventHandler(this.fileToolStripMenuItem_MouseLeave);
             this.fileToolStripMenuItem.MouseHover += new System.EventHandler(this.fileToolStripMenuItem_MouseHover);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "Stress Test";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "Ranking";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = "Updates";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // internetTestToolStripMenuItem
+            // 
+            this.internetTestToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.internetTestToolStripMenuItem.Image = global::ToroBench.Properties.Resources.png_internet_internet_icon_1600;
+            this.internetTestToolStripMenuItem.Name = "internetTestToolStripMenuItem";
+            this.internetTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.internetTestToolStripMenuItem.Text = "Internet Test";
+            this.internetTestToolStripMenuItem.Click += new System.EventHandler(this.internetTestToolStripMenuItem_Click);
+            // 
+            // diskTestToolStripMenuItem
+            // 
+            this.diskTestToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.diskTestToolStripMenuItem.Image = global::ToroBench.Properties.Resources.png_transparent_macintosh_hard_drives_macos_high_sierra_computer_icons_ntfs_driving_driving_text_computer_program_thumbnail_removebg_preview;
+            this.diskTestToolStripMenuItem.Name = "diskTestToolStripMenuItem";
+            this.diskTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.diskTestToolStripMenuItem.Text = "Disk Test";
+            this.diskTestToolStripMenuItem.Click += new System.EventHandler(this.diskTestToolStripMenuItem_Click);
+            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -117,6 +164,45 @@ namespace Benchmark
             this.settingsToolStripMenuItem.Text = "Appearence";
             this.settingsToolStripMenuItem.DropDownClosed += new System.EventHandler(this.settingsToolStripMenuItem_DropDownClosed);
             this.settingsToolStripMenuItem.DropDownOpened += new System.EventHandler(this.settingsToolStripMenuItem_DropDownOpened);
+            // 
+            // themeModeToolStripMenuItem
+            // 
+            this.themeModeToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.themeModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.darkToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.whiteToolStripMenuItem});
+            this.themeModeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("themeModeToolStripMenuItem.Image")));
+            this.themeModeToolStripMenuItem.Name = "themeModeToolStripMenuItem";
+            this.themeModeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.themeModeToolStripMenuItem.Text = "Theme mode";
+            // 
+            // darkToolStripMenuItem
+            // 
+            this.darkToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.darkToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("darkToolStripMenuItem.Image")));
+            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.darkToolStripMenuItem.Text = "Dark";
+            this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
+            this.toolStripMenuItem4.Text = "Light";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // whiteToolStripMenuItem
+            // 
+            this.whiteToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.whiteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("whiteToolStripMenuItem.Image")));
+            this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.whiteToolStripMenuItem.Text = "System";
+            this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click_1);
             // 
             // label5
             // 
@@ -431,81 +517,6 @@ namespace Benchmark
             this.guna2GradientCircleButton2.Text = "guna2GradientCircleButton2";
             this.guna2GradientCircleButton2.Click += new System.EventHandler(this.guna2GradientCircleButton2_Click);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "Stress Test";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = "Ranking";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem3.Text = "Updates";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
-            // 
-            // internetTestToolStripMenuItem
-            // 
-            this.internetTestToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.internetTestToolStripMenuItem.Image = global::ToroBench.Properties.Resources.png_internet_internet_icon_1600;
-            this.internetTestToolStripMenuItem.Name = "internetTestToolStripMenuItem";
-            this.internetTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.internetTestToolStripMenuItem.Text = "Internet Test";
-            this.internetTestToolStripMenuItem.Click += new System.EventHandler(this.internetTestToolStripMenuItem_Click);
-            // 
-            // themeModeToolStripMenuItem
-            // 
-            this.themeModeToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.themeModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.darkToolStripMenuItem,
-            this.toolStripMenuItem4,
-            this.whiteToolStripMenuItem});
-            this.themeModeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("themeModeToolStripMenuItem.Image")));
-            this.themeModeToolStripMenuItem.Name = "themeModeToolStripMenuItem";
-            this.themeModeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.themeModeToolStripMenuItem.Text = "Theme mode";
-            // 
-            // darkToolStripMenuItem
-            // 
-            this.darkToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.darkToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("darkToolStripMenuItem.Image")));
-            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
-            this.darkToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.darkToolStripMenuItem.Text = "Dark";
-            this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
-            this.toolStripMenuItem4.Text = "Light";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
-            // 
-            // whiteToolStripMenuItem
-            // 
-            this.whiteToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.whiteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("whiteToolStripMenuItem.Image")));
-            this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
-            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.whiteToolStripMenuItem.Text = "System";
-            this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click_1);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,6 +588,7 @@ namespace Benchmark
         private Guna.UI2.WinForms.Guna2GradientCircleButton guna2GradientCircleButton1;
         private Guna.UI2.WinForms.Guna2GradientCircleButton guna2GradientCircleButton2;
         private System.Windows.Forms.ToolStripMenuItem internetTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diskTestToolStripMenuItem;
     }
 }
 

@@ -431,6 +431,11 @@ namespace Benchmark
             mouseDown = true;
             lastLocation = e.Location;
         }
+
+        private void guna2GroupBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     static class Extensions
     {
