@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DiskTestConsoleApp
-build_property.ProjectDir = C:\Users\toron\Source\Repos\SerhiyToroniy\ToroBench\Benchmark\bin\Debug\DiskTestConsoleApp\
+build_property.ProjectDir = C:\Users\toron\source\repos\SerhiyToroniy\ToroBench\Benchmark\bin\Debug\DiskTestConsoleApp\
