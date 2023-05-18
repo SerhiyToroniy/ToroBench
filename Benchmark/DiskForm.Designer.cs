@@ -71,6 +71,7 @@
             this.guna2GradientCircleButton1.Size = new System.Drawing.Size(15, 15);
             this.guna2GradientCircleButton1.TabIndex = 49;
             this.guna2GradientCircleButton1.Text = "guna2GradientCircleButton1";
+            this.guna2GradientCircleButton1.Visible = false;
             this.guna2GradientCircleButton1.Click += new System.EventHandler(this.guna2GradientCircleButton1_Click);
             // 
             // guna2Button1

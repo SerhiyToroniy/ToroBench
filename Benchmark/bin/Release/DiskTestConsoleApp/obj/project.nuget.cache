@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qwZXXR831NK7XhO8TH+TBjTX+EzMXCP5tJlFy9Z0VdiloigtUADr7whmay9VZYKPVD2VtwmfTlp1MFH8o0Qujw==",
+  "dgSpecHash": "Bj/hwQqeyzy9O/5t9UCXDBoRhUJK6CCDpMQ/FLpqnXRBqzXAgVXxsfXtuB9SM+TxMgfR7yc4fRO9HYD0QxMtdA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\toron\\source\\repos\\ToroBench\\Benchmark\\bin\\Release\\DiskTestConsoleApp\\DiskTestConsoleApp.csproj",
+  "projectFilePath": "C:\\Users\\toron\\source\\repos\\SerhiyToroniy\\ToroBench\\Benchmark\\bin\\Debug\\DiskTestConsoleApp\\DiskTestConsoleApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\toron\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
     "C:\\Users\\toron\\.nuget\\packages\\system.codedom\\7.0.0\\system.codedom.7.0.0.nupkg.sha512",

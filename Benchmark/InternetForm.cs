@@ -57,6 +57,8 @@ namespace ToroBench
         {
             // Call GetNetworkStatistics when the form is loaded
             _ = await GetNetworkStatistics();
+            guna2CircleProgressBar1.Value = 100;
+            guna2GradientCircleButton1.Visible = true;
         }
 
         private void InternetTest_Load(object sender, EventArgs e)
@@ -223,7 +225,7 @@ namespace ToroBench
 
             // Create a random 10 MB buffer
             const int timeMs = 10000;
-            byte[] buffer = new byte[1024 * 1024 * 10];
+            byte[] buffer = new byte[1024 * 1024 * 90];
             new Random().NextBytes(buffer);
             System.Timers.Timer timer = new System.Timers.Timer(timeMs);
 

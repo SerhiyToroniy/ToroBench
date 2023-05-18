@@ -75,6 +75,7 @@
             this.guna2GradientCircleButton1.Size = new System.Drawing.Size(15, 15);
             this.guna2GradientCircleButton1.TabIndex = 48;
             this.guna2GradientCircleButton1.Text = "guna2GradientCircleButton1";
+            this.guna2GradientCircleButton1.Visible = false;
             this.guna2GradientCircleButton1.Click += new System.EventHandler(this.guna2GradientCircleButton1_Click);
             // 
             // guna2HtmlLabel1
@@ -163,6 +164,7 @@
             this.guna2Button1.TabIndex = 54;
             this.guna2Button1.Text = "Stop";
             this.guna2Button1.UseTransparentBackground = true;
+            this.guna2Button1.Visible = false;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // label2

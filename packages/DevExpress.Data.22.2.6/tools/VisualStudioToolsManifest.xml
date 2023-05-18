@@ -1,0 +1,17 @@
+<FileList>
+  <File Reference="DevExpress.Data.v22.2.dll">
+    <ToolboxItems UIFramework="WinForms" VSCategory="DX.22.2: Data &amp; Analytics">
+      <Item Type="DevExpress.Data.VirtualServerModeSource" />
+      <Item Type="DevExpress.Data.RealTimeSource" />
+      <Item Type="DevExpress.Data.UnboundSource" />
+      <Item Type="DevExpress.Data.PLinq.PLinqInstantFeedbackSource" />
+      <Item Type="DevExpress.Data.PLinq.PLinqServerModeSource" />
+      <Item Type="DevExpress.Data.ODataLinq.ODataInstantFeedbackSource" />
+      <Item Type="DevExpress.Data.ODataLinq.ODataServerModeSource" />
+      <Item Type="DevExpress.Data.Linq.EntityInstantFeedbackSource" />
+      <Item Type="DevExpress.Data.Linq.EntityServerModeSource" />
+      <Item Type="DevExpress.Data.Linq.LinqInstantFeedbackSource" />
+      <Item Type="DevExpress.Data.Linq.LinqServerModeSource" />
+    </ToolboxItems>
+  </File>
+</FileList>

@@ -50,7 +50,13 @@ namespace ToroBench
             }
             worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             worker.RunWorkerAsync();
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            guna2GradientCircleButton1.Visible = true;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)

@@ -17,6 +17,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToroBench;
+using System.Net.Http;
 
 namespace Benchmark
 {
@@ -539,7 +540,6 @@ namespace Benchmark
         }
         static async Task Download()
         {
-
             using (var dbx = new DropboxClient("Om2hCVZQDAsAAAAAAAAAAXaFNfMemQFCm6LvxnoJ2HY5AHWr9ByMtGcAYf82jMsJ"))
             {
                 using (var response = await dbx.Files.DownloadAsync("/Scores" + "/" + "scores.json"))
@@ -588,49 +588,51 @@ namespace Benchmark
         }
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            try
+            //try
+            //{
+            guna2Button1.Enabled = false;
+            guna2Button2.Enabled = false;
+            fileToolStripMenuItem.Enabled = false;
+            settingsToolStripMenuItem.Enabled = false;
+
+            //download
+            var task = Task.Run((Func<Task>)MainForm.Download);
+            task.Wait();
+
+            var a = JsonConvert.DeserializeObject<List<Scores>>(downloaded);
+            if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
             {
-                guna2Button1.Enabled = false;
-                guna2Button2.Enabled = false;
-                fileToolStripMenuItem.Enabled = false;
-                settingsToolStripMenuItem.Enabled = false;
-
-                //download
-                var task = Task.Run((Func<Task>)MainForm.Download);
-                task.Wait();
-
-                var a = JsonConvert.DeserializeObject<List<Scores>>(downloaded);
-                if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
-                {
-                    var temp = new Scores("0", $"{HardwareInfo.GetProcessorInformation()}", label11.Text.Replace("GPU: ", ""), HardwareInfo.GetPhysicalMemory(), HardwareInfo.GetOSInformation(), $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)", resultsStorage.CPUSingle, resultsStorage.CPUMulti, $"{HardwareInfo.GetCpuSpeedInGHz()}", resultsStorage.GpuScore);
-                    a.Add(temp);
-                }
-                ScoresList = a;
-                ScoresList = ScoresList.OrderByDescending(r => r.MultiCore).ThenByDescending(o => o.GPUScore).DistinctBy(y => y.CPU).ToList();
-
-                if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
-                {
-                    for (int i = 0; i < ScoresList.Count; i++)
-                    {
-                        ScoresList[i].Rank = $"#{i + 1}";
-                    }
-                }
-
-                //upload
-                if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
-                {
-                    var task2 = Task.Run((Func<Task>)MainForm.Upload);
-                    task2.Wait();
-                }
-
-                var s = new RankForm(guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor, ScoresList);
-                s.Show();
+                var temp = new Scores("0", $"{HardwareInfo.GetProcessorInformation()}", label11.Text.Replace("GPU: ", ""), HardwareInfo.GetPhysicalMemory(), HardwareInfo.GetOSInformation(), $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)", resultsStorage.CPUSingle, resultsStorage.CPUMulti, $"{HardwareInfo.GetCpuSpeedInGHz()}", resultsStorage.GpuScore);
+                a.Add(temp);
             }
-            catch (Exception)
+            ScoresList = a;
+            ScoresList = ScoresList.OrderByDescending(r => r.MultiCore).ThenByDescending(o => o.GPUScore).DistinctBy(y => y.CPU).ToList();
+
+            if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
             {
-                var q = new ErrorForm(this, guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor, "You aren't connected to the internet!", "Error", "NoInternet.png");
-                q.Show();
+                for (int i = 0; i < ScoresList.Count; i++)
+                {
+                    ScoresList[i].Rank = $"#{i + 1}";
+                }
             }
+
+            //upload
+            if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
+            {
+                var task2 = Task.Run((Func<Task>)MainForm.Upload);
+                task2.Wait();
+            }
+
+            var s = new RankForm(guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor, ScoresList);
+            s.Show();
+            //}
+            //catch (Exception ex)
+            //{
+            //    var q = new ErrorForm(this, guna2Button1, guna2Button2, fileToolStripMenuItem, settingsToolStripMenuItem, BackColor, "You aren't connected to the internet!", "Error", "NoInternet.png");
+            //    q.Show();
+            //    MessageBox.Show(ex.InnerException.Message);
+            //    MessageBox.Show(ex.InnerException.Message);
+            //}
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)

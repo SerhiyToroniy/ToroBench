@@ -1,16 +1,16 @@
 ﻿using System.Diagnostics;
 
 
-//////////////////////////SS
+//////////////////////////
 
 int threadCount = 10;
-const int blockSizeInKiB = 20 * 1024 * 1024; // blockSizeInKiB * queueDepth = files sizes overall
+const int blockSizeInKiB = 10 * 1024 * 1024; // blockSizeInKiB * queueDepth = files sizes overall
 const int queueDepth = 100;
 bool stopMonitoring = false;
 Random rand = new();
 Task[] tasksWrite = new Task[threadCount];
 Task[] tasksRead = new Task[threadCount];
-Task[] tasksMonitor = new Task[1];
+Task[] tasksMonitor = new Task[2];
 string[] fileNames = new string[threadCount];
 tasksMonitor[0] = GetDiskLoading();
 for (int i = 0; i < threadCount; i++)
@@ -63,14 +63,18 @@ async Task<int> WriteAsync(string filename)
     {
         byte[] buffer = new byte[blockSizeInKiB];
         Random rand = new();
-        using (FileStream fs = File.Create(filename))
+        lock (new object())
         {
-            for (int i = 0; i < queueDepth; i++)
+            Stopwatch stopwatch = new Stopwatch();
+            using (FileStream fs = File.Create(filename))
             {
-                rand.NextBytes(buffer);
-                fs.Write(buffer, 0, buffer.Length);
-                if (i % 10 == 0)
-                    Console.WriteLine($"{Math.Round(100.0 * (i) / queueDepth, 0)}");
+                for (int i = 0; i < queueDepth; i++)
+                {
+                    rand.NextBytes(buffer);
+                    fs.Write(buffer, 0, buffer.Length);
+                    if (i % 10 == 0)
+                        Console.WriteLine($"{Math.Round(100.0 * (i) / queueDepth, 0)}");
+                }
             }
         }
         return 0;
@@ -82,14 +86,16 @@ async Task<int> ReadAsync(string filename)
     return await Task.Run(() =>
     {
         byte[] buffer = new byte[blockSizeInKiB];
-
-        using (FileStream fs = File.OpenRead(filename))
+        lock (new object())
         {
-            for (int i = 0; i < queueDepth; i++)
+            using (FileStream fs = File.OpenRead(filename))
             {
-                fs.Read(buffer, 0, buffer.Length);
-                if (i % 10 == 0)
-                    Console.WriteLine($"{Math.Round(100.0 * (i) / queueDepth, 0)}");
+                for (int i = 0; i < queueDepth; i++)
+                {
+                    fs.Read(buffer, 0, buffer.Length);
+                    if (i % 10 == 0)
+                        Console.WriteLine($"{Math.Round(100.0 * (i) / queueDepth, 0)}");
+                }
             }
         }
         return 0;

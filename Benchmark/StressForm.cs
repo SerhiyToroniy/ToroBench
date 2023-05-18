@@ -27,7 +27,6 @@ namespace Benchmark
         public bool IsReadNow { get; set; }
 
         BackgroundWorker worker;
-        BackgroundWorker worker2;
 
         public List<float> floatList { get; set; }
 
@@ -55,9 +54,6 @@ namespace Benchmark
         int tempGPU = -1;
         int scoreCPU = -1;
         int scoreGPU = -1;
-        Thread thread1;
-        Thread thread2;
-        Thread thread3;
         List<string> l1 = new List<string>();
         char[] a;
         char[] B;
@@ -74,7 +70,9 @@ namespace Benchmark
             tool.Enabled = true;
             tool1.Enabled = true;
             _timer.Stop();
-            Dispose();
+            guna2GradientCircleButton1.Visible = true;
+
+            //Dispose();
         }
 
         public int getCurrentCpuUsage()
@@ -142,8 +140,19 @@ namespace Benchmark
 
         void worker_DoWork2(object sende, DoWorkEventArgs e)
         {
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var L = GetListL();
+
+            cl.Execute(1);
+
+
             while (!stop)
             {
+                if (stop)
+                    break;
 
                 string pathToConsoleApp = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DiskTestConsoleApp\\bin\\Debug\\net7.0\\DiskTestConsoleApp.exe");
 
@@ -153,6 +162,7 @@ namespace Benchmark
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true,
+                    Arguments = $"{5 * 1024 * 1024}" //20 disk test
                 };
                 Process process = new Process { StartInfo = startInfo };
                 process.OutputDataReceived += new DataReceivedEventHandler(Process_OutputDataReceived);
@@ -160,19 +170,8 @@ namespace Benchmark
                 process.BeginOutputReadLine();
                 process.WaitForExit();
                 IsReadNow = false;
-
-                //worker2.ReportProgress(1);
-            }
-        }
-
-        void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            var L = GetListL();
-
-            worker2.RunWorkerAsync();
-
-            while (!stop)
-            {
+                if (stop)
+                    break;
                 UpdateVisitor updateVisitor = new UpdateVisitor();
                 OpenHardwareMonitor.Hardware.Computer computer = new OpenHardwareMonitor.Hardware.Computer();
                 computer.Open();
@@ -180,7 +179,8 @@ namespace Benchmark
                 computer.GPUEnabled = true;
                 computer.Accept((OpenHardwareMonitor.Hardware.IVisitor)updateVisitor);
                 computer.Hardware[0].Update();
-
+                if (stop)
+                    break;
                 for (int i = 0; i < computer.Hardware.Length; i++)
                 {
                     if (computer.Hardware[i].HardwareType == OpenHardwareMonitor.Hardware.HardwareType.CPU)
@@ -199,7 +199,8 @@ namespace Benchmark
                         break;
                     }
                 }
-
+                if (stop)
+                    break;
                 // Get the GPU hardware
                 foreach (var hardware in computer.Hardware)
                 {
@@ -218,7 +219,8 @@ namespace Benchmark
                     }
                 }
                 loadGPU = 100;
-
+                if (stop)
+                    break;
                 Stopwatch stopWatchCPU = new Stopwatch();
                 stopWatchCPU.Start();
                 _ = Parallel.ForEach(L, i =>
@@ -251,7 +253,8 @@ namespace Benchmark
 
 
 
-
+                if (stop)
+                    break;
                 LoadsCPU.Add(loadCPU);
                 LoadsGPU.Add(loadGPU);
                 TempsCPU.Add(tempCPU);
@@ -385,7 +388,6 @@ namespace Benchmark
             ScoresDisk = new List<int>();
 
             worker = new BackgroundWorker();
-            worker2 = new BackgroundWorker();
             tool = t;
             tool1 = t1;
             label2.Text = _CPUname;
@@ -395,11 +397,8 @@ namespace Benchmark
             _timer.Interval = 1000;
             _timer.Tick += new EventHandler(_timer_Tick);
             worker.WorkerReportsProgress = true;
-            worker2.WorkerReportsProgress = true;
             worker.ProgressChanged += worker_ProgressChanged;
-            worker2.ProgressChanged += worker_ProgressChanged;
             worker.DoWork += worker_DoWork;
-            worker2.DoWork += worker_DoWork2;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             button1_ = b1;
@@ -538,7 +537,7 @@ namespace Benchmark
         private void button2_Click(object sender, EventArgs e)
         {
             stop = true;
-            Close();
+            //Close();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -570,16 +569,13 @@ namespace Benchmark
 
         }
 
+
+
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             stop = true;
-            if (thread1 != null)
-                thread1.Abort();
-            if (thread2 != null)
-                thread2.Abort();
-            if (thread3 != null)
-                thread3.Abort();
-            Close();
+            guna2Button1.Enabled = false;
+            //Close();
         }
 
         private void label2_Click_1(object sender, EventArgs e)
@@ -609,11 +605,6 @@ namespace Benchmark
 
         private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
         {
-            stop = true;
-            if (thread1 != null)
-                thread1.Abort();
-            if (thread2 != null)
-                thread2.Abort();
             Close();
         }
 
