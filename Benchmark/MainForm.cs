@@ -13,11 +13,13 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToroBench;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace Benchmark
 {
@@ -43,7 +45,6 @@ namespace Benchmark
         char[] B;
         string fullPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize";
         string valueName = "AppsUseLightTheme";
-
 
         void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -186,7 +187,6 @@ namespace Benchmark
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
 
             string mode = System.IO.File.ReadAllText("Theme.txt");
             if (mode == "system")
@@ -540,7 +540,7 @@ namespace Benchmark
         }
         static async Task Download()
         {
-            using (var dbx = new DropboxClient("Om2hCVZQDAsAAAAAAAAAAXaFNfMemQFCm6LvxnoJ2HY5AHWr9ByMtGcAYf82jMsJ"))
+            using (var dbx = new DropboxClient(Credentials.DropboxKey))
             {
                 using (var response = await dbx.Files.DownloadAsync("/Scores" + "/" + "scores.json"))
                 {
@@ -550,7 +550,7 @@ namespace Benchmark
         }
         static async Task Upload()
         {
-            using (var dbx = new DropboxClient("Om2hCVZQDAsAAAAAAAAAAXaFNfMemQFCm6LvxnoJ2HY5AHWr9ByMtGcAYf82jMsJ"))
+            using (var dbx = new DropboxClient(Credentials.DropboxKey))
             {
                 using (var mem = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(ScoresList))))
                 {
@@ -564,7 +564,7 @@ namespace Benchmark
 
         static async Task GetList()
         {
-            using (var dbx = new DropboxClient("Om2hCVZQDAsAAAAAAAAAAXaFNfMemQFCm6LvxnoJ2HY5AHWr9ByMtGcAYf82jMsJ"))
+            using (var dbx = new DropboxClient(Credentials.DropboxKey))
             {
                 var list = await dbx.Files.ListFolderAsync("/Updates");
 
@@ -575,7 +575,7 @@ namespace Benchmark
 
         static async Task InstallUpdates()
         {
-            using (var dbx = new DropboxClient("Om2hCVZQDAsAAAAAAAAAAXaFNfMemQFCm6LvxnoJ2HY5AHWr9ByMtGcAYf82jMsJ"))
+            using (var dbx = new DropboxClient(Credentials.DropboxKey))
             {
                 using (var response = await dbx.Files.DownloadAsync("/Updates" + "/" + FileName))
                 {

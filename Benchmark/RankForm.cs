@@ -11,8 +11,6 @@ namespace Benchmark
     public partial class RankForm : Form
     {
 
-
-
         private bool mouseDown;
         private Point lastLocation;
         public List<Scores> l { get; set; }
