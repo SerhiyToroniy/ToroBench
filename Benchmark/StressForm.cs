@@ -418,6 +418,9 @@ namespace Benchmark
                 guna2CircleProgressBar2.InnerColor = Color.FromArgb(56, 56, 56);
                 guna2CircleProgressBar4.InnerColor = Color.FromArgb(56, 56, 56);
                 guna2CircleProgressBar6.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar9.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar8.InnerColor = Color.FromArgb(56, 56, 56);
+                guna2CircleProgressBar7.InnerColor = Color.FromArgb(56, 56, 56);
 
                 label5.ForeColor = Color.White;
                 label1.ForeColor = Color.White;
@@ -434,6 +437,13 @@ namespace Benchmark
                 label11.ForeColor = Color.White;
                 label14.ForeColor = Color.White;
                 label15.ForeColor = Color.White;
+                label16.ForeColor = Color.White;
+                label17.ForeColor = Color.White;
+                label18.ForeColor = Color.White;
+                label19.ForeColor = Color.White;
+                label20.ForeColor = Color.White;
+                label21.ForeColor = Color.White;
+                label22.ForeColor = Color.White;
             }
             if (b == Color.White)
             {
@@ -576,7 +586,7 @@ namespace Benchmark
         {
             stop = true;
             guna2Button1.Enabled = false;
-            DisplayExit();
+            //DisplayExit();
             //Close();
         }
 
@@ -584,7 +594,6 @@ namespace Benchmark
         {
             await Task.Run(() =>
             {
-                Thread.Sleep(10000);
                 BeginInvoke((MethodInvoker)delegate { guna2GradientCircleButton1.Visible = true; });
             });
         }
@@ -617,7 +626,6 @@ namespace Benchmark
         private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
         {
             stop = true;
-            guna2Button1.Enabled = false;
             Close();
         }
 
