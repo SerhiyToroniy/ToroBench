@@ -103,12 +103,12 @@ namespace ToroBench
                 if (e.Data.StartsWith("Write:"))
                 {
                     BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar4.Value = 100; });
-                    BeginInvoke((MethodInvoker)delegate { label10.Text = $"{e.Data.Split()[1]} MB/s"; });
+                    BeginInvoke((MethodInvoker)delegate { label10.Text = $"{e.Data.Split()[1]} MБ/с"; });
                 }
                 if (e.Data.StartsWith("Read:"))
                 {
                     BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar1.Value = 100; });
-                    BeginInvoke((MethodInvoker)delegate { label7.Text = $"{e.Data.Split()[1]} MB/s"; });
+                    BeginInvoke((MethodInvoker)delegate { label7.Text = $"{e.Data.Split()[1]} MБ/с"; });
                 }
             }
         }

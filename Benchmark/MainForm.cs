@@ -602,7 +602,7 @@ namespace Benchmark
             var a = JsonConvert.DeserializeObject<List<Scores>>(downloaded);
             if (resultsStorage.CPUSingle != 0 && resultsStorage.CPUMulti != 0 && resultsStorage.GpuScore != 0)
             {
-                var temp = new Scores("0", $"{HardwareInfo.GetProcessorInformation()}", label11.Text.Replace("GPU: ", ""), HardwareInfo.GetPhysicalMemory(), HardwareInfo.GetOSInformation(), $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} logical)", resultsStorage.CPUSingle, resultsStorage.CPUMulti, $"{HardwareInfo.GetCpuSpeedInGHz()}", resultsStorage.GpuScore);
+                var temp = new Scores("0", $"{HardwareInfo.GetProcessorInformation()}", label11.Text.Replace("GPU: ", ""), HardwareInfo.GetPhysicalMemory(), HardwareInfo.GetOSInformation(), $"{HardwareInfo.GetCPUCoresCount()}({HardwareInfo.GetLogicalCoresCount()} логічних)", resultsStorage.CPUSingle, resultsStorage.CPUMulti, $"{HardwareInfo.GetCpuSpeedInGHz()}", resultsStorage.GpuScore);
                 a.Add(temp);
             }
             ScoresList = a;
@@ -852,6 +852,16 @@ namespace Benchmark
 
         private void tesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

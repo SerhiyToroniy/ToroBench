@@ -126,9 +126,9 @@ namespace ToroBench
             {
                 _ = new Ping();
                 if (!stop)
-                    label3.Text = $"{await GetPingTime()} ms";
+                    label3.Text = $"{await GetPingTime()} мс";
                 if (!stop)
-                    label4.Text = $"{await GetPingJitter()} ms";
+                    label4.Text = $"{await GetPingJitter()} мс";
                 if (!stop)
                     // Measure download speed
                     stats.DownloadSpeed = await GetDownloadSpeed();
@@ -138,7 +138,7 @@ namespace ToroBench
             }
             catch
             {
-                var q = new ErrorForm(this, button1, button2, toolstrip1, toolstrip2, color, "You aren't connected to the internet!", "Error", "NoInternet.png");
+                var q = new ErrorForm(this, button1, button2, toolstrip1, toolstrip2, color, "Ви не під'єднані до інтернету!", "Помилка", "NoInternet.png");
                 q.Show();
             }
             guna2Button1.Enabled = false;
@@ -179,17 +179,17 @@ namespace ToroBench
                 downloadSpeed = speed / 1024 / 1024 * 10; // convert to Mbps
                 if (downloadSpeed < 1)
                 {
-                    label10.Text = $"{Math.Round(downloadSpeed * 1024, 0)} Kbps";
+                    label10.Text = $"{Math.Round(downloadSpeed * 1024, 0)} Кб/с";
                     guna2CircleProgressBar4.AnimationSpeed = minAnimationSpeedTime;
                 }
                 if (downloadSpeed > 1 && downloadSpeed < 1000)
                 {
-                    label10.Text = $"{Math.Round(downloadSpeed, 0)} Mbps";
+                    label10.Text = $"{Math.Round(downloadSpeed, 0)} Мб/с";
                     guna2CircleProgressBar4.AnimationSpeed = (float)(maxAnimationSpeedTime * downloadSpeed / 100);
                 }
                 if (downloadSpeed >= 1000 && downloadSpeed < 1000000)
                 {
-                    label10.Text = $"{Math.Round(downloadSpeed / 1024, 0)} Gbps";
+                    label10.Text = $"{Math.Round(downloadSpeed / 1024, 0)} Гб/с";
                     guna2CircleProgressBar4.AnimationSpeed = maxAnimationSpeedTime;
                 }
                 guna2CircleProgressBar4.Value = Convert.ToInt32(progressStopwatch.ElapsedMilliseconds / (timeMs / 100));
@@ -251,17 +251,17 @@ namespace ToroBench
                     percent *= -1;
                     if (percent < 1)
                     {
-                        label7.Text = $"{Math.Round(percent * 1024, 0)} Kbps";
+                        label7.Text = $"{Math.Round(percent * 1024, 0)} Кб/с";
                         guna2CircleProgressBar1.AnimationSpeed = minAnimationSpeedTime;
                     }
                     if (percent > 1 && percent < 1000)
                     {
-                        label7.Text = $"{Math.Round(percent, 0)} Mbps";
+                        label7.Text = $"{Math.Round(percent, 0)} Мб/с";
                         guna2CircleProgressBar1.AnimationSpeed = (float)(maxAnimationSpeedTime * percent / 100);
                     }
                     if (percent >= 1000 && percent < 1000000)
                     {
-                        label7.Text = $"{Math.Round(percent / 1024, 0)} Gbps";
+                        label7.Text = $"{Math.Round(percent / 1024, 0)} Гб/с";
                         guna2CircleProgressBar1.AnimationSpeed = maxAnimationSpeedTime;
                     }
                 }

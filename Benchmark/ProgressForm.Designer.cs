@@ -92,7 +92,7 @@ namespace Benchmark
             this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
             this.guna2Button1.Size = new System.Drawing.Size(106, 33);
             this.guna2Button1.TabIndex = 33;
-            this.guna2Button1.Text = "Stop";
+            this.guna2Button1.Text = "Стоп";
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 

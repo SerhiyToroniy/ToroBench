@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using OpenHardwareMonitor.Hardware;
 using LibreHardwareMonitor.Hardware;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Benchmark
 {
@@ -262,7 +263,7 @@ namespace Benchmark
                 ScoresCPU.Add(scoreCPU);
                 ScoresGPU.Add(scoreGPU);
                 var lInt = new StressINT(loadCPU, LoadsCPU.Max(), tempCPU, TempsCPU.Max(), loadGPU, LoadsGPU.Max(), tempGPU, TempsGPU.Max(), scoreCPU, ScoresCPU.Max(), scoreGPU, ScoresGPU.Max());
-                var l = new Stress($"{loadCPU}%", $"Max: {LoadsCPU.Max()}%", $"{tempCPU}℃", $"Max: {TempsCPU.Max()}℃", $"{loadGPU}%", $"Max: {LoadsGPU.Max()}%", $"{tempGPU}℃", $"Max: {TempsGPU.Max()}℃", $"{scoreCPU}", $"Max: {ScoresCPU.Max()}", $"{scoreGPU}", $"Max: {ScoresGPU.Max()}", lInt);
+                var l = new Stress($"{loadCPU}%", $"Макс: {LoadsCPU.Max()}%", $"{tempCPU}℃", $"Макс: {TempsCPU.Max()}℃", $"{loadGPU}%", $"Макс: {LoadsGPU.Max()}%", $"{tempGPU}℃", $"Макс: {TempsGPU.Max()}℃", $"{scoreCPU}", $"Макс: {ScoresCPU.Max()}", $"{scoreGPU}", $"Макс: {ScoresGPU.Max()}", lInt);
                 worker.ReportProgress(1, l);
             }
 
@@ -303,7 +304,7 @@ namespace Benchmark
                     TempsDisk.Add(Convert.ToInt32(temperatureDisk));
 
                     BeginInvoke((MethodInvoker)delegate { label19.Text = $"{Convert.ToInt32(temperatureDisk)}℃"; });
-                    BeginInvoke((MethodInvoker)delegate { label18.Text = $"Max: {TempsDisk.Max()}℃"; });
+                    BeginInvoke((MethodInvoker)delegate { label18.Text = $"Макс: {TempsDisk.Max()}℃"; });
 
                     if (Convert.ToInt32(temperatureDisk) < 100)
                         BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar8.Value = Convert.ToInt32(temperatureDisk); });
@@ -313,7 +314,7 @@ namespace Benchmark
                     ScoresDisk.Add(Convert.ToInt32(e.Data.Split()[1]));
                     BeginInvoke((MethodInvoker)delegate { label16.Text = $"{e.Data.Split()[1]}"; });
                     BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar7.Value = Convert.ToInt32(Convert.ToInt32(e.Data.Split()[1]) / (5000 / 100)); });
-                    BeginInvoke((MethodInvoker)delegate { label17.Text = $"Min: {ScoresDisk.Min()}"; });
+                    BeginInvoke((MethodInvoker)delegate { label17.Text = $"Мін: {ScoresDisk.Min()}"; });
 
                 }
                 if (e.Data.StartsWith("Load:"))
@@ -321,7 +322,7 @@ namespace Benchmark
                     LoadsDisk.Add(Convert.ToInt32(e.Data.Split()[1]));
                     BeginInvoke((MethodInvoker)delegate { label20.Text = $"{e.Data.Split()[1]}%"; });
                     BeginInvoke((MethodInvoker)delegate { guna2CircleProgressBar9.Value = Convert.ToInt32(e.Data.Split()[1]); });
-                    BeginInvoke((MethodInvoker)delegate { label21.Text = $"Max: {LoadsDisk.Max()}%"; });
+                    BeginInvoke((MethodInvoker)delegate { label21.Text = $"Макс: {LoadsDisk.Max()}%"; });
 
                 }
             }
@@ -575,7 +576,17 @@ namespace Benchmark
         {
             stop = true;
             guna2Button1.Enabled = false;
+            DisplayExit();
             //Close();
+        }
+
+        private async void DisplayExit()
+        {
+            await Task.Run(() =>
+            {
+                Thread.Sleep(10000);
+                BeginInvoke((MethodInvoker)delegate { guna2GradientCircleButton1.Visible = true; });
+            });
         }
 
         private void label2_Click_1(object sender, EventArgs e)
@@ -605,6 +616,8 @@ namespace Benchmark
 
         private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
         {
+            stop = true;
+            guna2Button1.Enabled = false;
             Close();
         }
 
