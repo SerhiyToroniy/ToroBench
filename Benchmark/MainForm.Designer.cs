@@ -83,7 +83,7 @@ namespace Benchmark
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(250, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(146, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Tag = "";
             this.menuStrip1.Text = "menuStrip1";
@@ -94,12 +94,12 @@ namespace Benchmark
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
             this.internetTestToolStripMenuItem,
-            this.diskTestToolStripMenuItem});
+            this.diskTestToolStripMenuItem,
+            this.toolStripMenuItem3});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-            this.fileToolStripMenuItem.Text = "Tools";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 24);
+            this.fileToolStripMenuItem.Text = "Інструменти";
             this.fileToolStripMenuItem.DropDownClosed += new System.EventHandler(this.fileToolStripMenuItem_DropDownClosed);
             this.fileToolStripMenuItem.DropDownOpening += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpening);
             this.fileToolStripMenuItem.DropDownOpened += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpened);
@@ -115,7 +115,7 @@ namespace Benchmark
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "Stress Test";
+            this.toolStripMenuItem1.Text = "Стрес-тест";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
@@ -124,7 +124,7 @@ namespace Benchmark
             this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = "Ranking";
+            this.toolStripMenuItem2.Text = "Рейтинг";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
@@ -133,7 +133,7 @@ namespace Benchmark
             this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem3.Text = "Updates";
+            this.toolStripMenuItem3.Text = "Оновлення";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // internetTestToolStripMenuItem
@@ -142,7 +142,7 @@ namespace Benchmark
             this.internetTestToolStripMenuItem.Image = global::ToroBench.Properties.Resources.png_internet_internet_icon_1600;
             this.internetTestToolStripMenuItem.Name = "internetTestToolStripMenuItem";
             this.internetTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.internetTestToolStripMenuItem.Text = "Internet Test";
+            this.internetTestToolStripMenuItem.Text = "Інтернет-тест";
             this.internetTestToolStripMenuItem.Click += new System.EventHandler(this.internetTestToolStripMenuItem_Click);
             // 
             // diskTestToolStripMenuItem
@@ -151,7 +151,7 @@ namespace Benchmark
             this.diskTestToolStripMenuItem.Image = global::ToroBench.Properties.Resources.png_transparent_macintosh_hard_drives_macos_high_sierra_computer_icons_ntfs_driving_driving_text_computer_program_thumbnail_removebg_preview;
             this.diskTestToolStripMenuItem.Name = "diskTestToolStripMenuItem";
             this.diskTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.diskTestToolStripMenuItem.Text = "Disk Test";
+            this.diskTestToolStripMenuItem.Text = "Тестування диску";
             this.diskTestToolStripMenuItem.Click += new System.EventHandler(this.diskTestToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
@@ -160,8 +160,8 @@ namespace Benchmark
             this.themeModeToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
-            this.settingsToolStripMenuItem.Text = "Appearence";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
+            this.settingsToolStripMenuItem.Text = "Вигляд";
             this.settingsToolStripMenuItem.DropDownClosed += new System.EventHandler(this.settingsToolStripMenuItem_DropDownClosed);
             this.settingsToolStripMenuItem.DropDownOpened += new System.EventHandler(this.settingsToolStripMenuItem_DropDownOpened);
             // 
@@ -174,16 +174,16 @@ namespace Benchmark
             this.whiteToolStripMenuItem});
             this.themeModeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("themeModeToolStripMenuItem.Image")));
             this.themeModeToolStripMenuItem.Name = "themeModeToolStripMenuItem";
-            this.themeModeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.themeModeToolStripMenuItem.Text = "Theme mode";
+            this.themeModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.themeModeToolStripMenuItem.Text = "Режим теми";
             // 
             // darkToolStripMenuItem
             // 
             this.darkToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
             this.darkToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("darkToolStripMenuItem.Image")));
             this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
-            this.darkToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.darkToolStripMenuItem.Text = "Dark";
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.darkToolStripMenuItem.Text = "Темна";
             this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
@@ -191,8 +191,8 @@ namespace Benchmark
             this.toolStripMenuItem4.BackColor = System.Drawing.Color.WhiteSmoke;
             this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(112, 22);
-            this.toolStripMenuItem4.Text = "Light";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Text = "Світла";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // whiteToolStripMenuItem
@@ -200,8 +200,8 @@ namespace Benchmark
             this.whiteToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
             this.whiteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("whiteToolStripMenuItem.Image")));
             this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
-            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.whiteToolStripMenuItem.Text = "System";
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.whiteToolStripMenuItem.Text = "Системна";
             this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click_1);
             // 
             // label5
@@ -213,7 +213,7 @@ namespace Benchmark
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(336, 37);
             this.label5.TabIndex = 3;
-            this.label5.Text = "CPU SCORE: ";
+            this.label5.Text = "Результат ЦП: ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -304,9 +304,10 @@ namespace Benchmark
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Location = new System.Drawing.Point(17, 64);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 19);
+            this.label11.Size = new System.Drawing.Size(33, 19);
             this.label11.TabIndex = 3;
-            this.label11.Text = "GPU: ";
+            this.label11.Text = "ГП: ";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label10
             // 
@@ -316,9 +317,9 @@ namespace Benchmark
             this.label10.ForeColor = System.Drawing.Color.Black;
             this.label10.Location = new System.Drawing.Point(17, 27);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 19);
+            this.label10.Size = new System.Drawing.Size(36, 19);
             this.label10.TabIndex = 2;
-            this.label10.Text = "CPU: ";
+            this.label10.Text = "ЦП: ";
             // 
             // label9
             // 
@@ -328,9 +329,10 @@ namespace Benchmark
             this.label9.ForeColor = System.Drawing.Color.Black;
             this.label9.Location = new System.Drawing.Point(17, 100);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 19);
+            this.label9.Size = new System.Drawing.Size(45, 19);
             this.label9.TabIndex = 1;
-            this.label9.Text = "RAM: ";
+            this.label9.Text = "ОЗП: ";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label8
             // 
@@ -340,9 +342,9 @@ namespace Benchmark
             this.label8.ForeColor = System.Drawing.Color.Black;
             this.label8.Location = new System.Drawing.Point(17, 133);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(34, 19);
+            this.label8.Size = new System.Drawing.Size(36, 19);
             this.label8.TabIndex = 0;
-            this.label8.Text = "OS: ";
+            this.label8.Text = "ОС: ";
             // 
             // guna2GroupBox2
             // 
@@ -389,7 +391,7 @@ namespace Benchmark
             this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
             this.guna2Button1.Size = new System.Drawing.Size(115, 33);
             this.guna2Button1.TabIndex = 34;
-            this.guna2Button1.Text = "Run";
+            this.guna2Button1.Text = "Старт";
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
@@ -402,7 +404,7 @@ namespace Benchmark
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(336, 37);
             this.label6.TabIndex = 3;
-            this.label6.Text = "GPU SCORE: ";
+            this.label6.Text = "Результат ГП:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox3
@@ -452,7 +454,7 @@ namespace Benchmark
             this.guna2Button2.ShadowDecoration.Parent = this.guna2Button2;
             this.guna2Button2.Size = new System.Drawing.Size(115, 33);
             this.guna2Button2.TabIndex = 35;
-            this.guna2Button2.Text = "Run";
+            this.guna2Button2.Text = "Старт";
             this.guna2Button2.UseTransparentBackground = true;
             this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
             // 

@@ -100,7 +100,7 @@
             this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
             this.guna2Button1.Size = new System.Drawing.Size(106, 33);
             this.guna2Button1.TabIndex = 55;
-            this.guna2Button1.Text = "Stop";
+            this.guna2Button1.Text = "Стоп";
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Visible = false;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
@@ -150,7 +150,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 25);
             this.label6.TabIndex = 49;
-            this.label6.Text = "Read";
+            this.label6.Text = "Читання";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
@@ -160,7 +160,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(187, 53);
             this.label7.TabIndex = 48;
-            this.label7.Text = "0 MB/s";
+            this.label7.Text = "0 MБ/с";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2CircleProgressBar4
@@ -198,7 +198,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 25);
             this.label1.TabIndex = 49;
-            this.label1.Text = "Write";
+            this.label1.Text = "Записування";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
@@ -208,7 +208,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(187, 53);
             this.label10.TabIndex = 48;
-            this.label10.Text = "0 MB/s";
+            this.label10.Text = "0 MБ/с";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DiskForm

@@ -52,7 +52,8 @@ namespace Benchmark
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(404, 23);
             this.label6.TabIndex = 2;
-            this.label6.Text = "* You need to get both CPU and GPU scores to upload your results.";
+            this.label6.Text = "* Вам потрібно протестувати ЦП та ГП для того, щоб результати потрапили до таблиц" +
+    "і.";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // guna2TextBox1
@@ -116,7 +117,7 @@ namespace Benchmark
             this.guna2Button1.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(30, 20, 20, 20);
             this.guna2Button1.Size = new System.Drawing.Size(142, 36);
             this.guna2Button1.TabIndex = 4;
-            this.guna2Button1.Text = "Find";
+            this.guna2Button1.Text = "Пошук";
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // guna2DataGridView1

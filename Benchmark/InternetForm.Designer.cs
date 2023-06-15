@@ -123,7 +123,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 25);
             this.label1.TabIndex = 49;
-            this.label1.Text = "Download";
+            this.label1.Text = "Завантаження";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
@@ -133,7 +133,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(187, 53);
             this.label10.TabIndex = 48;
-            this.label10.Text = "0 Mb/s";
+            this.label10.Text = "0 Мб/с";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2Button1
@@ -162,7 +162,7 @@
             this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
             this.guna2Button1.Size = new System.Drawing.Size(106, 33);
             this.guna2Button1.TabIndex = 54;
-            this.guna2Button1.Text = "Stop";
+            this.guna2Button1.Text = "Стоп";
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Visible = false;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
@@ -174,34 +174,34 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 55;
-            this.label2.Text = "Ping:";
+            this.label2.Text = "Пінг:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(100, 333);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 56;
-            this.label3.Text = "0 ms";
+            this.label3.Text = "0 мс";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(245, 333);
+            this.label4.Location = new System.Drawing.Point(264, 333);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 58;
-            this.label4.Text = "0 ms";
+            this.label4.Text = "0 мс";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(208, 333);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 57;
-            this.label5.Text = "Jitter:";
+            this.label5.Text = "Джитер:";
             // 
             // guna2CircleProgressBar1
             // 
@@ -238,7 +238,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 25);
             this.label6.TabIndex = 49;
-            this.label6.Text = "Upload";
+            this.label6.Text = "Відвантаження";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
@@ -248,7 +248,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(187, 53);
             this.label7.TabIndex = 48;
-            this.label7.Text = "0 Mb/s";
+            this.label7.Text = "0 Мб/с";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InternetForm

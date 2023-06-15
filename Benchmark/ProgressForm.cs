@@ -37,11 +37,11 @@ namespace Benchmark
             {
                 if (Text == "CPU")
                 {
-                    score.Text = $"Your CPU score is {rS.CPUSingle + rS.CPUMulti}";
+                    score.Text = $"Ваш результат ЦП {rS.CPUSingle + rS.CPUMulti}";
                 }
                 else
                 {
-                    score.Text = $"Your GPU score is {rS.GpuScore}";
+                    score.Text = $"Ваш результат ГП {rS.GpuScore}";
                 }
                 score.Font = new Font("Segoe UI", 20);
                 Score = 100000000 / (int)elapsedMs;

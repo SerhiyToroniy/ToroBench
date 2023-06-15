@@ -116,7 +116,7 @@ namespace Benchmark
             this.guna2Button1.ShadowDecoration.Parent = this.guna2Button1;
             this.guna2Button1.Size = new System.Drawing.Size(106, 33);
             this.guna2Button1.TabIndex = 34;
-            this.guna2Button1.Text = "Stop";
+            this.guna2Button1.Text = "Стоп";
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
@@ -201,7 +201,7 @@ namespace Benchmark
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(121, 37);
             this.label17.TabIndex = 51;
-            this.label17.Text = "Min: 0";
+            this.label17.Text = "Мін: 0";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GradientCircleButton1
@@ -225,6 +225,7 @@ namespace Benchmark
             this.guna2GradientCircleButton1.Size = new System.Drawing.Size(15, 15);
             this.guna2GradientCircleButton1.TabIndex = 39;
             this.guna2GradientCircleButton1.Text = "guna2GradientCircleButton1";
+            this.guna2GradientCircleButton1.Visible = false;
             this.guna2GradientCircleButton1.Click += new System.EventHandler(this.guna2GradientCircleButton1_Click);
             // 
             // guna2CircleProgressBar8
@@ -261,9 +262,9 @@ namespace Benchmark
             this.label18.ForeColor = System.Drawing.Color.DimGray;
             this.label18.Location = new System.Drawing.Point(56, 114);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(43, 12);
+            this.label18.Size = new System.Drawing.Size(49, 12);
             this.label18.TabIndex = 50;
-            this.label18.Text = "Max: 0℃";
+            this.label18.Text = "Макс: 0℃";
             // 
             // label19
             // 
@@ -320,7 +321,7 @@ namespace Benchmark
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(121, 37);
             this.label15.TabIndex = 51;
-            this.label15.Text = "Min: 0";
+            this.label15.Text = "Мін: 0";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2CircleProgressBar9
@@ -368,9 +369,9 @@ namespace Benchmark
             this.label21.ForeColor = System.Drawing.Color.DimGray;
             this.label21.Location = new System.Drawing.Point(56, 114);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(41, 12);
+            this.label21.Size = new System.Drawing.Size(47, 12);
             this.label21.TabIndex = 47;
-            this.label21.Text = "Max: 0%";
+            this.label21.Text = "Макс: 0%";
             // 
             // label22
             // 
@@ -379,9 +380,9 @@ namespace Benchmark
             this.label22.ForeColor = System.Drawing.Color.DimGray;
             this.label22.Location = new System.Drawing.Point(46, 431);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(35, 19);
+            this.label22.Size = new System.Drawing.Size(44, 19);
             this.label22.TabIndex = 54;
-            this.label22.Text = "Disk";
+            this.label22.Text = "Диск ";
             this.label22.Click += new System.EventHandler(this.label22_Click);
             // 
             // guna2CircleProgressBar4
@@ -428,7 +429,7 @@ namespace Benchmark
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(147, 39);
             this.label11.TabIndex = 49;
-            this.label11.Text = "Min: 0";
+            this.label11.Text = "Мін: 0";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2CircleProgressBar2
@@ -465,9 +466,9 @@ namespace Benchmark
             this.label8.ForeColor = System.Drawing.Color.DimGray;
             this.label8.Location = new System.Drawing.Point(56, 114);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 12);
+            this.label8.Size = new System.Drawing.Size(49, 12);
             this.label8.TabIndex = 50;
-            this.label8.Text = "Max: 0℃";
+            this.label8.Text = "Макс: 0℃";
             // 
             // label9
             // 
@@ -525,9 +526,9 @@ namespace Benchmark
             this.label7.ForeColor = System.Drawing.Color.DimGray;
             this.label7.Location = new System.Drawing.Point(56, 114);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.Size = new System.Drawing.Size(47, 12);
             this.label7.TabIndex = 47;
-            this.label7.Text = "Max: 0%";
+            this.label7.Text = "Макс: 0%";
             // 
             // guna2CircleProgressBar5
             // 
@@ -574,9 +575,9 @@ namespace Benchmark
             this.label5.ForeColor = System.Drawing.Color.DimGray;
             this.label5.Location = new System.Drawing.Point(56, 114);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.Size = new System.Drawing.Size(47, 12);
             this.label5.TabIndex = 47;
-            this.label5.Text = "Max: 0%";
+            this.label5.Text = "Макс: 0%";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // guna2CircleProgressBar3
@@ -613,9 +614,9 @@ namespace Benchmark
             this.label6.ForeColor = System.Drawing.Color.DimGray;
             this.label6.Location = new System.Drawing.Point(56, 114);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 12);
+            this.label6.Size = new System.Drawing.Size(42, 12);
             this.label6.TabIndex = 50;
-            this.label6.Text = "Max: 0℃";
+            this.label6.Text = "Мін: 0℃";
             // 
             // label13
             // 
@@ -635,9 +636,9 @@ namespace Benchmark
             this.label3.ForeColor = System.Drawing.Color.DimGray;
             this.label3.Location = new System.Drawing.Point(46, 225);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 19);
+            this.label3.Size = new System.Drawing.Size(26, 19);
             this.label3.TabIndex = 41;
-            this.label3.Text = "GPU";
+            this.label3.Text = "ГП";
             // 
             // label2
             // 
@@ -646,9 +647,9 @@ namespace Benchmark
             this.label2.ForeColor = System.Drawing.Color.DimGray;
             this.label2.Location = new System.Drawing.Point(46, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 19);
+            this.label2.Size = new System.Drawing.Size(29, 19);
             this.label2.TabIndex = 40;
-            this.label2.Text = "CPU";
+            this.label2.Text = "ЦП";
             this.label2.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // guna2AnimateWindow1

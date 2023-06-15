@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -29,13 +30,66 @@ namespace Benchmark
             button2 = b2;
             file = f;
             settings = s;
+            Type scoresType = typeof(Scores);
+            PropertyInfo[] scoresProperties = scoresType.GetProperties();
             guna2DataGridView1.Update();
             guna2DataGridView1.Refresh();
+            guna2DataGridView1.AutoGenerateColumns = false;
+            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Місце";
+            column.DataPropertyName = scoresProperties[0].Name;
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "ЦП";
+            column.DataPropertyName = scoresProperties[1].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "ГП";
+            column.DataPropertyName = scoresProperties[2].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "ОЗП";
+            column.DataPropertyName = scoresProperties[3].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "ОС";
+            column.DataPropertyName = scoresProperties[4].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Кількість ядер";
+            column.DataPropertyName = scoresProperties[5].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Одноядерний результат";
+            column.DataPropertyName = scoresProperties[6].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Багатоядерний результат";
+            column.DataPropertyName = scoresProperties[7].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Частота ЦП";
+            column.DataPropertyName = scoresProperties[8].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Результат ГП";
+            column.DataPropertyName = scoresProperties[9].Name;
+
+            guna2DataGridView1.Columns.Add(column);
+
             guna2DataGridView1.DataSource = list;
             l = list;
-            foreach (DataGridViewColumn column in guna2DataGridView1.Columns)
+            foreach (DataGridViewColumn column_ in guna2DataGridView1.Columns)
             {
-                column.SortMode = DataGridViewColumnSortMode.Automatic;
+                column_.SortMode = DataGridViewColumnSortMode.Automatic;
             }
             backcolor = b;
             if (b == Color.DimGray)
